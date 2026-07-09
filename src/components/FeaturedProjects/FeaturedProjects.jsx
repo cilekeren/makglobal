@@ -1,5 +1,8 @@
+import { useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Button from '../common/Button'
 import { PROJECTS } from '../../data/projects'
+import { startCardHeroTransition } from '../../lib/pageTransition'
 import styles from './FeaturedProjects.module.css'
 
 function bedRange(prices) {
@@ -13,17 +16,39 @@ function bedRange(prices) {
 function ProjectCard({ project }) {
   const beds = project.prices ? bedRange(project.prices) : null
   const fromPrice = project.prices?.[0]?.price || project.price
+  const navigate = useNavigate()
+  const imgRef = useRef(null)
+  const titleRef = useRef(null)
+
+  const goToDetails = () =>
+    startCardHeroTransition({
+      imgEl: imgRef.current,
+      titleEl: titleRef.current,
+      slug: project.slug,
+      navigate,
+    })
 
   return (
-    <div className={styles.card}>
+    <div
+      className={styles.card}
+      role="link"
+      tabIndex={0}
+      onClick={goToDetails}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          goToDetails()
+        }
+      }}
+    >
       {project.image ? (
-        <img src={project.image} alt={project.name} className={styles.image} />
+        <img ref={imgRef} src={project.image} alt={project.name} className={styles.image} />
       ) : (
-        <div className={styles.imagePlaceholder} />
+        <div ref={imgRef} className={styles.imagePlaceholder} />
       )}
 
       <div className={styles.cardBody}>
-        <h3 className={styles.projectName}>{project.name}</h3>
+        <h3 ref={titleRef} className={styles.projectName}>{project.name}</h3>
 
         {(project.location || beds || project.completion) && (
           <p className={styles.projectDetails}>

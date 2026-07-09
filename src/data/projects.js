@@ -2,6 +2,24 @@ import berkeleyLogo from '../assets/firms/berkeley.svg'
 import londonSquareLogo from '../assets/firms/london_square.svg'
 import barrattLondonLogo from '../assets/firms/barratt_london.svg'
 
+// Placeholder amenities/highlights reused across projects that don't have
+// their real specification yet -- swap per-project once that data exists.
+const PLACEHOLDER_HIGHLIGHTS = [
+  'Strong rental demand in a prime riverside location',
+  'Excellent transport links to Central London',
+  'Walking distance to Chelsea and King’s Road',
+  'High-quality specification and residents’ facilities',
+  '20 minutes to Central London',
+]
+
+const PLACEHOLDER_AMENITIES = [
+  { icon: 'concierge', label: '7/24 Concierge' },
+  { icon: 'garden', label: 'Communal Gardens' },
+  { icon: 'cinema', label: 'Private Cinema' },
+  { icon: 'gym', label: 'Gym & Wellness' },
+  { icon: 'tube', label: 'Tube & Underground' },
+]
+
 export const PROJECTS = [
   {
     slug: 'oval-village',
@@ -17,6 +35,8 @@ export const PROJECTS = [
       { type: '2+1', price: '£850,000' },
       { type: '3+1', price: '£990,000' },
     ],
+    highlights: PLACEHOLDER_HIGHLIGHTS,
+    amenities: PLACEHOLDER_AMENITIES,
   },
   {
     slug: 'kings-road-park',
@@ -32,6 +52,8 @@ export const PROJECTS = [
       { type: '2+1', price: '£850,000' },
       { type: '3+1', price: '£990,000' },
     ],
+    highlights: PLACEHOLDER_HIGHLIGHTS,
+    amenities: PLACEHOLDER_AMENITIES,
   },
   {
     slug: 'camdens-good-yard',
@@ -47,6 +69,8 @@ export const PROJECTS = [
       { type: '2+1', price: '£850,000' },
       { type: '3+1', price: '£990,000' },
     ],
+    highlights: PLACEHOLDER_HIGHLIGHTS,
+    amenities: PLACEHOLDER_AMENITIES,
   },
   {
     slug: 'white-city-living',
@@ -55,6 +79,8 @@ export const PROJECTS = [
     developerLogo: berkeleyLogo,
     image: '/Projects/White City Living/aaa_hero_01_3990_1700_191211_v1613475354.webp',
     price: null,
+    highlights: PLACEHOLDER_HIGHLIGHTS,
+    amenities: PLACEHOLDER_AMENITIES,
   },
   {
     slug: 'wimbledon-bridge-house',
@@ -63,6 +89,8 @@ export const PROJECTS = [
     developerLogo: londonSquareLogo,
     image: '/Projects/Wimbledon Bridge House/aaa_hero_Ext_02_Final_ZG.webp',
     price: null,
+    highlights: PLACEHOLDER_HIGHLIGHTS,
+    amenities: PLACEHOLDER_AMENITIES,
   },
   {
     slug: 'county-hall-kingston',
@@ -71,6 +99,8 @@ export const PROJECTS = [
     developerLogo: londonSquareLogo,
     image: '/Projects/County Hall Kingston/aaa_hero_chk-building-overview-v5.webp',
     price: null,
+    highlights: PLACEHOLDER_HIGHLIGHTS,
+    amenities: PLACEHOLDER_AMENITIES,
   },
   {
     slug: 'colindale-gardens',
@@ -79,6 +109,8 @@ export const PROJECTS = [
     developerLogo: barrattLondonLogo,
     image: '/Projects/Colindale Gardens/aaa_hero_49728.webp',
     price: null,
+    highlights: PLACEHOLDER_HIGHLIGHTS,
+    amenities: PLACEHOLDER_AMENITIES,
   },
   {
     slug: 'royal-gateway',
@@ -87,6 +119,8 @@ export const PROJECTS = [
     developerLogo: barrattLondonLogo,
     image: '/Projects/Royal Gateway/aaa_hero_BA2308_Cloister Corner_View_33_Final.webp',
     price: null,
+    highlights: PLACEHOLDER_HIGHLIGHTS,
+    amenities: PLACEHOLDER_AMENITIES,
   },
   {
     slug: 'bermondsey-heights',
@@ -106,19 +140,7 @@ export const PROJECTS = [
       { type: '3+1', price: '£990,000' },
     ],
     gallery: [null, null, null],
-    highlights: [
-      'Strong rental demand in a prime riverside location',
-      'Excellent transport links to Central London',
-      'Walking distance to Chelsea and King’s Road',
-      'High-quality specification and residents’ facilities',
-      '20 minutes to Central London',
-    ],
-    amenities: [
-      { icon: 'concierge', label: '7/24 Concierge' },
-      { icon: 'garden', label: 'Communal Gardens' },
-      { icon: 'cinema', label: 'Private Cinema' },
-      { icon: 'gym', label: 'Gym & Wellness' },
-      { icon: 'tube', label: 'Tube & Underground' },
-    ],
+    highlights: PLACEHOLDER_HIGHLIGHTS,
+    amenities: PLACEHOLDER_AMENITIES,
   },
 ]

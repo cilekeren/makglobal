@@ -23,10 +23,29 @@
 }
 
 .intro {
-  background: #0a3332;
+  position: relative;
+  background: #fff;
   color: #ededed;
   text-align: center;
   padding: clamp(48px, 6vw, 80px) 24px clamp(40px, 5vw, 64px);
+  overflow: hidden;
+}
+
+/* Fills the section; defaults to fully shown (scaleX 1) so a direct page
+   load looks exactly like a solid dark-green section. The transition
+   entrance resets this to 0 and wipes it back in left-to-right. */
+.introWipe {
+  position: absolute;
+  inset: 0;
+  background: #0a3332;
+  transform: scaleX(1);
+  transform-origin: left center;
+  z-index: 0;
+}
+
+.introContent {
+  position: relative;
+  z-index: 1;
 }
 
 .heading {
@@ -63,9 +82,18 @@
   color: #cfe0dd;
 }
 
+.developerLogoMask {
+  height: 40px;
+  overflow: hidden;
+}
+
 .developerLogo {
-  height: 28px;
+  display: block;
+  height: 40px;
   width: auto;
+  /* source SVGs are a flat #bfbfbf gray; brightness-scale it up to match
+     the heading's #ededed since both are neutral (equal R=G=B) grays */
+  filter: brightness(1.24);
 }
 
 .infoRow {
@@ -79,20 +107,33 @@
 }
 
 .infoBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 300px;
+  height: 180px;
   border: 1px solid #1f4b4e;
   border-radius: 10px;
   padding: 18px clamp(24px, 2.6vw, 40px);
   text-align: center;
-  min-width: 220px;
 }
 
 .infoBoxTitle {
-  margin: 0 0 12px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0 10px;
+  background: #fff;
   font-family: 'Lexend Deca', sans-serif;
   font-weight: 600;
   font-size: 13px;
   letter-spacing: 1.5px;
   color: #163a3d;
+  white-space: nowrap;
 }
 
 .infoBoxText {

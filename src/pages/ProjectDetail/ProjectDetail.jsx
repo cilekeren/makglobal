@@ -1,5 +1,8 @@
+import { useLayoutEffect, useRef } from 'react'
 import { useParams, Navigate } from 'react-router-dom'
+import gsap from 'gsap'
 import { PROJECTS } from '../../data/projects'
+import { consumePendingHeroTransition } from '../../lib/pageTransition'
 import heroStyles from '../../components/Hero/Hero.module.css'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
@@ -7,9 +10,97 @@ import CommuteBadge from './CommuteBadge'
 import { AMENITY_ICONS } from './amenityIcons'
 import styles from './ProjectDetail.module.css'
 
+// Wraps each character of an element's text in its own span so GSAP can
+// stagger them in one at a time for a typewriter reveal. Keeps the real
+// text available to screen readers via aria-label.
+function splitIntoChars(el) {
+  const text = el.textContent
+  el.setAttribute('aria-label', text)
+  el.innerHTML = text
+    .split('')
+    .map((ch) => `<span style="display:inline-block">${ch === ' ' ? '&nbsp;' : ch}</span>`)
+    .join('')
+  return [...el.children]
+}
+
 export default function ProjectDetail() {
   const { slug } = useParams()
   const project = PROJECTS.find((p) => p.slug === slug)
+  const introWipeRef = useRef(null)
+  const headingRef = useRef(null)
+  const subheadingRef = useRef(null)
+  const developerLabelRef = useRef(null)
+  const developerLogoRef = useRef(null)
+  const infoRowRef = useRef(null)
+
+  useLayoutEffect(() => {
+    if (!project) return
+    const root = document.getElementById('root')
+    const data = consumePendingHeroTransition(project.slug)
+    const infoBoxes = infoRowRef.current ? [...infoRowRef.current.children] : []
+
+    if (!data) {
+      if (root) gsap.set(root, { opacity: 1 })
+      return
+    }
+
+    // Hand off from the floating hero image (already sitting at this exact
+    // spot) to the real hero image with no visible jump.
+    if (root) gsap.set(root, { opacity: 1 })
+    data.imgClone.remove()
+    data.whiteCover.remove()
+
+    const tl = gsap.timeline()
+
+    if (introWipeRef.current) {
+      gsap.set(introWipeRef.current, { scaleX: 0 })
+      tl.to(introWipeRef.current, { scaleX: 1, duration: 0.75, ease: 'power2.inOut' })
+    }
+
+    tl.addLabel('titleStart', '+=0.1')
+
+    if (headingRef.current) {
+      const chars = splitIntoChars(headingRef.current)
+      gsap.set(chars, { opacity: 0 })
+      tl.to(chars, { opacity: 1, duration: 0.01, stagger: 0.06 }, 'titleStart')
+    }
+
+    if (infoBoxes.length) {
+      gsap.set(infoBoxes, { opacity: 0, y: 32, scale: 0.8 })
+      tl.to(
+        infoBoxes,
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.65,
+          stagger: 0.22,
+          ease: 'power4.inOut',
+        },
+        'titleStart'
+      )
+    }
+
+    if (subheadingRef.current) {
+      gsap.set(subheadingRef.current, { opacity: 0 })
+      tl.to(subheadingRef.current, { opacity: 1, duration: 0.4 })
+    }
+
+    if (developerLabelRef.current) {
+      const chars = splitIntoChars(developerLabelRef.current)
+      gsap.set(chars, { opacity: 0 })
+      tl.to(chars, { opacity: 1, duration: 0.01, stagger: 0.04 }, '+=0.15')
+    }
+
+    if (developerLogoRef.current) {
+      gsap.set(developerLogoRef.current, { y: '100%' })
+      tl.to(
+        developerLogoRef.current,
+        { y: '0%', duration: 0.6, ease: 'power4.inOut' },
+        '+=0.1'
+      )
+    }
+  }, [project])
 
   if (!project) {
     return <Navigate to="/projects" replace />
@@ -35,19 +126,32 @@ export default function ProjectDetail() {
       </div>
 
       <section className={styles.intro}>
-        <h1 className={styles.heading}>{project.name}</h1>
+        <div ref={introWipeRef} className={styles.introWipe} />
 
-        {project.description && <p className={styles.subheading}>{project.description}</p>}
+        <div className={styles.introContent}>
+          <h1 ref={headingRef} className={styles.heading}>{project.name}</h1>
 
-        {project.developerLogo && (
-          <div className={styles.developer}>
-            <span className={styles.developerLabel}>developed by</span>
-            <img src={project.developerLogo} alt={project.developerName} className={styles.developerLogo} />
-          </div>
-        )}
+          {project.description && (
+            <p ref={subheadingRef} className={styles.subheading}>{project.description}</p>
+          )}
+
+          {project.developerLogo && (
+            <div className={styles.developer}>
+              <span ref={developerLabelRef} className={styles.developerLabel}>developed by</span>
+              <div className={styles.developerLogoMask}>
+                <img
+                  ref={developerLogoRef}
+                  src={project.developerLogo}
+                  alt={project.developerName}
+                  className={styles.developerLogo}
+                />
+              </div>
+            </div>
+          )}
+        </div>
       </section>
 
-      <section className={styles.infoRow}>
+      <section ref={infoRowRef} className={styles.infoRow}>
         <div className={styles.infoBox}>
           <h3 className={styles.infoBoxTitle}>FROM</h3>
           {project.prices && project.prices.length > 0 ? (
