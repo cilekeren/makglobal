@@ -1,0 +1,92 @@
+.section {
+  position: relative;
+  background: #175459;
+  color: #2c2c2a;
+  font-family: 'Lexend Deca', system-ui, sans-serif;
+  font-weight: 300;
+}
+
+.introText {
+  position: absolute;
+  top: clamp(48px, 6vw, 96px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  width: 100%;
+  padding: 0 24px;
+}
+
+.heading {
+  margin: 0;
+  text-align: center;
+  font-family: 'Petrona', serif;
+  font-weight: 200;
+  font-size: clamp(36px, 4.2vw, 56px);
+  color: #ededed;
+}
+
+.subheading {
+  max-width: clamp(480px, 34vw, 560px);
+  margin: clamp(12px, 1.5vw, 20px) auto 0;
+  text-align: center;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 300;
+  font-size: clamp(12px, 0.85vw, 14px);
+  line-height: 1.6;
+  color: #ededed;
+}
+
+.track {
+  position: relative;
+  height: 420vh;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 100%;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.traceWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.traceSvg {
+  display: block;
+  overflow: visible;
+}
+
+.traceSvg path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.ctaWrap {
+  position: absolute;
+  bottom: clamp(32px, 5vw, 64px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+}

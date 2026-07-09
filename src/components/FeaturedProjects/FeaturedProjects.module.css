@@ -1,0 +1,126 @@
+.section {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  padding: clamp(48px, 7vw, 96px) 24px clamp(64px, 9vw, 120px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.heading {
+  margin: 0;
+  font-family: 'Petrona', serif;
+  font-weight: 200;
+  font-size: clamp(36px, 4.2vw, 56px);
+  color: #163a3d;
+}
+
+.subheading {
+  margin: clamp(12px, 1.5vw, 20px) 0 0;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 300;
+  font-size: clamp(12px, 0.85vw, 14px);
+  line-height: 1.6;
+  color: #2c4a4d;
+}
+
+.cardRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: flex-start;
+  gap: clamp(16px, 2.4vw, 40px);
+  width: 100%;
+  max-width: 1600px;
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  border: 1px solid #1f4b4e;
+  border-radius: 10px;
+  padding: clamp(14px, 1.8vw, 28px) clamp(16px, 2vw, 32px) clamp(16px, 2vw, 32px);
+  background: #fff;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 40px rgba(22, 58, 61, 0.18);
+}
+
+.image,
+.imagePlaceholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.imagePlaceholder {
+  background: #e6e6e6;
+}
+
+.cardBody {
+  padding: 0;
+}
+
+.projectName {
+  margin: clamp(8px, 1vw, 12px) 0 0;
+  font-family: 'Petrona', serif;
+  font-weight: 400;
+  font-size: clamp(22px, 2.3vw, 29px);
+  letter-spacing: 0.5px;
+  color: #163a3d;
+}
+
+.projectDetails {
+  margin: clamp(4px, 0.6vw, 8px) 0 0;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 500;
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.7;
+  color: #1b2b33;
+}
+
+.developerLogo {
+  display: block;
+  height: 32px;
+  width: auto;
+  margin-top: clamp(20px, 2.6vw, 28px);
+  opacity: 0.6;
+}
+
+.price {
+  margin: clamp(48px, 5.6vw, 64px) 0 0;
+  padding: 0;
+  font-family: 'Petrona', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(20px, 2vw, 24px);
+  color: #8b3a3a;
+}
+
+.detailsBtnWrap {
+  position: absolute;
+  right: clamp(16px, 2.5vw, 28px);
+  bottom: 0;
+  transform: translateY(50%);
+}
+
+.ctaText {
+  margin: clamp(56px, 7vw, 84px) 0 0;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 300;
+  font-size: clamp(12px, 0.85vw, 14px);
+  line-height: 1.6;
+  color: #2c4a4d;
+}
+
+.viewProjectsWrap {
+  margin-top: clamp(32px, 4vw, 48px);
+}
+

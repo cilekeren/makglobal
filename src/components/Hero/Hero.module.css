@@ -1,0 +1,409 @@
+.heroOuter {
+  background: #fff;
+  padding: 20px;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #02131e;
+  color: #fff;
+}
+
+/* full-bleed background photo */
+
+.bgFull {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bgImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 32%;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+  will-change: transform, opacity;
+}
+
+.bgImageActive {
+  opacity: 1;
+  z-index: 1;
+  animation: heroKenBurns 7s ease-out forwards;
+}
+
+@keyframes heroKenBurns {
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* vignettes */
+
+.vignetteTop {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 1;
+  width: 100%;
+  height: 52%;
+  pointer-events: none;
+  background-image: linear-gradient(
+    -0.8327852506489393deg,
+    rgba(2, 19, 30, 0) 31.478%,
+    rgba(2, 19, 30, 0.49) 64.379%,
+    rgb(2, 19, 30) 97.919%
+  );
+}
+
+.vignetteBottomWrap {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  width: 100%;
+  height: 66%;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.vignetteBottomInner {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  transform: rotate(180deg);
+  background-image: linear-gradient(
+    -1.642222970451101deg,
+    rgba(10, 51, 50, 0) 11.478%,
+    rgba(10, 51, 50, 0.8) 50%,
+    rgb(10, 51, 50) 97.919%
+  );
+}
+
+/* navbar */
+
+.navbar {
+  position: absolute;
+  z-index: 2;
+  left: 30px;
+  right: 30px;
+  /* cancels out the navbar's own top padding + logoSlot's padding so the
+     logo's top edge sits exactly 40px down, matching its 40px left edge. */
+  top: calc(40px - clamp(8px, 0.9vw, 12px) - clamp(6px, 0.8vw, 10px));
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: clamp(16px, 3vw, 60px);
+  padding: clamp(8px, 0.9vw, 12px) clamp(16px, 2vw, 28px);
+}
+
+.stickyNavBar {
+  position: fixed;
+  z-index: 100;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  background: #ededed;
+  border-radius: 5px;
+  padding: clamp(4px, 0.45vw, 6px) clamp(16px, 2vw, 28px);
+  transform: translateY(-160%);
+  transition: transform 0.5s ease;
+}
+
+.stickyNavVisible {
+  transform: translateY(0);
+}
+
+.stickyNavBar .navItem {
+  color: #0a3332;
+  padding: 6px;
+  font-size: clamp(12px, 0.9vw, 15px);
+}
+
+.stickyNavBar .langBtn {
+  color: #0a3332;
+  padding: 6px;
+  font-size: clamp(11px, 0.75vw, 13px);
+}
+
+.stickyNavBar .langDivider {
+  height: clamp(26px, 3vw, 50px);
+}
+
+.logoSlot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(6px, 0.8vw, 10px);
+  /* cancels out navbar's own left inset (30px + its horizontal padding)
+     so the logo's left edge lines up exactly with .content's left: 40px. */
+  margin-left: calc(10px - clamp(16px, 2vw, 28px) - clamp(6px, 0.8vw, 10px));
+  flex-shrink: 0;
+}
+
+.navItems {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(12px, 1.9vw, 33px);
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 999px;
+  font-family: 'Petrona', serif;
+  font-weight: 400;
+  font-size: clamp(14px, 1.15vw, 19px);
+  letter-spacing: 0.6px;
+  color: #fff;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.navItemWrap {
+  position: relative;
+  display: flex;
+}
+
+.pillBox {
+  position: absolute;
+  inset: -8px -14px;
+  pointer-events: none;
+}
+
+.pillSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.pillPath {
+  fill: none;
+  stroke: #e2c27a;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.7s ease 0s;
+}
+
+.navItemWrapOpen .pillPath {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.7s ease 0s;
+}
+
+.navItemSimple:hover .pillPath,
+.navItemSimple:focus-within .pillPath {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.7s ease 0s;
+}
+
+.dropdownConnector {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  width: clamp(20px, 2vw, 30px);
+  height: clamp(85px, 8.5vw, 112px);
+  z-index: 6;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.connectorPath {
+  fill: none;
+  stroke: #e2c27a;
+  stroke-width: 2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.4s ease 0s;
+}
+
+.navItemWrapOpen .connectorPath {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.4s ease 0.7s;
+}
+
+.hoverBridge {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  width: clamp(120px, 10vw, 180px);
+  height: calc(55px + 4px);
+  pointer-events: auto;
+}
+
+.dropdown {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 55px);
+  transform: translateX(-41px) translateY(-8px);
+  z-index: 5;
+  min-width: clamp(360px, 34vw, 520px);
+  background: #ededed;
+  border-radius: 10px;
+  padding: clamp(40px, 4.6vw, 60px) clamp(20px, 2.2vw, 30px) clamp(20px, 2.2vw, 30px)
+    32px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+
+.navItemWrapOpen .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-41px) translateY(0);
+  pointer-events: auto;
+}
+
+.dropdownList {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 0.8vw, 10px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 300;
+  font-size: clamp(14px, 1.15vw, 17px);
+  color: #02131e;
+  white-space: nowrap;
+}
+
+.bullet {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 2px solid #e2c27a;
+}
+
+.bulletActive::after {
+  content: '';
+  position: absolute;
+  inset: 3.5px;
+  border-radius: 50%;
+  background: #e2c27a;
+}
+
+.langBlock {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.langBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background: none;
+  border: none;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 600;
+  font-size: clamp(13px, 0.93vw, 16px);
+  color: #fff;
+}
+
+.langDivider {
+  width: clamp(10px, 1.16vw, 20px);
+  height: clamp(50px, 5.9vw, 102px);
+  flex-shrink: 0;
+}
+
+/* content */
+
+.content {
+  position: absolute;
+  z-index: 2;
+  left: 40px;
+  bottom: clamp(20px, 4.5vw, 70px);
+  width: min(56vw, 820px);
+  max-width: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(28px, 2.6vw, 46px);
+}
+
+.headingWrap {
+  display: flex;
+  width: 100%;
+}
+
+.heading {
+  margin: 0;
+  font-family: 'Petrona', serif;
+  font-weight: 300;
+  font-size: clamp(32px, 4.7vw, 85.492px);
+  letter-spacing: clamp(-2px, -0.25vw, -4.2746px);
+  color: #ededed;
+}
+
+.line {
+  display: block;
+  overflow: hidden;
+  line-height: 1;
+  padding: 14px 0;
+  margin: -14px 0;
+}
+
+.lineInner {
+  display: block;
+  line-height: 0.85;
+  white-space: nowrap;
+}
+
+.subtextWrap {
+  display: flex;
+}
+
+.subtext {
+  margin: 0;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 300;
+  font-size: clamp(15px, 1.32vw, 22.517px);
+  color: #fff;
+}
+
+.subtextLine {
+  display: block;
+  line-height: 1.35;
+}
+
+/* small screens */
+
+@media (max-width: 700px) {
+  .content {
+    width: calc(100% - 60px);
+  }
+
+  .navItems {
+    display: none;
+  }
+}

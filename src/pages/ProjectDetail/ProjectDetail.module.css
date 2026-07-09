@@ -1,0 +1,266 @@
+.top {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  min-height: 360px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #02131e;
+  color: #fff;
+}
+
+.topImage,
+.topImagePlaceholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.topImagePlaceholder {
+  background: #12312d;
+}
+
+.intro {
+  background: #0a3332;
+  color: #ededed;
+  text-align: center;
+  padding: clamp(48px, 6vw, 80px) 24px clamp(40px, 5vw, 64px);
+}
+
+.heading {
+  margin: 0;
+  font-family: 'Petrona', serif;
+  font-weight: 300;
+  font-size: clamp(36px, 4.5vw, 58px);
+  line-height: 1.15;
+  letter-spacing: 1px;
+}
+
+.subheading {
+  margin: clamp(20px, 2.4vw, 28px) auto 0;
+  max-width: 780px;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 300;
+  font-size: clamp(14px, 1vw, 16px);
+  line-height: 1.7;
+}
+
+.developer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: clamp(28px, 3.4vw, 40px);
+}
+
+.developerLabel {
+  font-family: 'Petrona', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 14px;
+  color: #cfe0dd;
+}
+
+.developerLogo {
+  height: 28px;
+  width: auto;
+}
+
+.infoRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 2.4vw, 32px);
+  background: #fff;
+  padding: clamp(32px, 4vw, 56px) 24px;
+}
+
+.infoBox {
+  border: 1px solid #1f4b4e;
+  border-radius: 10px;
+  padding: 18px clamp(24px, 2.6vw, 40px);
+  text-align: center;
+  min-width: 220px;
+}
+
+.infoBoxTitle {
+  margin: 0 0 12px;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  color: #163a3d;
+}
+
+.infoBoxText {
+  margin: 0;
+  font-family: 'Petrona', serif;
+  font-style: italic;
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.5;
+  color: #8b3a3a;
+}
+
+.priceList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.priceList li {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 14px;
+  font-family: 'Petrona', serif;
+  font-style: italic;
+  font-size: clamp(15px, 1.3vw, 18px);
+  color: #8b3a3a;
+}
+
+.priceType {
+  min-width: 32px;
+  text-align: right;
+}
+
+.gallery {
+  background: #fff;
+  padding: 0 24px clamp(24px, 4vw, 56px);
+  max-width: 1600px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(12px, 1.5vw, 24px);
+}
+
+@media (max-width: 720px) {
+  .galleryGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.galleryImage,
+.galleryPlaceholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.galleryPlaceholder {
+  background: #e6e6e6;
+}
+
+.footerInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(40px, 5vw, 64px);
+  background: #fff;
+  padding: 0 24px clamp(48px, 6vw, 80px);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.amenitiesSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(20px, 2.4vw, 28px);
+}
+
+.amenitiesHeading {
+  margin: 0;
+  font-family: 'Petrona', serif;
+  font-weight: 300;
+  font-size: clamp(26px, 2.8vw, 36px);
+  letter-spacing: 1px;
+  color: #163a3d;
+  text-align: center;
+}
+
+.highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.highlights li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 400;
+  font-size: clamp(13px, 1vw, 15px);
+  color: #163a3d;
+}
+
+.checkIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: #e2c27a;
+}
+
+.checkIcon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.amenities {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.amenity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  padding: 0 clamp(22px, 2.6vw, 36px);
+}
+
+.amenity:not(:last-child) {
+  border-right: 1px solid #dcdcdc;
+}
+
+.amenityIcon {
+  width: 100px;
+  height: 100px;
+}
+
+.amenityLabel {
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #163a3d;
+  max-width: 90px;
+}
+
+@media (max-width: 900px) {
+  .amenity:not(:last-child) {
+    border-right: none;
+  }
+}

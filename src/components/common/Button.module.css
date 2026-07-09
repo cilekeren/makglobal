@@ -1,0 +1,55 @@
+.btn {
+  --btn-color: #fff;
+  display: inline-block;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.cls1 {
+  fill: none;
+  stroke: var(--btn-color);
+  stroke-miterlimit: 10;
+  stroke-width: var(--stroke-w, 0.25px);
+}
+.rectShape {
+  stroke-miterlimit: 10;
+  stroke-width: var(--stroke-w, 0.25px);
+}
+.cls2 {
+  fill: var(--btn-color);
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 300;
+  font-size: 5.5px;
+}
+
+/* text is centered at rest, slides left on hover to make room for the arrow */
+.label {
+  transition: transform 0.4s ease;
+}
+.btn:hover .label,
+.btn:focus-visible .label,
+.btn.hovered .label {
+  transform: translateX(var(--label-hover-shift, -24.4px));
+}
+
+/* arrow starts off to the right, slides in on hover */
+.arrow {
+  transform: translateX(12px);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+.btn:hover .arrow,
+.btn:focus-visible .arrow,
+.btn.hovered .arrow {
+  transform: translateX(0);
+  opacity: 1;
+}

@@ -1,0 +1,56 @@
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(3px, 0.4vw, 7px);
+  width: clamp(140px, 12vw, 206px);
+}
+
+.logoDark {
+  display: block;
+  height: clamp(30px, 3.2vw, 42px);
+  width: auto;
+}
+
+.logoDarkCompact {
+  height: clamp(16px, 1.8vw, 22px);
+  margin-left: 14px;
+}
+
+.row {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 206 / 19.762;
+}
+
+.icon,
+.mak,
+.global {
+  position: absolute;
+}
+
+.icon {
+  left: 0;
+  top: 2.53%;
+  width: 9.738%;
+  height: 97.47%;
+}
+
+.mak {
+  left: 13.17%;
+  top: 0;
+  width: 28.86%;
+  height: 98.24%;
+}
+
+.global {
+  left: 45.786%;
+  top: 1.063%;
+  width: 53.58%;
+  height: 98.25%;
+}
+
+.subtitle {
+  width: 100%;
+  aspect-ratio: 206 / 11.604;
+}

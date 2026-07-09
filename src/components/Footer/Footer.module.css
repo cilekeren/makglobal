@@ -1,0 +1,229 @@
+.footer {
+  background: #8e2f30;
+  width: 100%;
+}
+
+.inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 96px) clamp(24px, 4vw, 64px) clamp(56px, 8vw, 112px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(40px, 6vw, 120px);
+}
+
+.left {
+  flex: 1 1 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  margin: 0;
+  font-family: 'Petrona', serif;
+  font-weight: 300;
+  font-size: clamp(40px, 4.4vw, 64px);
+  color: #fff;
+}
+
+.navRow {
+  margin-top: clamp(48px, 6vw, 88px);
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(24px, 3vw, 48px);
+}
+
+.navList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.3vw, 18px);
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 300;
+  font-size: clamp(14px, 1.1vw, 19px);
+  letter-spacing: 0.4px;
+  color: #fff;
+}
+
+.radio {
+  position: relative;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-sizing: border-box;
+}
+
+.radioActive::after {
+  content: '';
+  position: absolute;
+  inset: 3.5px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.divider {
+  align-self: stretch;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.tagline {
+  margin: 2px 0 0;
+  font-family: 'Petrona', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(15px, 1.15vw, 20px);
+  color: #fff;
+}
+
+.social {
+  margin-top: clamp(40px, 5vw, 72px);
+  display: flex;
+  gap: 12px;
+}
+
+.socialIcon {
+  width: clamp(32px, 2.6vw, 42px);
+  height: clamp(32px, 2.6vw, 42px);
+  background: #fff;
+}
+
+.brand {
+  margin-top: auto;
+  padding-top: clamp(40px, 5vw, 72px);
+}
+
+.logoRow {
+  position: relative;
+  width: clamp(150px, 12vw, 210px);
+  aspect-ratio: 206 / 19.762;
+  margin-bottom: clamp(14px, 1.6vw, 22px);
+}
+
+.logoIcon,
+.logoMak,
+.logoGlobal {
+  position: absolute;
+}
+
+.logoIcon {
+  left: 0;
+  top: 2.53%;
+  width: 9.738%;
+  height: 97.47%;
+}
+
+.logoMak {
+  left: 13.17%;
+  top: 0;
+  width: 28.86%;
+  height: 98.24%;
+}
+
+.logoGlobal {
+  left: 45.786%;
+  top: 1.063%;
+  width: 53.58%;
+  height: 98.25%;
+}
+
+.contactLine,
+.address {
+  margin: 0;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 400;
+  font-size: clamp(13px, 0.95vw, 16px);
+  line-height: 1.7;
+  color: #fff;
+}
+
+.contactLine a,
+.address a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.contactSep {
+  margin: 0 8px;
+  opacity: 0.6;
+}
+
+.form {
+  flex: 1 1 380px;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 600;
+  font-size: clamp(13px, 0.9vw, 15px);
+  letter-spacing: 0.4px;
+  color: #fff;
+  margin: clamp(18px, 2.2vw, 26px) 0 clamp(8px, 1vw, 12px);
+}
+
+.field,
+.textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: #fff;
+  font-family: 'Lexend Deca', sans-serif;
+  font-size: clamp(14px, 1vw, 16px);
+  padding: clamp(12px, 1.4vw, 16px);
+  box-sizing: border-box;
+}
+
+.field::placeholder,
+.textarea::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.field:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #fff;
+}
+
+.textarea {
+  min-height: clamp(140px, 16vw, 210px);
+  resize: vertical;
+  font-family: inherit;
+}
+
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 2vw, 24px);
+  margin-top: clamp(18px, 2.2vw, 26px);
+}
+
+.row2 .label {
+  margin-top: 0;
+}
+
+.sendWrap {
+  margin-top: clamp(28px, 3.4vw, 40px);
+}
+
+@media (max-width: 640px) {
+  .navRow {
+    flex-direction: column;
+  }
+
+  .divider {
+    display: none;
+  }
+}
