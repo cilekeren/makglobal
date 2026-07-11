@@ -1,0 +1,49 @@
+.section {
+  background: #fff;
+  padding: 0 24px clamp(56px, 7vw, 96px);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.mapWrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #1f4b4e;
+}
+
+.map {
+  width: 100%;
+  height: clamp(320px, 40vw, 480px);
+}
+
+/* ------------------------------------------------------------------ */
+/* Marker pin -- a divIcon so the circle can hold our logomark instead  */
+/* of Leaflet's plain vector dot.                                      */
+/* ------------------------------------------------------------------ */
+
+.markerIcon {
+  background: none;
+  border: none;
+}
+
+.markerCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #163a3d;
+  border: 2px solid #fff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.markerLogo {
+  display: block;
+  width: 55%;
+  height: 55%;
+  flex-shrink: 0;
+  overflow: visible;
+}

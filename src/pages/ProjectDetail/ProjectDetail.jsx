@@ -7,6 +7,8 @@ import heroStyles from '../../components/Hero/Hero.module.css'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
 import CommuteBadge from './CommuteBadge'
+import GalleryCarousel from './GalleryCarousel'
+import ProjectLocationMap from './ProjectLocationMap'
 import { AMENITY_ICONS } from './amenityIcons'
 import styles from './ProjectDetail.module.css'
 
@@ -200,15 +202,7 @@ export default function ProjectDetail() {
       </section>
 
       <section className={styles.gallery}>
-        <div className={styles.galleryGrid}>
-          {gallery.map((src, i) =>
-            src ? (
-              <img key={i} src={src} alt={`${project.name} ${i + 1}`} className={styles.galleryImage} />
-            ) : (
-              <div key={i} className={styles.galleryPlaceholder} />
-            )
-          )}
-        </div>
+        <GalleryCarousel key={project.slug} images={gallery} name={project.name} />
       </section>
 
       {hasFooterInfo && (
@@ -244,6 +238,8 @@ export default function ProjectDetail() {
           )}
         </section>
       )}
+
+      <ProjectLocationMap coords={project.coords} />
 
       <Footer />
     </>

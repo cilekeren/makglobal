@@ -39,7 +39,7 @@
 .card {
   position: relative;
   width: 100%;
-  border: 1px solid #1f4b4e;
+  border: 1px solid rgba(31, 75, 78, 0.2);
   border-radius: 10px;
   padding: clamp(14px, 1.8vw, 28px) clamp(16px, 2vw, 32px) clamp(16px, 2vw, 32px);
   background: #fff;
@@ -50,7 +50,7 @@
 
 .card:hover {
   transform: scale(1.02);
-  box-shadow: 0 20px 40px rgba(22, 58, 61, 0.18);
+  box-shadow: 0 0 16px -4px rgba(22, 58, 61, 0.22);
 }
 
 .image,

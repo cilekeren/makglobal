@@ -1,0 +1,312 @@
+.carousel {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 100 / 33.75;
+}
+
+.item {
+  position: absolute;
+  top: 50%;
+  left: 27.5%;
+  width: 45%;
+  aspect-ratio: 4 / 3;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+  transform: translateY(-50%) scale(1);
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.itemImage,
+.itemPlaceholder {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.itemPlaceholder {
+  background: #e6e6e6;
+}
+
+.active {
+  opacity: 1;
+  z-index: 10;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.prevSlide {
+  left: 0%;
+  opacity: 0.65;
+  z-index: 5;
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translateY(-50%) scale(0.8);
+  transform-origin: left center;
+}
+
+.nextSlide {
+  left: 55%;
+  opacity: 0.65;
+  z-index: 5;
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translateY(-50%) scale(0.8);
+  transform-origin: right center;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 2.4vw, 32px);
+  margin-top: clamp(24px, 3vw, 36px);
+}
+
+.navBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #163a3d;
+  border-radius: 50%;
+  background: none;
+  color: #163a3d;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.navBtn:hover,
+.navBtn:focus-visible {
+  background: #163a3d;
+  color: #fff;
+}
+
+.navArrow {
+  width: 20px;
+  height: auto;
+  color: currentColor;
+  transform: translateX(2px);
+}
+
+.navArrow line,
+.navArrow polyline {
+  stroke: currentColor;
+  stroke-width: 1;
+}
+
+.navArrowPrev {
+  transform: translateX(-2px) scaleX(-1);
+}
+
+.thumbnailsViewport {
+  width: clamp(220px, 32vw, 460px);
+  overflow: hidden;
+}
+
+.thumbnailsTrack {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: max-content;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.thumbBtn {
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.thumb {
+  display: block;
+  width: 64px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+  opacity: 0.45;
+  border: 2px solid transparent;
+  transition: opacity 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.thumbPlaceholder {
+  background: #e6e6e6;
+}
+
+.thumbBtn:hover .thumb {
+  opacity: 0.8;
+}
+
+.thumb.thumbActive {
+  opacity: 1;
+  border-color: #163a3d;
+  transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .thumb {
+    width: 48px;
+  }
+}
+
+.lightboxOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(10, 51, 50, 0.75);
+}
+
+.lightboxImageBox {
+  position: relative;
+  display: flex;
+  max-width: min(85vw, 1100px);
+  max-height: 85vh;
+}
+
+.lightboxImage {
+  display: block;
+  max-width: min(85vw, 1100px);
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  object-fit: contain;
+}
+
+.lightboxPlaceholder {
+  width: min(85vw, 800px);
+  aspect-ratio: 4 / 3;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.lightboxClose {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: rgba(10, 51, 50, 0.85);
+  color: #fff;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.25s ease;
+}
+
+.lightboxClose:hover,
+.lightboxClose:focus-visible {
+  background: #0a3332;
+}
+
+.closeIcon {
+  width: 14px;
+  height: 14px;
+}
+
+.closeIcon line {
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.lightboxNavBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: rgba(10, 51, 50, 0.55);
+  color: #fff;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.25s ease;
+}
+
+.lightboxNavBtnPrev {
+  left: clamp(16px, 4vw, 48px);
+}
+
+.lightboxNavBtnNext {
+  right: clamp(16px, 4vw, 48px);
+}
+
+.lightboxNavBtn:hover,
+.lightboxNavBtn:focus-visible {
+  background: #0a3332;
+}
+
+.lightboxArrow {
+  width: 22px;
+  height: auto;
+  color: currentColor;
+  transform: translateX(2px);
+}
+
+.lightboxArrow line,
+.lightboxArrow polyline {
+  stroke: currentColor;
+  stroke-width: 1;
+}
+
+.lightboxArrowPrev {
+  transform: translateX(-2px) scaleX(-1);
+}
+
+@media (max-width: 600px) {
+  .lightboxOverlay {
+    padding: 12px;
+  }
+
+  .lightboxNavBtn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .lightboxNavBtnPrev {
+    left: 8px;
+  }
+
+  .lightboxNavBtnNext {
+    right: 8px;
+  }
+
+  .lightboxArrow {
+    width: 16px;
+  }
+}

@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Button from '../common/Button'
 import styles from './ZoneIsometric.module.css'
 
@@ -102,7 +103,7 @@ const RAMPS = [
 ]
 
 const VB = { w: 310.3488, h: 245.8101 }
-const GAP = 82
+const GAP = 55
 const MAX_ROT_X = 60
 const MAX_ROT_Z = -42
 const RAD = Math.PI / 180
@@ -147,6 +148,7 @@ function makeSVG() {
 }
 
 export default function ZoneIsometric() {
+  const navigate = useNavigate()
   const trackRef = useRef(null)
   const stageRef = useRef(null)
   const sceneRef = useRef(null)
@@ -359,7 +361,7 @@ export default function ZoneIsometric() {
           </div>
           <TraceLine innerRef={traceRef} wrapRef={traceWrapRef} />
           <div className={styles.ctaWrap}>
-            <Button label="DISCOVER LONDON" />
+            <Button label="DISCOVER LONDON" onClick={() => navigate('/discover-london')} />
           </div>
         </div>
       </div>

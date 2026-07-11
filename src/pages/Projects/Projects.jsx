@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar/Navbar'
 import ArrowIcon from '../../components/common/ArrowIcon'
 import ProjectsSlider from './ProjectsSlider'
 import ProjectCard from './ProjectCard'
+import ProjectsMap from './ProjectsMap'
 import Footer from '../../components/Footer/Footer'
 import { PROJECTS } from '../../data/projects'
 import styles from './Projects.module.css'
@@ -38,6 +39,8 @@ export default function Projects() {
           ))}
         </div>
       </section>
+
+      <ProjectsMap />
 
       <Footer />
     </>

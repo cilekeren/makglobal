@@ -2,7 +2,8 @@ import { useEffect, useRef } from 'react'
 import { JOURNEY_SVG_MARKUP } from './journeySvgMarkup'
 import sideVideo from '../../assets/journey/side-video.mp4'
 import sideVideo2 from '../../assets/journey/side-video-2.mp4'
-import makStamp from '../../assets/journey/mak-stamp.svg'
+import makStampRing from '../../assets/journey/mak-stamp-ring.svg'
+import makStampCenter from '../../assets/journey/mak-stamp-center.svg'
 import Button from '../common/Button'
 import styles from './BuyingJourney.module.css'
 
@@ -383,7 +384,8 @@ export default function BuyingJourney() {
             />
           </div>
           <div className={styles.stampWrap} ref={stampRef}>
-            <img className={styles.stamp} src={makStamp} alt="" />
+            <img className={styles.stampRing} src={makStampRing} alt="" />
+            <img className={styles.stampCenter} src={makStampCenter} alt="" />
           </div>
           <div className={styles.wrap} ref={wrapRef}>
             <div dangerouslySetInnerHTML={{ __html: JOURNEY_SVG_MARKUP }} />

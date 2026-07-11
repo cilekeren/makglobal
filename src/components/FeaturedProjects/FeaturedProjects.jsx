@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '../common/Button'
 import { PROJECTS } from '../../data/projects'
@@ -19,6 +19,7 @@ function ProjectCard({ project }) {
   const navigate = useNavigate()
   const imgRef = useRef(null)
   const titleRef = useRef(null)
+  const [hovered, setHovered] = useState(false)
 
   const goToDetails = () =>
     startCardHeroTransition({
@@ -33,6 +34,8 @@ function ProjectCard({ project }) {
       className={styles.card}
       role="link"
       tabIndex={0}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       onClick={goToDetails}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -88,6 +91,7 @@ function ProjectCard({ project }) {
           strokeScale={3}
           padding={10}
           arrowLength={24}
+          hovered={hovered}
         />
       </div>
     </div>
@@ -95,6 +99,8 @@ function ProjectCard({ project }) {
 }
 
 export default function FeaturedProjects() {
+  const navigate = useNavigate()
+
   return (
     <section className={styles.section}>
       <h2 className={styles.heading}>Featured Projects</h2>
@@ -117,7 +123,7 @@ export default function FeaturedProjects() {
       </p>
 
       <div className={styles.viewProjectsWrap}>
-        <Button label="VIEW ALL PROJECTS" color="#163a3d" />
+        <Button label="VIEW ALL PROJECTS" color="#163a3d" onClick={() => navigate('/projects')} />
       </div>
     </section>
   )

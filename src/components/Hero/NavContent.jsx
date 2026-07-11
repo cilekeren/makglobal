@@ -18,7 +18,7 @@ export const NAV_ITEMS = [
       'FAQ’s',
     ],
   },
-  { label: 'DISCOVER LONDON' },
+  { label: 'DISCOVER LONDON', to: '/discover-london' },
   { label: 'ABOUT US' },
   { label: 'TALK TO US!' },
 ]

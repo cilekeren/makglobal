@@ -100,8 +100,8 @@
   left: 30px;
   right: 30px;
   /* cancels out the navbar's own top padding + logoSlot's padding so the
-     logo's top edge sits exactly 40px down, matching its 40px left edge. */
-  top: calc(40px - clamp(8px, 0.9vw, 12px) - clamp(6px, 0.8vw, 10px));
+     logo's top edge sits exactly 24px down, matching its 40px left edge. */
+  top: calc(24px - clamp(8px, 0.9vw, 12px) - clamp(6px, 0.8vw, 10px));
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -315,6 +315,16 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  /* cancels out the navbar's own right padding so the "TR" button's own
+     10px padding is the only thing separating it from the viewport edge,
+     mirroring the logo's fixed 40px left margin on the other side. Only
+     applies to the regular navbar -- the sticky one keeps its original
+     position, restored just below. */
+  margin-right: calc(-1 * clamp(16px, 2vw, 28px));
+}
+
+.stickyNavBar .langBlock {
+  margin-right: 0;
 }
 
 .langBtn {

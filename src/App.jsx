@@ -5,6 +5,7 @@ import 'lenis/dist/lenis.css'
 import Home from './pages/Home/Home'
 import Projects from './pages/Projects/Projects'
 import ProjectDetail from './pages/ProjectDetail/ProjectDetail'
+import DiscoverLondon from './pages/DiscoverLondon/DiscoverLondon'
 
 function App() {
   const lenisRef = useRef(null)
@@ -44,6 +45,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/projects" element={<Projects />} />
       <Route path="/projects/:slug" element={<ProjectDetail />} />
+      <Route path="/discover-london" element={<DiscoverLondon />} />
     </Routes>
   )
 }
