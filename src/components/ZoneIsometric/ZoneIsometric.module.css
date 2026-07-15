@@ -38,7 +38,7 @@
 
 .track {
   position: relative;
-  height: 420vh;
+  height: 480vh;
 }
 
 .sticky {
@@ -89,4 +89,21 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 6;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 10;
+  max-width: 240px;
+  padding: 10px 14px;
+  background: #0a3332;
+  color: #f3efe4;
+  font-family: 'Lexend Deca', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.5;
+  border-radius: 3px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
 }

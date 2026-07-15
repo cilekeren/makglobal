@@ -4,21 +4,44 @@ import berkeleyLogo from '../../assets/firms/berkeley.svg'
 import theOwoLogo from '../../assets/firms/the_owo.svg'
 import emaarLogo from '../../assets/firms/emaar.svg'
 import londonSquareLogo from '../../assets/firms/london_square.svg'
+import ballymoreLogo from '../../assets/firms/Ballymore_Group.svg'
+import redrowLogo from '../../assets/firms/Redrow_plc_Logo.svg'
+import hillGroupLogo from '../../assets/firms/hill_group.svg'
+import knightDragonLogo from '../../assets/firms/knight_dragon.svg'
 import styles from './FirmsBand.module.css'
 
 const LOGO_HEIGHT = 42.5
 const DURATION_S = 30
 
 const LOGOS = [
-  { src: barrattLondonLogo, alt: 'Barratt London', ratio: 38.616 / 8.5942 },
+  {
+    src: barrattLondonLogo,
+    alt: 'Barratt London',
+    ratio: 38.616 / 8.5942,
+    scale: 0.85,
+  },
   { src: berkeleyLogo, alt: 'Berkeley Group', ratio: 36.1794 / 12.2008 },
   { src: theOwoLogo, alt: 'The OWO', ratio: 23.9259 / 9.8844 },
-  { src: emaarLogo, alt: 'Emaar', ratio: 31.5227 / 6.236, scale: 0.7 },
+  { src: emaarLogo, alt: 'Emaar', ratio: 31.5227 / 6.236, scale: 0.55 },
   {
     src: londonSquareLogo,
     alt: 'London Square',
     ratio: 25.0955 / 17.0332,
     scale: 1.3,
+  },
+  { src: ballymoreLogo, alt: 'Ballymore Group', ratio: 503 / 164 },
+  {
+    src: redrowLogo,
+    alt: 'Redrow',
+    ratio: 585.6 / 125.3,
+    scale: 0.8,
+  },
+  { src: hillGroupLogo, alt: 'The Hill Group', ratio: 888.6 / 444 },
+  {
+    src: knightDragonLogo,
+    alt: 'Knight Dragon',
+    ratio: 220.62 / 118.47,
+    scale: 1.25,
   },
 ]
 

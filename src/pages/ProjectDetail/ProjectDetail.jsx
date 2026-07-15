@@ -1,11 +1,12 @@
 import { useLayoutEffect, useRef } from 'react'
-import { useParams, Navigate } from 'react-router-dom'
+import { useParams, useNavigate, Navigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { PROJECTS } from '../../data/projects'
 import { consumePendingHeroTransition } from '../../lib/pageTransition'
 import heroStyles from '../../components/Hero/Hero.module.css'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
+import Button from '../../components/common/Button'
 import CommuteBadge from './CommuteBadge'
 import GalleryCarousel from './GalleryCarousel'
 import ProjectLocationMap from './ProjectLocationMap'
@@ -27,6 +28,7 @@ function splitIntoChars(el) {
 
 export default function ProjectDetail() {
   const { slug } = useParams()
+  const navigate = useNavigate()
   const project = PROJECTS.find((p) => p.slug === slug)
   const introWipeRef = useRef(null)
   const headingRef = useRef(null)
@@ -240,6 +242,10 @@ export default function ProjectDetail() {
       )}
 
       <ProjectLocationMap coords={project.coords} />
+
+      <section className={styles.backSection}>
+        <Button label="BACK TO PROJECTS" color="#0A3332" reverse onClick={() => navigate('/projects')} />
+      </section>
 
       <Footer />
     </>

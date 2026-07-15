@@ -41,9 +41,10 @@
   transform: translateX(var(--label-hover-shift, -24.4px));
 }
 
-/* arrow starts off to the right, slides in on hover */
+/* arrow starts off to one side (right normally, left when reversed),
+   slides in on hover */
 .arrow {
-  transform: translateX(12px);
+  transform: translateX(var(--arrow-rest-shift, 12px));
   opacity: 0;
   transition: transform 0.4s ease, opacity 0.3s ease;
 }

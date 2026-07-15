@@ -4,6 +4,7 @@ import FeaturedProjects from '../../components/FeaturedProjects/FeaturedProjects
 import ZoneIsometric from '../../components/ZoneIsometric/ZoneIsometric'
 import AreaCards from '../../components/AreaCards/AreaCards'
 import BuyingJourney from '../../components/BuyingJourney/BuyingJourney'
+import About from '../../components/About/About'
 import Footer from '../../components/Footer/Footer'
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <ZoneIsometric />
       <AreaCards />
       <BuyingJourney />
+      <About />
       <Footer />
     </>
   )

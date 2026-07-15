@@ -7,6 +7,8 @@
 }
 
 .mapWrap {
+  position: relative;
+  z-index: 0;
   margin: clamp(4px, 0.6vw, 8px) auto 0;
   border-radius: 10px;
   overflow: hidden;

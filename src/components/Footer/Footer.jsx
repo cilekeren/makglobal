@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { FaInstagram, FaLinkedinIn } from 'react-icons/fa6'
 import logoIcon from '../../assets/hero/logo-mark2.svg'
 import logoMak from '../../assets/hero/logo-mark.svg'
 import logoGlobal from '../../assets/hero/logo-text.svg'
@@ -7,8 +8,92 @@ import styles from './Footer.module.css'
 
 const NAV_ITEMS = ['PROJECTS', 'BUYER’S GUIDE', 'DISCOVER LONDON', 'FAQ', 'ABOUT US']
 
+const PURPOSE_OPTIONS = [
+  { value: 'investment', label: 'Investment' },
+  { value: 'home', label: 'Home to Live In' },
+  { value: 'education', label: 'Child’s Education' },
+  { value: 'buy-to-let', label: 'Buy-to-Let' },
+  { value: 'holiday', label: 'Holiday / Second Home' },
+  { value: 'not-sure', label: 'Not Sure Yet' },
+]
+
+const BUDGET_OPTIONS = [
+  { value: 'under-400k', label: 'Up to £400K' },
+  { value: '400k-600k', label: '£400K-£600K' },
+  { value: '600k-800k', label: '£600K-£800K' },
+  { value: '800k-plus', label: '£800K+' },
+]
+
+// native <select> popups can't be styled to match the site (maroon bg,
+// white border) in most browsers, so this is a small custom listbox
+// instead, built to look and behave like one.
+function FormSelect({ id, placeholder, options, value, onChange }) {
+  const [open, setOpen] = useState(false)
+  const rootRef = useRef(null)
+
+  useEffect(() => {
+    if (!open) return
+    const onDocClick = (e) => {
+      if (rootRef.current && !rootRef.current.contains(e.target)) setOpen(false)
+    }
+    const onKey = (e) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('mousedown', onDocClick)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onDocClick)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  const selected = options.find((o) => o.value === value)
+
+  return (
+    <div className={styles.selectRoot} ref={rootRef}>
+      <button
+        type="button"
+        id={id}
+        className={`${styles.field} ${styles.selectButton}`}
+        onClick={() => setOpen((o) => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+      >
+        <span className={selected ? undefined : styles.selectPlaceholder}>
+          {selected ? selected.label : placeholder}
+        </span>
+        <span className={`${styles.selectArrow} ${open ? styles.selectArrowOpen : ''}`} aria-hidden="true">
+          ▾
+        </span>
+      </button>
+      {open && (
+        <ul className={styles.selectMenu} role="listbox">
+          {options.map((o) => (
+            <li key={o.value}>
+              <button
+                type="button"
+                className={styles.selectOption}
+                role="option"
+                aria-selected={o.value === value}
+                onClick={() => {
+                  onChange(o.value)
+                  setOpen(false)
+                }}
+              >
+                {o.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
+
 export default function Footer() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [purpose, setPurpose] = useState('')
+  const [budget, setBudget] = useState('')
 
   return (
     <footer className={styles.footer}>
@@ -34,8 +119,24 @@ export default function Footer() {
           </div>
 
           <div className={styles.social}>
-            <a href="#" className={styles.socialIcon} aria-label="Instagram" />
-            <a href="#" className={styles.socialIcon} aria-label="LinkedIn" />
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialIcon}
+              aria-label="Instagram"
+            >
+              <FaInstagram />
+            </a>
+            <a
+              href="https://www.linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialIcon}
+              aria-label="LinkedIn"
+            >
+              <FaLinkedinIn />
+            </a>
           </div>
 
           <div className={styles.brand}>
@@ -75,26 +176,39 @@ export default function Footer() {
 
           <div className={styles.row2}>
             <div>
+              <label className={styles.label} htmlFor="footer-purpose">
+                PURPOSE
+              </label>
+              <FormSelect
+                id="footer-purpose"
+                placeholder="Select purpose"
+                options={PURPOSE_OPTIONS}
+                value={purpose}
+                onChange={setPurpose}
+              />
+            </div>
+
+            <div>
               <label className={styles.label} htmlFor="footer-budget">
                 ESTIMATED BUDGET
               </label>
-              <input className={styles.field} id="footer-budget" type="text" />
-            </div>
-            <div>
-              <label className={styles.label} htmlFor="footer-rooms">
-                ROOMS
-              </label>
-              <input className={styles.field} id="footer-rooms" type="text" />
+              <FormSelect
+                id="footer-budget"
+                placeholder="Select budget"
+                options={BUDGET_OPTIONS}
+                value={budget}
+                onChange={setBudget}
+              />
             </div>
           </div>
 
           <label className={styles.label} htmlFor="footer-message">
-            MESSAGE
+            ADDITIONAL INFORMATION
           </label>
           <textarea className={styles.textarea} id="footer-message" />
 
           <div className={styles.sendWrap}>
-            <Button type="submit" label="SEND" />
+            <Button type="submit" label="FIND MY IDEAL PROPERTY" fullWidth />
           </div>
         </form>
       </div>

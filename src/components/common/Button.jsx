@@ -1,6 +1,16 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import styles from './Button.module.css'
 
+function mergeRefs(...refs) {
+  return (node) => {
+    refs.forEach((ref) => {
+      if (!ref) return
+      if (typeof ref === 'function') ref(node)
+      else ref.current = node
+    })
+  }
+}
+
 // Height, stroke width, corner radius and arrow geometry are taken
 // verbatim from the original hand-built reference button
 // (animated-button-1.html). Only the label is swappable: its measured
@@ -31,9 +41,20 @@ export default function Button({
   onClick,
   type = 'button',
   hovered = false,
+  // mirrors the whole interaction: arrow sits before the label and points
+  // left, hidden off to the left at rest, label shifts right on hover
+  // instead of left — for "back" style buttons.
+  reverse = false,
+  // stretches the pill to fill its parent's width (e.g. to match a form
+  // above it) instead of shrink-wrapping the label — everything below
+  // still centers/anchors correctly since the label/arrow positions are
+  // all derived from pillWidth, not hardcoded to the tight-fit case.
+  fullWidth = false,
 }) {
   const textRef = useRef(null)
+  const btnElRef = useRef(null)
   const [labelWidth, setLabelWidth] = useState(0)
+  const [containerWidth, setContainerWidth] = useState(0)
 
   useLayoutEffect(() => {
     if (textRef.current) {
@@ -41,14 +62,35 @@ export default function Button({
     }
   }, [label])
 
+  useLayoutEffect(() => {
+    if (!fullWidth) return
+    const parent = btnElRef.current?.parentElement
+    if (!parent) return
+    const ro = new ResizeObserver((entries) => {
+      setContainerWidth(entries[0].contentRect.width)
+    })
+    ro.observe(parent)
+    return () => ro.disconnect()
+  }, [fullWidth])
+
   const ready = labelWidth > 0
   const hoverBlockWidth = labelWidth + GAP_AFTER_LABEL + arrowLength
-  const pillWidth = hoverBlockWidth + padding * 2
+  const naturalPillWidth = hoverBlockWidth + padding * 2
+  const pillWidth =
+    fullWidth && containerWidth > 0
+      ? Math.max(naturalPillWidth, containerWidth / scale)
+      : naturalPillWidth
 
-  const hoverLabelX = padding
-  const arrowX = padding + labelWidth + GAP_AFTER_LABEL
+  // anchored to the pill's edges (padding in from left/right) rather than
+  // relative to each other — mathematically identical to the old
+  // label-relative formulas when the pill is tightly fit to its content,
+  // but (unlike those) still lands correctly when pillWidth is stretched
+  // wider by `fullWidth`.
+  const hoverLabelX = reverse ? pillWidth - padding - labelWidth : padding
+  const arrowX = reverse ? padding : pillWidth - padding - arrowLength
   const restLabelX = (pillWidth - labelWidth) / 2
   const labelHoverShift = hoverLabelX - restLabelX
+  const arrowRestShift = reverse ? -12 : 12
   const chevronW = arrowLength * CHEVRON_W_RATIO
   const chevronTop = arrowLength * CHEVRON_TOP_RATIO
   const chevronBottom = arrowLength * CHEVRON_BOTTOM_RATIO
@@ -63,11 +105,12 @@ export default function Button({
       type={type}
       className={`${styles.btn} ${hovered ? styles.hovered : ''}`}
       aria-label={label}
-      ref={innerRef}
+      ref={mergeRefs(innerRef, btnElRef)}
       onClick={onClick}
       style={{
         '--btn-color': contentColor,
         '--label-hover-shift': `${labelHoverShift}px`,
+        '--arrow-rest-shift': `${arrowRestShift}px`,
         '--stroke-w': `${strokeW}px`,
         width: ready ? pillWidth * scale : undefined,
         height: HEIGHT * scale,
@@ -96,18 +139,24 @@ export default function Button({
           {label}
         </text>
         <g transform={`translate(${arrowX}, 0)`}>
+          {/* CSS (.arrow) drives the hover slide/fade via `transform` — a
+              static SVG `transform` attribute on the same element would be
+              overridden by it, so the reverse mirror-flip lives on this
+              separate inner group instead. */}
           <g className={styles.arrow}>
-            <line
-              className={styles.cls1}
-              x1="0"
-              y1={CENTER_Y}
-              x2={arrowLength}
-              y2={CENTER_Y}
-            />
-            <polyline
-              className={styles.cls1}
-              points={`${arrowLength - chevronW} ${CENTER_Y - chevronTop} ${arrowLength} ${CENTER_Y} ${arrowLength - chevronW} ${CENTER_Y + chevronBottom}`}
-            />
+            <g transform={reverse ? `translate(${arrowLength}, 0) scale(-1, 1)` : undefined}>
+              <line
+                className={styles.cls1}
+                x1="0"
+                y1={CENTER_Y}
+                x2={arrowLength}
+                y2={CENTER_Y}
+              />
+              <polyline
+                className={styles.cls1}
+                points={`${arrowLength - chevronW} ${CENTER_Y - chevronTop} ${arrowLength} ${CENTER_Y} ${arrowLength - chevronW} ${CENTER_Y + chevronBottom}`}
+              />
+            </g>
           </g>
         </g>
       </svg>

@@ -251,14 +251,15 @@ export default function BuyingJourney() {
       const batchStagger = revealBatchIndex * 350
       revealBatchIndex += 1
       const els = steps[stepKey]
+      // title/body no longer wait for the ring + icon to finish drawing —
+      // ring, icon, and text all fire together at the same delay — the
+      // ring no longer draws first with the icon following once it's
+      // done, and the text no longer waits on either.
       const seq = ['ring-navy', 'ring-gold', 'icon', 'title', 'body']
-      let base = 150 + batchStagger
+      const base = 150 + batchStagger
       seq.forEach((kind) => {
         const grp = els.filter((e) => e.dataset.kind === kind)
         grp.forEach((e, k) => drawEl(e, base + k * 60))
-        if (grp.length) {
-          base += kind === 'icon' ? 500 : kind === 'ring-navy' ? 700 : kind === 'ring-gold' ? 300 : 250
-        }
       })
     }
 
