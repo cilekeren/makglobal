@@ -1,0 +1,204 @@
+.heroOuter {
+  background: #fff;
+  padding: 20px;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: clamp(460px, 40vw, 630px);
+  overflow: hidden;
+  border-radius: 6px;
+  background: #0a3332;
+}
+
+.bgImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 75% center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(9, 26, 27, 0.95) 0%,
+    rgba(9, 26, 27, 0.88) 42%,
+    rgba(9, 26, 27, 0.35) 62%,
+    rgba(9, 26, 27, 0) 75%
+  );
+}
+
+@media (max-width: 720px) {
+  .bgImage {
+    object-position: 85% center;
+  }
+
+  .overlay {
+    background: rgba(9, 26, 27, 0.75);
+  }
+}
+
+/* same background as the homepage's Zone Guides section
+   (ZoneIsometric.module.css .section: #175459), so this band reads as
+   the same brand teal. */
+.storyBand {
+  position: relative;
+  background: #175459;
+  padding: clamp(56px, 7vw, 96px) 24px;
+  text-align: center;
+}
+
+/* straddles the boundary with .reasonsSection below: horizontally centered
+   on the midpoint between the section's center and left edge, vertically
+   centered on the band's own bottom edge so half sits on the teal band and
+   half on the white section that follows. */
+.stampWrap {
+  position: absolute;
+  left: 25%;
+  bottom: 0;
+  transform: translate(-50%, 43%);
+  width: clamp(90px, 9vw, 140px);
+  aspect-ratio: 1 / 1;
+  pointer-events: none;
+}
+
+.stampRing,
+.stampCenter {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.stampRing {
+  animation: stampSpin 18s linear infinite;
+}
+
+@keyframes stampSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.heading {
+  margin: 0;
+  font-family: 'Petrona', serif;
+  font-weight: 200;
+  font-size: clamp(36px, 4.2vw, 56px);
+  color: #ededed;
+}
+
+.body {
+  max-width: clamp(480px, 34vw, 640px);
+  margin: clamp(16px, 2vw, 24px) auto 0;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 300;
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.7;
+  color: #ededed;
+}
+
+.reasonsSection {
+  width: 100%;
+  background: #fff;
+  padding: clamp(64px, 7vw, 96px) 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.reasonsHeading {
+  margin: 0;
+  padding: 0 24px;
+  font-family: 'Petrona', serif;
+  font-weight: 200;
+  font-size: clamp(36px, 4.2vw, 56px);
+  color: #163a3d;
+}
+
+/* left/right edges match Footer.module.css's .inner exactly (same
+   max-width + margin + horizontal padding formula), so the cards line up
+   with the footer's "Contact" heading on the left and the form's right
+   edge on the right. */
+.reasonsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(32px, 4vw, 56px) clamp(24px, 3vw, 40px);
+  width: 100%;
+  max-width: 1600px;
+  margin: clamp(48px, 6vw, 72px) auto 0;
+  padding: 0 clamp(24px, 4vw, 64px);
+}
+
+.reasonCard {
+  text-align: left;
+  border: 1px solid rgba(31, 75, 78, 0.2);
+  border-radius: 10px;
+  padding: clamp(20px, 2.2vw, 32px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reasonCard:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 16px -4px rgba(22, 58, 61, 0.22);
+}
+
+.reasonIcon {
+  display: block;
+  width: clamp(24px, 2vw, 28px);
+  height: clamp(24px, 2vw, 28px);
+}
+
+.reasonDivider {
+  display: block;
+  margin-top: clamp(14px, 1.6vw, 20px);
+  width: 100%;
+  height: 1px;
+  background: #d9d9d9;
+}
+
+.reasonTitle {
+  margin: clamp(20px, 2.4vw, 28px) 0 0;
+  font-family: 'Petrona', serif;
+  font-weight: 400;
+  font-size: clamp(18px, 1.6vw, 22px);
+  color: #163a3d;
+}
+
+.reasonBody {
+  margin: clamp(8px, 1vw, 12px) 0 0;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 300;
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.7;
+  color: #5c6b6a;
+}
+
+@media (max-width: 900px) {
+  .reasonsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .reasonsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.backSection {
+  display: flex;
+  justify-content: center;
+  gap: clamp(16px, 2vw, 24px);
+  background: #fff;
+  padding: clamp(96px, 12vw, 160px) 24px;
+}

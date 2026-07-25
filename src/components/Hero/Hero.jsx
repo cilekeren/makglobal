@@ -1,11 +1,13 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
+import { useTranslation } from 'react-i18next'
 import Button from '../common/Button'
 import HeroSlider from './HeroSlider'
 import NavContent from './NavContent'
 import styles from './Hero.module.css'
 
 export default function Hero() {
+  const { t } = useTranslation()
   const rootRef = useRef(null)
   const navRef = useRef(null)
   const lineRefs = useRef([])
@@ -64,7 +66,7 @@ export default function Hero() {
                 className={styles.lineInner}
                 ref={(el) => el && (lineRefs.current[0] = el)}
               >
-                Considering Purchasing
+                {t('hero.headingLine1')}
               </span>
             </span>
             <span className={styles.line}>
@@ -72,7 +74,7 @@ export default function Hero() {
                 className={styles.lineInner}
                 ref={(el) => el && (lineRefs.current[1] = el)}
               >
-                Property in the UK?
+                {t('hero.headingLine2')}
               </span>
             </span>
           </h1>
@@ -80,20 +82,19 @@ export default function Hero() {
 
         <div className={styles.subtextWrap}>
           <p className={styles.subtext} ref={subtextRef}>
-            <span className={styles.subtextLine}>
-              Based on your objectives, preferred location, and budget,
-            </span>
-            <span className={styles.subtextLine}>
-              we help you identify developments that match your investment goals.
-            </span>
+            <span className={styles.subtextLine}>{t('hero.subtextLine1')}</span>{' '}
+            <span className={styles.subtextLine}>{t('hero.subtextLine2')}</span>
           </p>
         </div>
 
-        <Button label="VIEW PROJECTS" innerRef={buttonRef} />
+        <Button label={t('common.viewProjects')} innerRef={buttonRef} />
       </div>
     </section>
 
-    <header className={`${styles.navbar} ${styles.stickyNavBar} ${stickyVisible ? styles.stickyNavVisible : ''}`}>
+    <header
+      data-sticky-nav
+      className={`${styles.navbar} ${styles.stickyNavBar} ${stickyVisible ? styles.stickyNavVisible : ''}`}
+    >
       <NavContent sticky />
     </header>
     </div>

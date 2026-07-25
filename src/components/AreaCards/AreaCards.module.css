@@ -1,6 +1,6 @@
 .section {
   position: relative;
-  background: linear-gradient(to bottom, #175459 0%, #175459 50%, #fff 50%, #fff 100%);
+  background: linear-gradient(to bottom, #175459 0%, #175459 28%, #fff 28%, #fff 100%);
   padding: 0 24px 96px;
   z-index: 2;
 }
@@ -102,4 +102,38 @@
 .card:hover .pillPath,
 .card:focus-within .pillPath {
   stroke-dashoffset: 0;
+}
+
+.ctaWrap {
+  display: flex;
+  justify-content: center;
+  /* matches .section's bottom padding so the button sits exactly midway
+     between the cards above and the next section below. */
+  margin-top: 96px;
+}
+
+@media (max-width: 700px) {
+  /* matches the zone guide cards' own mobile inset (16px, see
+     .zoneLabelsCol in ZoneIsometric.module.css) so both card rows read as
+     the same total width stacked on top of each other down the page. */
+  .section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* hover is a mouse-only affordance — on touch it just gets "stuck" on
+     the last-tapped card until something else is tapped, which reads as
+     a stray highlighted card rather than an effect. */
+  .card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .card:hover .pillPath {
+    stroke-dashoffset: 1;
+  }
+
+  .label {
+    font-size: 18px;
+  }
 }

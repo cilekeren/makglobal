@@ -2,24 +2,6 @@ import berkeleyLogo from '../assets/firms/berkeley.svg'
 import londonSquareLogo from '../assets/firms/london_square.svg'
 import barrattLondonLogo from '../assets/firms/barratt_london.svg'
 
-// Placeholder amenities/highlights reused across projects that don't have
-// their real specification yet -- swap per-project once that data exists.
-const PLACEHOLDER_HIGHLIGHTS = [
-  'Strong rental demand in a prime riverside location',
-  'Excellent transport links to Central London',
-  'Walking distance to Chelsea and King’s Road',
-  'High-quality specification and residents’ facilities',
-  '20 minutes to Central London',
-]
-
-const PLACEHOLDER_AMENITIES = [
-  { icon: 'concierge', label: '7/24 Concierge' },
-  { icon: 'garden', label: 'Communal Gardens' },
-  { icon: 'cinema', label: 'Private Cinema' },
-  { icon: 'gym', label: 'Gym & Wellness' },
-  { icon: 'tube', label: 'Tube & Underground' },
-]
-
 export const PROJECTS = [
   {
     slug: 'oval-village',
@@ -29,12 +11,16 @@ export const PROJECTS = [
     image: '/Projects/Oval Village/aaa_hero_06_0442-st022_comp_v010_v1746699902.webp',
     coords: [51.4816, -0.1136],
     price: null,
-    location: { text: 'Chelsea, London SW10', zone: 'Zone 2' },
-    completion: { quarter: 'Q4', year: '2027' },
+    description: {
+      en: 'Oval Village is a landmark collection of Manhattan, one, two and three-bedroom apartments in Oval (Zone 1), moments from Westminster, the South Bank and the City of London. Set within one of Central London’s most significant regeneration areas, the development combines outstanding wellness facilities, exceptional connectivity and historic character with strong long-term investment potential.',
+      tr: 'Oval Village; Westminster, South Bank ve City of London’a yalnızca birkaç dakika mesafede, Oval’de (1. Bölge) yer alan stüdyo, bir, iki ve üç yatak odalı dairelerden oluşan çarpıcı bir projedir. Central London’ın en önemli yenileme bölgelerinden birinde konumlanan proje; üstün wellness olanaklarını, olağanüstü ulaşım bağlantılarını ve tarihi dokuyu güçlü bir uzun vadeli yatırım potansiyeliyle bir araya getiriyor.',
+    },
+    location: { text: 'Oval', zone: 'Zone 1' },
+    completion: { quarter: 'Q3 2026', year: 'Q1/Q2 2028' },
     prices: [
-      { type: '1+1', price: '£720,000' },
-      { type: '2+1', price: '£850,000' },
-      { type: '3+1', price: '£990,000' },
+      { type: '1+1', price: 'Price on Request' },
+      { type: '2+1', price: 'Price on Request' },
+      { type: '3+1', price: 'Price on Request' },
     ],
     gallery: [
       '/Projects/Oval Village/oval_village_1.webp',
@@ -59,8 +45,31 @@ export const PROJECTS = [
       '/Projects/Oval Village/oval_village_20.webp',
       '/Projects/Oval Village/oval_village_21.webp',
     ],
-    highlights: PLACEHOLDER_HIGHLIGHTS,
-    amenities: PLACEHOLDER_AMENITIES,
+    highlights: {
+      en: [
+        'Oval (Zone 1), close to Westminster, the South Bank and the City of London.',
+        'Less than 10 minutes’ walk to Oval, Kennington and Vauxhall stations, with direct access to Waterloo (4 mins), Victoria (4 mins) and London Bridge (5 mins).',
+        'Located within one of Central London’s fastest-growing regeneration areas, with 34% rental growth over two years',
+        'Excellent access to 16 London universities, including King’s College London, LSE, UCL and Imperial College London.',
+        'Enjoy landscaped gardens, the River Thames, Kennington Park, The Kia Oval, cafés, restaurants and vibrant Central London living.',
+      ],
+      tr: [
+        'Oval (1. Bölge), Westminster, South Bank ve City of London’a yakın konumda.',
+        'Oval, Kennington ve Vauxhall istasyonlarına 10 dakikadan kısa yürüme mesafesinde; Waterloo (4 dk), Victoria (4 dk) ve London Bridge’e (5 dk) doğrudan erişim.',
+        'İki yılda %34 kira artışıyla, Central London’ın en hızlı gelişen yenileme bölgelerinden birinde yer alıyor.',
+        'King’s College London, LSE, UCL ve Imperial College London dahil 16 Londra üniversitesine mükemmel erişim.',
+        'Peyzajlı bahçelerin, River Thames’in, Kennington Park’ın, The Kia Oval’ın, kafelerin, restoranların ve canlı Central London yaşamının keyfini çıkarın.',
+      ],
+    },
+    amenities: [
+      { icon: 'concierge', label: { en: 'Concierge', tr: 'Konsiyerj' } },
+      { icon: 'gym', label: { en: 'Gymnasium', tr: 'Spor Salonu' } },
+      { icon: 'pool', label: { en: 'Swimming Pool', tr: 'Yüzme Havuzu' } },
+      { icon: 'lounge', label: { en: 'Lounge', tr: 'Lounge Alanı' } },
+      { icon: 'meetingRoom', label: { en: 'Meeting Room', tr: 'Toplantı Odası' } },
+      { icon: 'cinema', label: { en: 'Private Cinema', tr: 'Özel Sinema' } },
+      { icon: 'coworking', label: { en: 'Co-working Workspace', tr: 'Ortak Çalışma Alanı' } },
+    ],
   },
   {
     slug: 'kings-road-park',
@@ -70,12 +79,16 @@ export const PROJECTS = [
     image: '/Projects/Kings Road Park/aaa_hero_04_vb1858799_v1648230977.webp',
     coords: [51.4757, -0.1875],
     price: null,
-    location: { text: 'Chelsea, London SW10', zone: 'Zone 2' },
-    completion: { quarter: 'Q4', year: '2027' },
+    description: {
+      en: 'One King’s Road Park is a landmark collection of suites, apartments and penthouses in Fulham (Zone 2), moments from Chelsea, King’s Road and the River Thames. Set within six acres of beautifully landscaped parkland with exceptional residents’ facilities and outstanding transport connections, it offers a refined London lifestyle and strong long-term investment potential.',
+      tr: 'One King’s Road Park; Chelsea, King’s Road ve River Thames’e yalnızca birkaç dakika mesafede, Fulham’da (2. Bölge) yer alan süit, daire ve çatı katlarından oluşan çarpıcı bir projedir. Altı dönümlük özenle peyzajlanmış parklık alan içinde, üstün sakin olanakları ve olağanüstü ulaşım bağlantılarıyla, rafine bir Londra yaşam tarzı ve güçlü bir uzun vadeli yatırım potansiyeli sunuyor.',
+    },
+    location: { text: 'Fulham', zone: 'Zone 2' },
+    completion: { quarter: 'Q2-Q3 2027', year: 'Q3-Q4 2029' },
     prices: [
-      { type: '1+1', price: '£720,000' },
-      { type: '2+1', price: '£850,000' },
-      { type: '3+1', price: '£990,000' },
+      { type: '1+1', price: '£725,000' },
+      { type: '2+1', price: '£1,190,000.00' },
+      { type: '3+1', price: '£2,250,000.00' },
     ],
     gallery: [
       '/Projects/Kings Road Park/01_vb1858794_v1648230861.webp',
@@ -97,8 +110,31 @@ export const PROJECTS = [
       '/Projects/Kings Road Park/16_vb2191618_v1710866201.webp',
       '/Projects/Kings Road Park/vb2377208_v1710790235.webp',
     ],
-    highlights: PLACEHOLDER_HIGHLIGHTS,
-    amenities: PLACEHOLDER_AMENITIES,
+    highlights: {
+      en: [
+        'Fulham (Zone 2), close to Chelsea, Kensington and Battersea.',
+        'A short walk to Imperial Wharf (Overground) and Fulham Broadway (District Line), with fast connections to Victoria, Waterloo, Paddington and King’s Cross.',
+        'Part of the South Fulham Riverside Regeneration Area, delivering over 1,800 new homes alongside 100,000 sq ft of retail, dining and commercial space',
+        'Excellent access to leading independent schools and world-renowned universities including Imperial College London, King’s College London and UCL.',
+        'Enjoy King’s Road boutiques, Michelin-starred restaurants, riverside walks, Chelsea Harbour, Battersea Park and London’s finest cultural destinations.',
+      ],
+      tr: [
+        'Fulham (2. Bölge), Chelsea, Kensington ve Battersea’ya yakın konumda.',
+        'Imperial Wharf (Overground) ve Fulham Broadway’e (District Line) kısa yürüme mesafesinde; Victoria, Waterloo, Paddington ve King’s Cross’a hızlı bağlantılar.',
+        'South Fulham Riverside Yenileme Bölgesi’nin bir parçası olarak, 1.800’den fazla yeni konutun yanı sıra 100.000 sq ft perakende, yeme-içme ve ticari alan sunuyor.',
+        'Imperial College London, King’s College London ve UCL dahil önde gelen özel okullara ve dünyaca ünlü üniversitelere mükemmel erişim.',
+        'King’s Road butiklerinin, Michelin yıldızlı restoranların, nehir kenarı yürüyüş yollarının, Chelsea Harbour’ın, Battersea Park’ın ve Londra’nın en seçkin kültürel mekanlarının keyfini çıkarın.',
+      ],
+    },
+    amenities: [
+      { icon: 'concierge', label: { en: 'Concierge', tr: 'Konsiyerj' } },
+      { icon: 'pool', label: { en: 'Swimming Pool', tr: 'Yüzme Havuzu' } },
+      { icon: 'spa', label: { en: 'Spa', tr: 'Spa' } },
+      { icon: 'gym', label: { en: 'Gymnasium', tr: 'Spor Salonu' } },
+      { icon: 'lounge', label: { en: 'Lounge', tr: 'Lounge Alanı' } },
+      { icon: 'coworking', label: { en: 'Co-working & Workspaces', tr: 'Ortak Çalışma Alanları' } },
+      { icon: 'cinema', label: { en: 'Private Cinema', tr: 'Özel Sinema' } },
+    ],
   },
   {
     slug: 'camdens-good-yard',
@@ -108,12 +144,16 @@ export const PROJECTS = [
     image: '/Projects/Camdens Good Yard/aaa_hero_4350_1012_250710_rgb_v1760966760.webp',
     coords: [51.5390, -0.1416],
     price: null,
-    location: { text: 'Chelsea, London SW10', zone: 'Zone 2' },
-    completion: { quarter: 'Q4', year: '2027' },
+    description: {
+      en: 'Camden Goods Yard is a landmark mixed-use destination in Camden (Zone 2), delivering new homes, landscaped public spaces, shops, cafés and restaurants, moments from Primrose Hill, Regent’s Park and King’s Cross. Spanning eight acres with exceptional resident amenities, vibrant public spaces and outstanding transport connections, it offers an exceptional lifestyle and strong long-term investment potential.',
+      tr: 'Camden Goods Yard; Primrose Hill, Regent’s Park ve King’s Cross’a yalnızca birkaç dakika mesafede, Camden’de (2. Bölge) yer alan; yeni konutlar, peyzajlı kamusal alanlar, mağazalar, kafeler ve restoranlar sunan çarpıcı bir karma kullanım projesidir. Sekiz dönümlük alana yayılan proje; üstün sakin olanakları, canlı kamusal alanları ve olağanüstü ulaşım bağlantılarıyla eşsiz bir yaşam tarzı ve güçlü bir uzun vadeli yatırım potansiyeli sunuyor.',
+    },
+    location: { text: 'Camden', zone: 'Zone 2' },
+    completion: { quarter: 'Ready', year: 'Q4-2026' },
     prices: [
-      { type: '1+1', price: '£720,000' },
-      { type: '2+1', price: '£850,000' },
-      { type: '3+1', price: '£990,000' },
+      { type: '1+1', price: 'Price on Request' },
+      { type: '2+1', price: 'Price on Request' },
+      { type: '3+1', price: 'Price on Request' },
     ],
     gallery: [
       '/Projects/Camdens Good Yard/01_4._concierge_2_v1740411969.webp',
@@ -134,8 +174,31 @@ export const PROJECTS = [
       '/Projects/Camdens Good Yard/4350_7000_250709a_rgb_v1760966911.webp',
       '/Projects/Camdens Good Yard/4350_7200_250709_rgb_v1760967066.webp',
     ],
-    highlights: PLACEHOLDER_HIGHLIGHTS,
-    amenities: PLACEHOLDER_AMENITIES,
+    highlights: {
+      en: [
+        'Camden (Zone 2), close to Primrose Hill, Regent’s Park and King’s Cross.',
+        'Just a 5-minute walk to Chalk Farm Station and 8 minutes to Camden Town, with King’s Cross one stop away on the Northern Line.',
+        'Part of the transformational Camden Goods Yard regeneration, delivering an eight-acre mixed-use destination with 178,000 sq ft of retail, dining and leisure space in one of North London’s most established postcodes.',
+        'Excellent access to UCL, SOAS, Regent’s University London, Central Saint Martins, King’s College London and many outstanding schools.',
+        'Enjoy Primrose Hill, Regent’s Park, Camden Market, canal-side walks, boutique cafés, restaurants and vibrant cultural attractions on your doorstep.',
+      ],
+      tr: [
+        'Camden (2. Bölge), Primrose Hill, Regent’s Park ve King’s Cross’a yakın konumda.',
+        'Chalk Farm İstasyonu’na 5 dakika, Camden Town’a 8 dakika yürüme mesafesinde; King’s Cross, Northern Line ile bir durak uzaklıkta.',
+        'Kuzey Londra’nın en köklü semtlerinden birinde, 178.000 sq ft perakende, yeme-içme ve eğlence alanı sunan sekiz dönümlük karma kullanım destinasyonunu hayata geçiren dönüştürücü Camden Goods Yard yenilemesinin bir parçası.',
+        'UCL, SOAS, Regent’s University London, Central Saint Martins, King’s College London ve birçok seçkin okula mükemmel erişim.',
+        'Primrose Hill, Regent’s Park, Camden Market, kanal kenarı yürüyüş yolları, butik kafeler, restoranlar ve canlı kültürel mekanların keyfini kapınızın önünde çıkarın.',
+      ],
+    },
+    amenities: [
+      { icon: 'concierge', label: { en: 'Concierge', tr: 'Konsiyerj' } },
+      { icon: 'pool', label: { en: 'Swimming Pool', tr: 'Yüzme Havuzu' } },
+      { icon: 'coworking', label: { en: 'Co-working Space', tr: 'Ortak Çalışma Alanı' } },
+      { icon: 'supermarket', label: { en: 'Supermarket', tr: 'Süpermarket' } },
+      { icon: 'cinema', label: { en: 'Private Cinema', tr: 'Özel Sinema' } },
+      { icon: 'gym', label: { en: 'Gymnasium', tr: 'Spor Salonu' } },
+      { icon: 'meetingRoom', label: { en: 'Meeting Room', tr: 'Toplantı Odası' } },
+    ],
   },
   {
     slug: 'white-city-living',
@@ -145,6 +208,16 @@ export const PROJECTS = [
     image: '/Projects/White City Living/aaa_hero_01_3990_1700_191211_v1613475354.webp',
     coords: [51.5118, -0.2223],
     price: null,
+    description: {
+      en: 'White City Living is a landmark collection of over 2,500 apartments and penthouses in White City (Zone 2), moments from Notting Hill, Kensington and the West End. Set within eight acres of landscaped parkland with world-class resident facilities and exceptional transport connections, it offers an outstanding lifestyle and strong long-term investment potential.',
+      tr: 'White City Living; Notting Hill, Kensington ve West End’e yalnızca birkaç dakika mesafede, White City’de (2. Bölge) yer alan 2.500’den fazla daire ve çatı katından oluşan çarpıcı bir projedir. Sekiz dönümlük peyzajlı parklık alan içinde, dünya standartlarında sakin olanakları ve olağanüstü ulaşım bağlantılarıyla, üstün bir yaşam tarzı ve güçlü bir uzun vadeli yatırım potansiyeli sunuyor.',
+    },
+    location: { text: 'White City', zone: 'Zone 2' },
+    completion: { quarter: 'Ready', year: 'Q3-Q4 2027' },
+    prices: [
+      { type: '1+1', price: '£745,000.00' },
+      { type: '2+1', price: '£1,000,000.00' },
+    ],
     gallery: [
       '/Projects/White City Living/01_0027_v1758193455.webp',
       '/Projects/White City Living/01_00114_v1762764152.webp',
@@ -165,8 +238,31 @@ export const PROJECTS = [
       '/Projects/White City Living/13_0122_v1758194153.webp',
       '/Projects/White City Living/14_0156_v1758194173.webp',
     ],
-    highlights: PLACEHOLDER_HIGHLIGHTS,
-    amenities: PLACEHOLDER_AMENITIES,
+    highlights: {
+      en: [
+        'White City (Zone 2), close to Notting Hill, Kensington and the West End.',
+        'Moments from White City and Wood Lane stations, with Bond Street in 12 minutes and Paddington in 7 minutes.',
+        'Part of the £8bn White City regeneration, supported by Imperial College’s innovation campus, a thriving commercial district and 41% average rental growth since 2020',
+        'Excellent access to Imperial College London, the Royal College of Art, UCL, LSE and many of West London’s leading independent schools.',
+        'Enjoy eight acres of landscaped gardens, Westfield London, world-class dining, cafés, entertainment and vibrant cultural attractions on your doorstep.',
+      ],
+      tr: [
+        'White City (2. Bölge), Notting Hill, Kensington ve West End’e yakın konumda.',
+        'White City ve Wood Lane istasyonlarına yalnızca birkaç dakika mesafede; Bond Street’e 12 dakika, Paddington’a 7 dakika.',
+        'Imperial College’ın inovasyon kampüsü, canlı bir ticari bölge ve 2020’den bu yana ortalama %41 kira artışıyla desteklenen 8 milyar sterlinlik White City yenilemesinin bir parçası.',
+        'Imperial College London, Royal College of Art, UCL, LSE ve West London’ın önde gelen özel okullarının birçoğuna mükemmel erişim.',
+        'Sekiz dönümlük peyzajlı bahçelerin, Westfield London’ın, dünya standartlarındaki restoranların, kafelerin, eğlence mekanlarının ve canlı kültürel çekim noktalarının keyfini kapınızın önünde çıkarın.',
+      ],
+    },
+    amenities: [
+      { icon: 'concierge', label: { en: 'Concierge', tr: 'Konsiyerj' } },
+      { icon: 'pool', label: { en: 'Swimming Pool', tr: 'Yüzme Havuzu' } },
+      { icon: 'gym', label: { en: 'Gymnasium', tr: 'Spor Salonu' } },
+      { icon: 'lounge', label: { en: 'Lounge', tr: 'Lounge Alanı' } },
+      { icon: 'cinema', label: { en: 'Private Cinema', tr: 'Özel Sinema' } },
+      { icon: 'gamesLounge', label: { en: 'Games Lounge', tr: 'Oyun Salonu' } },
+      { icon: 'rooftopPool', label: { en: 'Rooftop Pool', tr: 'Çatı Havuzu' } },
+    ],
   },
   {
     slug: 'wimbledon-bridge-house',
@@ -176,6 +272,16 @@ export const PROJECTS = [
     image: '/Projects/Wimbledon Bridge House/aaa_hero_Ext_02_Final_ZG.webp',
     coords: [51.4227, -0.2044],
     price: null,
+    description: {
+      en: 'Wimbledon Bridge House is an exclusive collection of 123 studio, one, two and three-bedroom apartments and penthouses in the heart of Wimbledon, moments from Wimbledon Station with fast connections to Waterloo, Victoria and Central London. Designed around wellness and contemporary living, the development combines premium resident amenities, excellent education, outstanding connectivity and Wimbledon’s village atmosphere with strong long-term investment potential.',
+      tr: 'Wimbledon Bridge House; Waterloo, Victoria ve Central London’a hızlı bağlantıları olan Wimbledon İstasyonu’na yalnızca birkaç dakika mesafede, Wimbledon’un tam merkezinde yer alan 123 stüdyo, bir, iki ve üç yatak odalı daire ve çatı katından oluşan seçkin bir projedir. Wellness ve çağdaş yaşam etrafında tasarlanan proje; premium sakin olanaklarını, üstün eğitim imkanlarını, olağanüstü ulaşım bağlantılarını ve Wimbledon’un köy atmosferini güçlü bir uzun vadeli yatırım potansiyeliyle bir araya getiriyor.',
+    },
+    location: { text: 'Wimbledon Town Centre', zone: '' },
+    completion: { quarter: 'Q3 2028', year: '' },
+    prices: [
+      { type: '1+1', price: '£485,000.00' },
+      { type: '2+1', price: '£770,000.00' },
+    ],
     gallery: [
       '/Projects/Wimbledon Bridge House/2_Bed_Apt_Plot_609_Living.webp',
       '/Projects/Wimbledon Bridge House/Ext_Hero_Final_ZG.webp',
@@ -204,8 +310,29 @@ export const PROJECTS = [
       '/Projects/Wimbledon Bridge House/MClayton_2603-6-LDS-WIM_017.webp',
       '/Projects/Wimbledon Bridge House/WBH Terrace.webp',
     ],
-    highlights: PLACEHOLDER_HIGHLIGHTS,
-    amenities: PLACEHOLDER_AMENITIES,
+    highlights: {
+      en: [
+        'Prime Wimbledon town centre location, moments from Wimbledon Station and Wimbledon Village.',
+        '2-minute walk to Wimbledon Station with direct services to Waterloo, Vauxhall, Victoria and the District Line.',
+        'Supported by strong rental demand, projected 30% rental growth over five years and an 11% rise in local property values',
+        'Excellent access to leading independent schools, outstanding state schools and nearby universities.',
+        'Enjoy Wimbledon Village, Wimbledon Common, boutique shopping, cafés, restaurants and year-round sporting and cultural attractions',
+      ],
+      tr: [
+        'Wimbledon İstasyonu ve Wimbledon Village’a yalnızca birkaç dakika mesafede, ayrıcalıklı Wimbledon şehir merkezi konumu.',
+        'Waterloo, Vauxhall, Victoria ve District Line’a doğrudan seferleri olan Wimbledon İstasyonu’na 2 dakika yürüme mesafesinde.',
+        'Güçlü kira talebi, beş yılda öngörülen %30 kira artışı ve yerel emlak değerlerinde %11’lik yükselişle destekleniyor.',
+        'Önde gelen özel okullara, seçkin devlet okullarına ve yakındaki üniversitelere mükemmel erişim.',
+        'Wimbledon Village, Wimbledon Common, butik alışveriş, kafeler, restoranlar ve yıl boyu süren spor ve kültür etkinliklerinin keyfini çıkarın.',
+      ],
+    },
+    amenities: [
+      { icon: 'concierge', label: { en: 'Concierge', tr: 'Konsiyerj' } },
+      { icon: 'lounge', label: { en: 'Lounge', tr: 'Lounge Alanı' } },
+      { icon: 'coworking', label: { en: 'Co-working Space', tr: 'Ortak Çalışma Alanı' } },
+      { icon: 'gym', label: { en: 'Gymnasium', tr: 'Spor Salonu' } },
+      { icon: 'restaurant', label: { en: 'Restaurant', tr: 'Restoran' } },
+    ],
   },
   {
     slug: 'county-hall-kingston',
@@ -215,6 +342,16 @@ export const PROJECTS = [
     image: '/Projects/County Hall Kingston/aaa_hero_chk-building-overview-v5.webp',
     coords: [51.4132, -0.2895],
     price: null,
+    description: {
+      en: 'County Hall Kingston is an exclusive collection of 264 apartments and duplexes in Kingston upon Thames, created through the restoration of the iconic Grade II listed Surrey County Hall alongside contemporary new-build residences. Set on the banks of the River Thames in one of South West London’s most desirable boroughs, it combines exceptional heritage, premium amenities and excellent connectivity with strong long-term investment appeal.',
+      tr: 'County Hall Kingston; ikonik, II. Sınıf tescilli Surrey County Hall’ün restorasyonu ile çağdaş yeni inşa konutların bir araya getirilmesiyle Kingston upon Thames’te oluşturulan 264 daire ve dubleksten oluşan seçkin bir projedir. Güneybatı Londra’nın en gözde ilçelerinden birinde, River Thames kıyısında konumlanan proje; olağanüstü mirası, premium olanakları ve mükemmel ulaşım bağlantılarını güçlü bir uzun vadeli yatırım cazibesiyle bir araya getiriyor.',
+    },
+    location: { text: 'Kingston Upon Thames', zone: 'Zone 6' },
+    completion: { quarter: 'Q4 2026', year: 'Q3/Q4 2027' },
+    prices: [
+      { type: '1+1', price: '£490,000.00' },
+      { type: '2+1', price: '£795,000.00' },
+    ],
     gallery: [
       '/Projects/County Hall Kingston/2c78dc9108540b4aa92e78a04c83f23b03494131 copy.webp',
       '/Projects/County Hall Kingston/Aerial_View_02_PRINT.webp',
@@ -229,8 +366,29 @@ export const PROJECTS = [
       '/Projects/County Hall Kingston/County_Hall_Kingston_INT_Refurb_Bedroom_FINAL_2K.webp',
       '/Projects/County Hall Kingston/County_Hall_Kingston_INT_Refurb_Living_FINAL_2K.webp',
     ],
-    highlights: PLACEHOLDER_HIGHLIGHTS,
-    amenities: PLACEHOLDER_AMENITIES,
+    highlights: {
+      en: [
+        'Kingston upon Thames (Zone 6), set on the River Thames close to Richmond Park, Wimbledon and Central London',
+        '12 mins to Kingston Station, 12 mins from Surbiton to Waterloo and excellent access to the A3, M25, Heathrow and Gatwick.',
+        'A rare Grade II listed landmark in one of London’s safest and most desirable boroughs, supported by strong rental demand and over £1.5bn of local investment.',
+        'Moments from Kingston University, Kingston College and excellent state, grammar and independent schools.',
+        'Enjoy riverside living with boutique shopping, cafés, restaurants, Richmond Park, Hampton Court Palace and Kingston’s historic market all nearby.',
+      ],
+      tr: [
+        'Kingston upon Thames (6. Bölge), Richmond Park, Wimbledon ve Central London’a yakın, River Thames kıyısında konumlanmış.',
+        'Kingston İstasyonu’na 12 dakika, Surbiton’dan Waterloo’ya 12 dakika; A3, M25, Heathrow ve Gatwick’e mükemmel erişim.',
+        'Londra’nın en güvenli ve gözde ilçelerinden birinde, güçlü kira talebi ve 1,5 milyar sterlinin üzerinde yerel yatırımla desteklenen nadir bir II. Sınıf tescilli miras yapı.',
+        'Kingston University, Kingston College ve seçkin devlet, grammar ve özel okullara yalnızca birkaç dakika mesafede.',
+        'Butik alışveriş, kafeler, restoranlar, Richmond Park, Hampton Court Palace ve Kingston’un tarihi pazarının hepsinin yakınında, nehir kıyısında bir yaşamın keyfini çıkarın.',
+      ],
+    },
+    amenities: [
+      { icon: 'concierge', label: { en: 'Concierge', tr: 'Konsiyerj' } },
+      { icon: 'cinema', label: { en: 'Private Cinema', tr: 'Özel Sinema' } },
+      { icon: 'lounge', label: { en: 'Lounge', tr: 'Lounge Alanı' } },
+      { icon: 'meetGreet', label: { en: 'Meet&Greet Service', tr: 'Karşılama Hizmeti' } },
+      { icon: 'spa', label: { en: 'Wellness', tr: 'Wellness' } },
+    ],
   },
   {
     slug: 'colindale-gardens',
@@ -240,6 +398,16 @@ export const PROJECTS = [
     image: '/Projects/Colindale Gardens/aaa_hero_49728.webp',
     coords: [51.5978, -0.2503],
     price: null,
+    description: {
+      en: 'Colindale Gardens is a landmark residential community in Colindale (Zone 4), offering over 4,000 new homes within one of North West London’s largest regeneration projects. Set amongst nine acres of landscaped green space with outstanding resident facilities and excellent Northern Line connections, it combines modern living with strong long-term investment potential.',
+      tr: 'Colindale Gardens; Kuzeybatı Londra’nın en büyük yenileme projelerinden birinde, Colindale’de (4. Bölge) 4.000’den fazla yeni konut sunan çarpıcı bir yerleşim projesidir. Dokuz dönümlük peyzajlı yeşil alan içinde, üstün sakin olanakları ve mükemmel Northern Line bağlantılarıyla, modern yaşamı güçlü bir uzun vadeli yatırım potansiyeliyle bir araya getiriyor.',
+    },
+    location: { text: 'Colindale', zone: 'Zone 4' },
+    completion: { quarter: 'Ready', year: '' },
+    prices: [
+      { type: '1+1', price: '£400,000.00' },
+      { type: '2+1', price: '£500,000.00' },
+    ],
     gallery: [
       '/Projects/Colindale Gardens/64778.webp',
       '/Projects/Colindale Gardens/64782.webp',
@@ -256,8 +424,30 @@ export const PROJECTS = [
       '/Projects/Colindale Gardens/Colindale_Block_W_Balcony_HR (1).webp',
       '/Projects/Colindale Gardens/Colindale_Block_W_Podium_HR.webp',
     ],
-    highlights: PLACEHOLDER_HIGHLIGHTS,
-    amenities: PLACEHOLDER_AMENITIES,
+    highlights: {
+      en: [
+        'Colindale (Zone 4), close to Brent Cross, Hampstead and Central London.',
+        '5 mins to Colindale Station (Northern Line), 22 mins to King’s Cross & 29 mins to Bank.',
+        'Over 4,000 new homes within a major regeneration area, supported by station upgrades and growing local infrastructure.',
+        'Excellent access to Middlesex University and leading London universities including UCL, King’s College and Imperial College London.',
+        'Surrounded by landscaped parks, shopping, cafés, restaurants and everyday amenities in a growing North West London community.',
+      ],
+      tr: [
+        'Colindale (4. Bölge), Brent Cross, Hampstead ve Central London’a yakın konumda.',
+        'Colindale İstasyonu’na (Northern Line) 5 dakika, King’s Cross’a 22 dakika ve Bank’a 29 dakika.',
+        'İstasyon yenilemeleri ve gelişen yerel altyapıyla desteklenen büyük bir yenileme bölgesinde 4.000’den fazla yeni konut.',
+        'Middlesex University ile UCL, King’s College ve Imperial College London dahil önde gelen Londra üniversitelerine mükemmel erişim.',
+        'Gelişmekte olan bu Kuzeybatı Londra semtinde, peyzajlı parklarla, alışveriş, kafe, restoran ve günlük ihtiyaç olanaklarıyla çevrili.',
+      ],
+    },
+    amenities: [
+      { icon: 'concierge', label: { en: 'Concierge', tr: 'Konsiyerj' } },
+      { icon: 'gym', label: { en: 'Gymnasium', tr: 'Spor Salonu' } },
+      { icon: 'childrensPlay', label: { en: 'Children’s Play Areas', tr: 'Çocuk Oyun Alanları' } },
+      { icon: 'garden', label: { en: 'Park & Walking Paths', tr: 'Park ve Yürüyüş Yolları' } },
+      { icon: 'primarySchool', label: { en: 'Planned Primary School', tr: 'Planlanan İlkokul' } },
+      { icon: 'spa', label: { en: 'Steam Room and Sauna', tr: 'Buhar Odası ve Sauna' } },
+    ],
   },
   {
     slug: 'royal-gateway',
@@ -267,6 +457,16 @@ export const PROJECTS = [
     image: '/Projects/Royal Gateway/aaa_hero_BA2308_Cloister Corner_View_33_Final.webp',
     coords: [51.5364, 0.0798],
     price: null,
+    description: {
+      en: 'Peruzzi Residences is a contemporary collection of one and two-bedroom apartments in North Acton, ideally positioned close to White City, Notting Hill and just minutes from Central London. With exclusive resident amenities, excellent transport connections and the long-term growth potential of the Old Oak Common regeneration, it offers an exceptional lifestyle and investment opportunity.',
+      tr: 'Peruzzi Residences; White City ve Notting Hill’e yakın, Central London’a yalnızca birkaç dakika mesafede, North Acton’da ideal konumlanmış bir ve iki yatak odalı dairelerden oluşan çağdaş bir projedir. Ayrıcalıklı sakin olanakları, mükemmel ulaşım bağlantıları ve Old Oak Common yenilemesinin uzun vadeli büyüme potansiyeliyle eşsiz bir yaşam tarzı ve yatırım fırsatı sunuyor.',
+    },
+    location: { text: 'North Acton', zone: 'Zone 2' },
+    completion: { quarter: 'Ready', year: '' },
+    prices: [
+      { type: '1+1', price: '£440,000.00' },
+      { type: '2+1', price: '£595,000.00' },
+    ],
     gallery: [
       '/Projects/Royal Gateway/4282_Royal Gateway_Int_Amenities_Gym_FINAL.webp',
       '/Projects/Royal Gateway/4282_Royal Gateway_Int_Amenities_Lobby_FINAL.webp',
@@ -282,8 +482,28 @@ export const PROJECTS = [
       '/Projects/Royal Gateway/MClayton_2502-2-BAR-ROY_020.webp',
       '/Projects/Royal Gateway/MClayton_2502-2-BAR-ROY_022.webp',
     ],
-    highlights: PLACEHOLDER_HIGHLIGHTS,
-    amenities: PLACEHOLDER_AMENITIES,
+    highlights: {
+      en: [
+        'North Acton (Zone 2), close to White City, Notting Hill and Central London.',
+        '5 mins to North Acton, 7 mins to Acton Main Line (Elizabeth Line)',
+        'Strong long-term growth potential driven by the £10bn Old Oak Common regeneration and excellent rental demand.',
+        'Excellent access to leading universities and highly rated schools nearby.',
+        'Close to Westfield, Churchfield Road, Notting Hill, parks, cafés and cultural destinations',
+      ],
+      tr: [
+        'North Acton (2. Bölge), White City, Notting Hill ve Central London’a yakın konumda.',
+        'North Acton’a 5 dakika, Acton Main Line’a (Elizabeth Line) 7 dakika.',
+        '10 milyar sterlinlik Old Oak Common yenilemesi ve güçlü kira talebiyle desteklenen güçlü uzun vadeli büyüme potansiyeli.',
+        'Önde gelen üniversitelere ve yakındaki yüksek puanlı okullara mükemmel erişim.',
+        'Westfield, Churchfield Road, Notting Hill, parklar, kafeler ve kültürel mekanlara yakın.',
+      ],
+    },
+    amenities: [
+      { icon: 'concierge', label: { en: 'Concierge', tr: 'Konsiyerj' } },
+      { icon: 'lounge', label: { en: 'Lounge', tr: 'Lounge Alanı' } },
+      { icon: 'gym', label: { en: 'Gymnasium', tr: 'Spor Salonu' } },
+      { icon: 'rooftopPool', label: { en: 'Roof Terrace', tr: 'Çatı Terası' } },
+    ],
   },
   {
     slug: 'bermondsey-heights',
@@ -293,15 +513,16 @@ export const PROJECTS = [
     image: '/Projects/Bermondsey Heights/aaa_heroBermondsey Heights -48.webp',
     coords: [51.4936, -0.0663],
     price: null,
-    description:
-      'With the City and Canary Wharf within easy reach, Bermondsey Heights has access to great transport connections, is surrounded by plenty of leafy green spaces and the River Thames is close by for all to enjoy.',
+    description: {
+      en: 'Bermondsey Heights is a contemporary collection of 1, 2 and 3-bedroom apartments in South Bermondsey, ideally positioned just minutes from London Bridge, Canary Wharf and the City. Located within one of London’s largest regeneration areas, the development combines modern living, excellent connectivity and strong long-term investment potential in a rapidly evolving neighbourhood.',
+      tr: 'Bermondsey Heights; London Bridge, Canary Wharf ve City’ye yalnızca birkaç dakika mesafede, South Bermondsey’de ideal konumlanmış 1, 2 ve 3 yatak odalı dairelerden oluşan çağdaş bir projedir. Londra’nın en büyük yenileme bölgelerinden birinde konumlanan proje; hızla gelişen bir semtte modern yaşamı, mükemmel ulaşım bağlantılarını ve güçlü bir uzun vadeli yatırım potansiyelini bir araya getiriyor.',
+    },
     location: { text: 'Chelsea, London SW10', zone: 'Zone 2' },
-    completion: { quarter: 'Q4', year: '2027' },
-    commuteMinutes: 20,
+    completion: { quarter: 'Ready', year: '' },
     prices: [
-      { type: '1+1', price: '£720,000' },
-      { type: '2+1', price: '£850,000' },
-      { type: '3+1', price: '£990,000' },
+      { type: '1+1', price: '£400,000.00' },
+      { type: '2+1', price: '£495,000.00' },
+      { type: '3+1', price: '£700,000.00' },
     ],
     gallery: [
       '/Projects/Bermondsey Heights/_09A9177 edit.webp',
@@ -322,7 +543,29 @@ export const PROJECTS = [
       '/Projects/Bermondsey Heights/Storymakers_Amenities_Bermondsey0H2A4691.webp',
       '/Projects/Bermondsey Heights/street dusk_NEW_CGI_HR.webp',
     ],
-    highlights: PLACEHOLDER_HIGHLIGHTS,
-    amenities: PLACEHOLDER_AMENITIES,
+    highlights: {
+      en: [
+        'South Bermondsey (Zone 2), moments from London Bridge and Canary Wharf.',
+        '7 mins to South Bermondsey Station & 5 mins to the proposed Surrey Canal Overground.',
+        'Strong rental demand with excellent long-term growth potential in a major regeneration area.',
+        'Excellent access to leading universities and highly regarded primary and secondary schools.',
+        'Close to parks, riverside walks, cafés, restaurants and everyday amenities.',
+        'Co-working & Workspaces',
+      ],
+      tr: [
+        'South Bermondsey (2. Bölge), London Bridge ve Canary Wharf’a yalnızca birkaç dakika mesafede.',
+        'South Bermondsey İstasyonu’na 7 dakika, planlanan Surrey Canal Overground’a 5 dakika.',
+        'Büyük bir yenileme bölgesinde, mükemmel uzun vadeli büyüme potansiyeliyle güçlü kira talebi.',
+        'Önde gelen üniversitelere ve seçkin ilk ve orta okullara mükemmel erişim.',
+        'Parklara, nehir kenarı yürüyüş yollarına, kafelere, restoranlara ve günlük ihtiyaç olanaklarına yakın.',
+        'Ortak Çalışma Alanları',
+      ],
+    },
+    amenities: [
+      { icon: 'concierge', label: { en: 'Concierge', tr: 'Konsiyerj' } },
+      { icon: 'lounge', label: { en: 'Lounge', tr: 'Lounge Alanı' } },
+      { icon: 'supermarket', label: { en: 'Market', tr: 'Market' } },
+      { icon: 'garden', label: { en: 'Communal Gardens', tr: 'Ortak Bahçeler' } },
+    ],
   },
 ]

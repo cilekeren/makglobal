@@ -177,6 +177,17 @@
   margin: 0 auto;
 }
 
+.imageDisclaimer {
+  margin: clamp(16px, 2vw, 24px) auto 0;
+  max-width: 520px;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 300;
+  font-size: 9px;
+  line-height: 1.6;
+  color: #a3a3a3;
+  text-align: center;
+}
+
 .backSection {
   display: flex;
   justify-content: center;
@@ -216,18 +227,21 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  margin: 0;
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
   padding: 0;
   list-style: none;
 }
 
 .highlights li {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   font-family: 'Lexend Deca', sans-serif;
   font-weight: 400;
   font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.5;
   color: #163a3d;
 }
 
@@ -291,5 +305,38 @@
 @media (max-width: 900px) {
   .amenity:not(:last-child) {
     border-right: none;
+  }
+
+  .imageDisclaimer {
+    font-size: 8px;
+  }
+
+  .amenities {
+    justify-content: center;
+    row-gap: 28px;
+  }
+
+  .amenity {
+    gap: 4px;
+  }
+
+  /* hover is a mouse-only affordance — on touch it just gets "stuck" on
+     the last-tapped icon instead of reading as an effect. */
+  .amenityIcon:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .infoBox {
+    height: 140px;
+  }
+
+  .subheading {
+    font-size: 12px;
+  }
+
+  .top {
+    height: 38vh;
+    min-height: 260px;
   }
 }

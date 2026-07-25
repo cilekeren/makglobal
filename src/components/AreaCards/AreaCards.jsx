@@ -1,15 +1,17 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { pillPathD, PILL_STROKE_W } from '../Hero/pillPath'
 import lifestyleImg from '../../assets/areas/lifestyle.jpg'
 import educationImg from '../../assets/areas/education.jpg'
 import experiencesImg from '../../assets/areas/experiences.jpg'
+import Button from '../common/Button'
 import styles from './AreaCards.module.css'
 
 const CARDS = [
-  { label: 'Lifestyle', image: lifestyleImg },
-  { label: 'Education', image: educationImg },
-  { label: 'Experiences', image: experiencesImg },
+  { id: 'lifestyle', image: lifestyleImg },
+  { id: 'education', image: educationImg },
+  { id: 'experiences', image: experiencesImg },
 ]
 
 // Same drawn-pill outline as the navbar's NavItem, sized to the label's
@@ -53,22 +55,33 @@ function CardLabel({ label }) {
 }
 
 export default function AreaCards() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
 
   return (
     <section className={styles.section}>
       <div className={styles.cardsRow}>
-        {CARDS.map((card) => (
-          <button
-            key={card.label}
-            type="button"
-            className={styles.card}
-            onClick={() => navigate('/discover-london')}
-          >
-            <img src={card.image} alt={card.label} className={styles.image} />
-            <CardLabel label={card.label} />
-          </button>
-        ))}
+        {CARDS.map((card) => {
+          const label = t(`areaCards.${card.id}`)
+          return (
+            <button
+              key={card.id}
+              type="button"
+              className={styles.card}
+              onClick={() => navigate('/discover-london')}
+            >
+              <img src={card.image} alt={label} className={styles.image} />
+              <CardLabel label={label} />
+            </button>
+          )
+        })}
+      </div>
+      <div className={styles.ctaWrap}>
+        <Button
+          label={t('common.discoverLondon')}
+          color="#0A3332"
+          onClick={() => navigate('/discover-london')}
+        />
       </div>
     </section>
   )

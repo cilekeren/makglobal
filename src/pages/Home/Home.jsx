@@ -13,9 +13,9 @@ export default function Home() {
       <Hero />
       <FirmsBand />
       <FeaturedProjects />
+      <BuyingJourney />
       <ZoneIsometric />
       <AreaCards />
-      <BuyingJourney />
       <About />
       <Footer />
     </>

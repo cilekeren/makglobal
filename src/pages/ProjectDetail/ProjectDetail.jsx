@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from 'react'
 import { useParams, useNavigate, Navigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import gsap from 'gsap'
 import { PROJECTS } from '../../data/projects'
 import { consumePendingHeroTransition } from '../../lib/pageTransition'
@@ -27,6 +28,8 @@ function splitIntoChars(el) {
 }
 
 export default function ProjectDetail() {
+  const { t, i18n } = useTranslation()
+  const lang = i18n.language === 'tr' ? 'tr' : 'en'
   const { slug } = useParams()
   const navigate = useNavigate()
   const project = PROJECTS.find((p) => p.slug === slug)
@@ -111,7 +114,8 @@ export default function ProjectDetail() {
   }
 
   const gallery = project.gallery && project.gallery.length ? project.gallery : [null, null, null]
-  const hasFooterInfo = (project.highlights && project.highlights.length > 0) || (project.amenities && project.amenities.length > 0)
+  const highlights = project.highlights?.[lang] || []
+  const hasFooterInfo = highlights.length > 0 || (project.amenities && project.amenities.length > 0)
 
   return (
     <>
@@ -136,12 +140,14 @@ export default function ProjectDetail() {
           <h1 ref={headingRef} className={styles.heading}>{project.name}</h1>
 
           {project.description && (
-            <p ref={subheadingRef} className={styles.subheading}>{project.description}</p>
+            <p ref={subheadingRef} className={styles.subheading}>{project.description[lang]}</p>
           )}
 
           {project.developerLogo && (
             <div className={styles.developer}>
-              <span ref={developerLabelRef} className={styles.developerLabel}>developed by</span>
+              <span ref={developerLabelRef} className={styles.developerLabel}>
+                {t('projectDetail.developedBy')}
+              </span>
               <div className={styles.developerLogoMask}>
                 <img
                   ref={developerLogoRef}
@@ -157,25 +163,27 @@ export default function ProjectDetail() {
 
       <section ref={infoRowRef} className={styles.infoRow}>
         <div className={styles.infoBox}>
-          <h3 className={styles.infoBoxTitle}>FROM</h3>
+          <h3 className={styles.infoBoxTitle}>{t('projectDetail.from')}</h3>
           {project.prices && project.prices.length > 0 ? (
             <ul className={styles.priceList}>
               {project.prices.map((p) => (
                 <li key={p.type}>
                   <span className={styles.priceType}>{p.type}</span>
-                  <span className={styles.priceValue}>{p.price}</span>
+                  <span className={styles.priceValue}>
+                    {p.price === 'Price on Request' ? t('common.priceOnRequest') : p.price}
+                  </span>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className={styles.infoBoxText}>{project.price || 'Price on Request'}</p>
+            <p className={styles.infoBoxText}>{project.price || t('common.priceOnRequest')}</p>
           )}
         </div>
 
         <div className={styles.infoBox}>
-          <h3 className={styles.infoBoxTitle}>LOCATION</h3>
+          <h3 className={styles.infoBoxTitle}>{t('projectDetail.location')}</h3>
           <p className={styles.infoBoxText}>
-            {project.location?.text || 'London, UK'}
+            {project.location?.text || t('projectDetail.londonUk')}
             {project.location?.zone && (
               <>
                 <br />
@@ -186,16 +194,16 @@ export default function ProjectDetail() {
         </div>
 
         <div className={styles.infoBox}>
-          <h3 className={styles.infoBoxTitle}>COMPLETION</h3>
+          <h3 className={styles.infoBoxTitle}>{t('projectDetail.completion')}</h3>
           <p className={styles.infoBoxText}>
             {project.completion ? (
               <>
-                {project.completion.quarter}
-                <br />
+                {project.completion.quarter === 'Ready' ? t('common.ready') : project.completion.quarter}
+                {project.completion.year && <br />}
                 {project.completion.year}
               </>
             ) : (
-              'TBC'
+              t('projectDetail.tbc')
             )}
           </p>
         </div>
@@ -205,27 +213,28 @@ export default function ProjectDetail() {
 
       <section className={styles.gallery}>
         <GalleryCarousel key={project.slug} images={gallery} name={project.name} />
+        <p className={styles.imageDisclaimer}>{t('projectDetail.imageDisclaimer')}</p>
       </section>
 
       {hasFooterInfo && (
         <section className={styles.footerInfo}>
           {project.amenities && project.amenities.length > 0 && (
             <div className={styles.amenitiesSection}>
-              <h2 className={styles.amenitiesHeading}>AMENITIES</h2>
+              <h2 className={styles.amenitiesHeading}>{t('projectDetail.amenities')}</h2>
               <div className={styles.amenities}>
                 {project.amenities.map((a) => (
-                  <div key={a.label} className={styles.amenity}>
+                  <div key={a.icon} className={styles.amenity}>
                     <img src={AMENITY_ICONS[a.icon]} alt="" className={styles.amenityIcon} />
-                    <span className={styles.amenityLabel}>{a.label}</span>
+                    <span className={styles.amenityLabel}>{a.label[lang]}</span>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          {project.highlights && project.highlights.length > 0 && (
+          {highlights.length > 0 && (
             <ul className={styles.highlights}>
-              {project.highlights.map((item) => (
+              {highlights.map((item) => (
                 <li key={item}>
                   <span className={styles.checkIcon}>
                     <svg viewBox="0 0 20 20">
@@ -244,7 +253,12 @@ export default function ProjectDetail() {
       <ProjectLocationMap coords={project.coords} />
 
       <section className={styles.backSection}>
-        <Button label="BACK TO PROJECTS" color="#0A3332" reverse onClick={() => navigate('/projects')} />
+        <Button
+          label={t('projectDetail.backToProjects')}
+          color="#0A3332"
+          reverse
+          onClick={() => navigate('/projects')}
+        />
       </section>
 
       <Footer />

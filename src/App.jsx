@@ -6,6 +6,8 @@ import Home from './pages/Home/Home'
 import Projects from './pages/Projects/Projects'
 import ProjectDetail from './pages/ProjectDetail/ProjectDetail'
 import DiscoverLondon from './pages/DiscoverLondon/DiscoverLondon'
+import AboutUs from './pages/AboutUs/AboutUs'
+import Services from './pages/Services/Services'
 
 function App() {
   const lenisRef = useRef(null)
@@ -46,6 +48,8 @@ function App() {
       <Route path="/projects" element={<Projects />} />
       <Route path="/projects/:slug" element={<ProjectDetail />} />
       <Route path="/discover-london" element={<DiscoverLondon />} />
+      <Route path="/about" element={<AboutUs />} />
+      <Route path="/services" element={<Services />} />
     </Routes>
   )
 }

@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { pillPathD, PILL_STROKE_W } from './pillPath'
+import makMark from '../../assets/hero/nav-mak-mark.svg'
 import styles from './Hero.module.css'
 
 export default function NavDropdownItem({ label, items }) {
@@ -78,7 +79,15 @@ export default function NavDropdownItem({ label, items }) {
               className={styles.dropdownItem}
               onMouseEnter={() => setActiveIndex(i)}
             >
-              <span className={`${styles.bullet} ${i === activeIndex ? styles.bulletActive : ''}`} />
+              <span className={styles.bullet}>
+                <img
+                  src={makMark}
+                  alt=""
+                  className={`${styles.bulletMark} ${
+                    i === activeIndex ? styles.bulletMarkActive : styles.bulletMarkPassive
+                  }`}
+                />
+              </span>
               <span>{entry}</span>
             </li>
           ))}

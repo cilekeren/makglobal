@@ -8,7 +8,9 @@
 
 .introText {
   position: absolute;
-  top: clamp(48px, 6vw, 96px);
+  /* top is set in JS (layout()) — centered between the sticky navbar and
+     the shape's resting position, see NAVBAR_BOTTOM/STAGE_Y_REST in
+     ZoneIsometric.jsx. */
   left: 50%;
   transform: translateX(-50%);
   z-index: 6;
@@ -38,7 +40,7 @@
 
 .track {
   position: relative;
-  height: 480vh;
+  height: 240vh;
 }
 
 .sticky {
@@ -56,6 +58,13 @@
   width: 100%;
   max-width: 1100px;
   height: 100%;
+  /* the fixed sticky navbar overlaps the top of the viewport, so centering
+     purely on the full 100vh box reads as sitting a bit high relative to
+     the actually-visible area beneath it — nudged down in JS (see
+     STAGE_Y_REST/STAGE_Y_EXPLODED in ZoneIsometric.jsx), which eases this
+     back up a bit as the layers separate so the fully-exploded state
+     doesn't end up sitting too low.
+  */
 }
 
 .scene {
@@ -63,6 +72,11 @@
   inset: 0;
   transform-style: preserve-3d;
   will-change: transform;
+  /* explicit and above .zoneLegend's (mobile-only) z-index:2 — without
+     this, .scene's z-index:auto still loses to .zoneLegend's positive
+     z-index regardless of DOM order, putting the legend on top of the
+     isometric layers instead of behind them. */
+  z-index: 3;
 }
 
 .traceWrap {
@@ -71,6 +85,7 @@
   z-index: 5;
   overflow: hidden;
   pointer-events: none;
+  transform: translateY(100px);
 }
 
 .traceSvg {
@@ -83,27 +98,228 @@
   stroke-dashoffset: 1;
 }
 
-.ctaWrap {
+.zoneLabelsCol {
   position: absolute;
-  bottom: clamp(32px, 5vw, 64px);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 6;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 7;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2.4vw, 32px);
+  pointer-events: none;
 }
 
-.tooltip {
-  position: fixed;
-  z-index: 10;
-  max-width: 240px;
-  padding: 10px 14px;
-  background: #0a3332;
-  color: #f3efe4;
-  font-family: 'Lexend Deca', system-ui, sans-serif;
-  font-size: 13px;
-  font-weight: 300;
-  line-height: 1.5;
-  border-radius: 3px;
+.zoneLabelsLeft {
+  left: clamp(60px, 10vw, 160px);
+}
+
+.zoneLabelsRight {
+  right: clamp(60px, 10vw, 160px);
+}
+
+.zoneLabel {
   opacity: 0;
+  /* fixed (not max-width) so every card — regardless of its own content
+     length — matches the width the widest one needs. */
+  width: clamp(190px, 16vw, 250px);
+  background: rgba(10, 30, 32, 0.55);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  padding: 10px 14px;
+  box-sizing: border-box;
+}
+
+.zoneLabelTitle {
+  margin: 0 0 clamp(18px, 1.6vw, 22px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Petrona', serif;
+  font-weight: 400;
+  font-size: clamp(14px, 1.1vw, 17px);
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.zoneLabelDot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--zone-color);
+}
+
+.zoneLabelList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.zoneLabelList li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 300;
+  font-size: clamp(11px, 0.8vw, 12.5px);
+  line-height: 1.4;
+  color: #ededed;
+}
+
+.zoneLabelIcon {
+  flex-shrink: 0;
+  width: 1.05em;
+  height: 1.05em;
+}
+
+.connectorWrap {
+  position: absolute;
+  inset: 0;
+  /* above .zoneLabelsCol (z-index 7) so the end dot sitting right at a
+     card's edge isn't covered by the card's own background. */
+  z-index: 8;
+  overflow: hidden;
   pointer-events: none;
-  transition: opacity 0.15s ease;
+}
+
+.connectorSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.connectorPath {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  opacity: 0;
+  vector-effect: non-scaling-stroke;
+}
+
+.connectorDot {
+  fill: #fff;
+}
+
+.zoneLegend {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  /* the elbow connector lines only make sense linking the shape out to
+     side columns — with the cards pinned to the bottom instead (below),
+     there's nothing sensible for them to connect to, so they're dropped
+     rather than redrawn. */
+  .connectorWrap {
+    display: none;
+  }
+
+  .introText {
+    /* top is set in JS (layout()) — pinned 10px below the real sticky
+       navbar instead of the desktop midpoint-to-shape formula, see
+       ZoneIsometric.jsx. */
+    padding: 0 20px;
+  }
+
+  .stage {
+    position: absolute;
+    /* just a little narrower than the full screen width, rather than
+       leaving room down the sides for anything else — the zone cards
+       overlay on top of it near the bottom instead of sitting beside it. */
+    left: 10px;
+    right: 10px;
+    width: auto;
+    max-width: none;
+    /* top/height are set from JS (layout()) so the shape fills the room
+       below the intro text down to the bottom of the sticky viewport. */
+  }
+
+  .traceWrap {
+    left: 10px;
+    right: 10px;
+    /* the desktop offset compensates for .stage's own JS nudge (see
+       STAGE_Y_REST in ZoneIsometric.jsx), which is zeroed out on mobile —
+       so this needs to match. top/height are set from JS to mirror
+       .stage's box exactly. */
+    transform: translateY(0);
+  }
+
+  .zoneLabelsCol {
+    top: auto;
+    bottom: 16px;
+    transform: none;
+    width: calc(50% - 22px);
+    gap: 8px;
+  }
+
+  .zoneLabelsLeft {
+    left: 16px;
+  }
+
+  .zoneLabelsRight {
+    right: 16px;
+  }
+
+  .zoneLabel {
+    width: 100%;
+    /* fixed (not just min) so all six cards match — tall enough for the
+       longest wrapped label (Zone 1's "Big Ben / Houses of Parliament"),
+       measured at this column width; shorter cards just get breathing
+       room at the bottom instead of shrinking to fit their own content. */
+    height: 124px;
+    padding: 8px 10px;
+  }
+
+  .zoneLabelTitle {
+    margin-bottom: 10px;
+    font-size: 11px;
+  }
+
+  .zoneLabelList li {
+    font-size: 10px;
+  }
+
+  /* explains what the ring colours mean before the cards carrying the
+     same colour dots arrive — sits below the shape's own box (not over
+     it) and fades out (opacity driven from JS, see legendRef in frame())
+     once the cards start revealing, rather than sticking around alongside
+     them. */
+  .zoneLegend {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: center;
+    gap: 6px 8px;
+    position: absolute;
+    bottom: 0;
+    left: 8px;
+    right: 8px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .zoneLegendItem {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    color: #ededed;
+    background: rgba(10, 30, 32, 0.55);
+    backdrop-filter: blur(6px);
+    border-radius: 999px;
+    padding: 4px 9px;
+  }
+
+  .zoneLegendDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
 }

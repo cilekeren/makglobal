@@ -20,6 +20,16 @@
   height: clamp(440px, 56vw, 680px);
 }
 
+@media (max-width: 600px) {
+  /* matches .heroOuter's/the project cards' own mobile inset (10px, see
+     Hero.module.css and Projects.module.css's .grid) so the map ends up
+     exactly as wide as the hero image and the cards above it. */
+  .section {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
 /* ------------------------------------------------------------------ */
 /* Marker pin -- a divIcon so the circle can hold our logomark instead  */
 /* of Leaflet's plain vector dot.                                      */

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
 import styles from './DiscoverLondon.module.css'
@@ -6,6 +7,7 @@ const YOUTUBE_VIDEO_ID = 'M3EYAY2MftI'
 const YOUTUBE_EMBED_SRC = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}`
 
 export default function DiscoverLondon() {
+  const { t } = useTranslation()
   return (
     <>
       <section className={styles.videoHero}>
@@ -13,7 +15,7 @@ export default function DiscoverLondon() {
           <iframe
             className={styles.videoIframe}
             src={YOUTUBE_EMBED_SRC}
-            title="Discover London"
+            title={t('discoverLondon.videoTitle')}
             frameBorder="0"
             allow="autoplay; encrypted-media; picture-in-picture"
             allowFullScreen
@@ -25,23 +27,22 @@ export default function DiscoverLondon() {
         <Navbar />
 
         <div className={styles.comingSoon}>
-          <h1 className={styles.comingSoonText}>Under Construction</h1>
+          <h1 className={styles.comingSoonText}>{t('discoverLondon.underConstruction')}</h1>
 
           <p className={styles.comingSoonBody}>
-            We are collecting the best local stories, property insights, and neighborhood
-            highlights to help you find not just a house, but a home.
+            {t('discoverLondon.bodyLine1')}
             <br />
             <br />
-            Check back soon to explore London like a local!
+            {t('discoverLondon.bodyLine2')}
           </p>
         </div>
 
         <div className={styles.cameraInfo}>
-          <p className={styles.cameraLocation}>Abbey Road, St John&rsquo;s Wood, London</p>
+          <p className={styles.cameraLocation}>{t('discoverLondon.cameraLocation')}</p>
 
           <span className={styles.liveBadge}>
             <span className={styles.liveDot} />
-            LIVE
+            {t('discoverLondon.live')}
           </span>
         </div>
       </section>

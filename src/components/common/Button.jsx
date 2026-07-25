@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import styles from './Button.module.css'
 
 function mergeRefs(...refs) {
@@ -27,14 +27,19 @@ const CHEVRON_BOTTOM_RATIO = 3.8812 / ARROW_TOTAL_W
 const GAP_AFTER_LABEL = 6
 const PADDING = 14
 const SCALE = 3 // matches the hero button's established on-screen size
+// at SCALE the pill is sized for desktop labels — on a narrow screen a
+// longer label (e.g. "BOOK A CONSULTANT") renders wider than the
+// container it's centered in, leaving no visible side margin at all.
+const MOBILE_SCALE = 2
+const MOBILE_QUERY = '(max-width: 700px)'
 
 export default function Button({
   label,
   color,
   textColor,
   variant = 'outline',
-  scale = SCALE,
-  strokeScale = scale,
+  scale: scaleProp,
+  strokeScale: strokeScaleProp,
   padding = PADDING,
   arrowLength = ARROW_TOTAL_W,
   innerRef,
@@ -55,6 +60,17 @@ export default function Button({
   const btnElRef = useRef(null)
   const [labelWidth, setLabelWidth] = useState(0)
   const [containerWidth, setContainerWidth] = useState(0)
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia(MOBILE_QUERY).matches)
+
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_QUERY)
+    const onChange = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  const scale = scaleProp ?? (isMobile ? MOBILE_SCALE : SCALE)
+  const strokeScale = strokeScaleProp ?? scale
 
   useLayoutEffect(() => {
     if (textRef.current) {
@@ -76,9 +92,15 @@ export default function Button({
   const ready = labelWidth > 0
   const hoverBlockWidth = labelWidth + GAP_AFTER_LABEL + arrowLength
   const naturalPillWidth = hoverBlockWidth + padding * 2
+  // when a long label's natural width (at this scale) would still be
+  // wider than the container fullWidth is meant to match, shrink the
+  // whole pill down to fit instead of overflowing it — stretching wider
+  // than the container is fine, but overflowing past it isn't.
+  const renderScale =
+    fullWidth && containerWidth > 0 ? Math.min(scale, containerWidth / naturalPillWidth) : scale
   const pillWidth =
     fullWidth && containerWidth > 0
-      ? Math.max(naturalPillWidth, containerWidth / scale)
+      ? Math.max(naturalPillWidth, containerWidth / renderScale)
       : naturalPillWidth
 
   // anchored to the pill's edges (padding in from left/right) rather than
@@ -112,8 +134,13 @@ export default function Button({
         '--label-hover-shift': `${labelHoverShift}px`,
         '--arrow-rest-shift': `${arrowRestShift}px`,
         '--stroke-w': `${strokeW}px`,
-        width: ready ? pillWidth * scale : undefined,
-        height: HEIGHT * scale,
+        // CSS percentage instead of the equivalent computed px value —
+        // both land on the same number, but 100% is pixel-exact to the
+        // parent by construction (browser layout, not our arithmetic),
+        // and keeps tracking it live on resize with no ResizeObserver
+        // round-trip lag.
+        width: !ready ? undefined : fullWidth && containerWidth > 0 ? '100%' : pillWidth * renderScale,
+        height: HEIGHT * renderScale,
         visibility: ready ? 'visible' : 'hidden',
       }}
     >

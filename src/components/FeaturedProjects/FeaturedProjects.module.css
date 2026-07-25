@@ -125,3 +125,123 @@
   margin-top: clamp(32px, 4vw, 48px);
 }
 
+@media (max-width: 700px) {
+  .section {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .carousel {
+    position: relative;
+    width: 100%;
+    max-width: 1600px;
+    margin-top: clamp(40px, 5vw, 64px);
+  }
+
+  .carouselViewport {
+    width: 100%;
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+
+  .carouselTrack {
+    display: flex;
+    transition: transform 0.4s ease;
+  }
+
+  .carouselSlide {
+    flex: 0 0 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .carouselControls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(16px, 2.4vw, 32px);
+    margin-top: clamp(20px, 4vw, 28px);
+  }
+
+  .carouselNavBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid #163a3d;
+    border-radius: 50%;
+    background: none;
+    color: #163a3d;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .carouselNavBtn:hover,
+  .carouselNavBtn:focus-visible {
+    background: #163a3d;
+    color: #fff;
+  }
+
+  .carouselNavArrow {
+    width: 20px;
+    height: auto;
+    color: currentColor;
+    transform: translateX(2px);
+  }
+
+  .carouselNavArrow line,
+  .carouselNavArrow polyline {
+    stroke: currentColor;
+    stroke-width: 1;
+  }
+
+  .carouselNavArrowPrev {
+    transform: translateX(-2px) scaleX(-1);
+  }
+
+  .carouselDots {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .carouselDot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(22, 58, 61, 0.25);
+    cursor: pointer;
+  }
+
+  .carouselDotActive {
+    background: #163a3d;
+  }
+
+  .priceRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: clamp(24px, 6vw, 32px);
+  }
+
+  .price {
+    margin: 0;
+  }
+
+  .detailsBtnWrap {
+    position: static;
+    transform: none;
+  }
+}
+

@@ -164,6 +164,29 @@
   .thumb {
     width: 48px;
   }
+
+  /* only the active slide shows — the thumbnail strip and side arrow
+     buttons below are the only way to move between images on mobile, so
+     the peeking prev/next previews are just wasted stage space here. */
+  .item {
+    left: 0%;
+    width: 100%;
+  }
+
+  /* .stage's desktop ratio (100/33.75) was tuned for a 45%-wide item —
+     now that .item is full-width at its own 4/3 ratio, the stage needs
+     that same ratio too, or its height stays stuck at the old (much
+     shorter) proportion and the now much-taller item spills out both
+     above (over the completion box) and below (over the thumbnails/arrows). */
+  .stage {
+    aspect-ratio: 4 / 3;
+  }
+
+  .prevSlide,
+  .nextSlide {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 .lightboxOverlay {

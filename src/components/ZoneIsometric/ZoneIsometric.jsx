@@ -1,7 +1,27 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Button from '../common/Button'
+import { useTranslation } from 'react-i18next'
 import styles from './ZoneIsometric.module.css'
+import buckinghamPalaceIcon from '../../assets/zones/buckingham-palace.svg'
+import londonEyeIcon from '../../assets/zones/london-eye.svg'
+import bigBenIcon from '../../assets/zones/big-ben.svg'
+import coventGardenIcon from '../../assets/zones/covent-garden.svg'
+import canaryWharfIcon from '../../assets/zones/canary-wharf.svg'
+import shoreditchIcon from '../../assets/zones/shoreditch.svg'
+import towerBridgeIcon from '../../assets/zones/tower-bridge.svg'
+import stKatharineDocksIcon from '../../assets/zones/st-katharine-docks.svg'
+import wembleyStadiumIcon from '../../assets/zones/wembley-stadium.svg'
+import richmondParkIcon from '../../assets/zones/richmond-park.svg'
+import wimbledonIcon from '../../assets/zones/wimbledon.svg'
+import greenwichIcon from '../../assets/zones/greenwich.svg'
+import heathrowIcon from '../../assets/zones/heathrow.svg'
+import kewGardensIcon from '../../assets/zones/kew-gardens.svg'
+import westfieldStratfordIcon from '../../assets/zones/westfield-stratford.svg'
+import kingstonIcon from '../../assets/zones/kingston.svg'
+import eppingForestIcon from '../../assets/zones/epping-forest.svg'
+import twickenhamStadiumIcon from '../../assets/zones/twickenham-stadium.svg'
+import heathrowTerminal5Icon from '../../assets/zones/heathrow-terminal-5.svg'
+import londonCityAirportIcon from '../../assets/zones/london-city-airport.svg'
+import countrysideIcon from '../../assets/zones/countryside.svg'
 
 // Vertices of the decorative trace line, as [dx, dy] offsets from the
 // isometric shape's own center — measured pixel-for-pixel from the
@@ -34,6 +54,25 @@ const TRACE_POINTS_PX = [
   [404, -13.5],
 ]
 
+function ZoneLabel({ zone, labelRef }) {
+  return (
+    <div className={styles.zoneLabel} ref={labelRef} style={{ '--zone-color': RAMPS[zone.i].f }}>
+      <h3 className={styles.zoneLabelTitle}>
+        <span className={styles.zoneLabelDot} />
+        {zone.title}
+      </h3>
+      <ul className={styles.zoneLabelList}>
+        {zone.items.map((item) => (
+          <li key={item.label}>
+            <img src={item.icon} alt="" className={styles.zoneLabelIcon} />
+            {item.label}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 function TraceLine({ innerRef, wrapRef }) {
   const [size, setSize] = useState({ w: 0, h: 0 })
 
@@ -47,10 +86,16 @@ function TraceLine({ innerRef, wrapRef }) {
     return () => ro.disconnect()
   }, [])
 
+  // fixed baseline (always the original 0.5 fit-fraction, NOT
+  // SHAPE_SCALE_FACTOR) so that scale/refScale below reflects how much
+  // bigger the actual shape now is than that baseline — which is exactly
+  // the extra zoom the trace line's geometry needs to keep matching it.
   const refScale = (STAGE_MAX_W * 0.5) / VB.w
   const SW = Math.min(size.w, STAGE_MAX_W)
   const SH = size.h
-  const scale = Math.min((SW * 0.5) / VB.w, (SH * 0.5) / VB.h)
+  const shapeScaleFactor =
+    size.w > 0 && window.matchMedia(MOBILE_QUERY).matches ? MOBILE_SHAPE_SCALE_FACTOR : SHAPE_SCALE_FACTOR
+  const scale = Math.min((SW * shapeScaleFactor) / VB.w, (SH * shapeScaleFactor) / VB.h)
   const k = (scale / refScale) * ZOOM_OUT
 
   const cx = size.w / 2
@@ -103,118 +148,152 @@ const RAMPS = [
   { f: '#e2c27a', s: '#A8924F' },
 ]
 
+// POLYS[5]/RAMPS[5] (gold) is the innermost ring — real-world Zone 1 —
+// through POLYS[0]/RAMPS[0] (dark teal) as the outermost ring, Zone 6.
+// `anchor` is a point inside that ring's own solid-fill area (in VB
+// units, near its leftmost/rightmost vertex on the side matching `side`,
+// nudged toward the ring's centroid so the dot sits inside the fill
+// instead of straddling its boundary), used as an invisible measurement
+// probe — see the "probe" comment in build() below.
+const ZONES = [
+  {
+    i: 5,
+    number: 1,
+    title: 'Zone 1',
+    side: 'left',
+    anchor: { x: 100.4654, y: 82.0958 },
+    items: [
+      { icon: buckinghamPalaceIcon, label: 'Buckingham Palace' },
+      { icon: londonEyeIcon, label: 'London Eye' },
+      { icon: bigBenIcon, label: 'Big Ben / Houses of Parliament' },
+      { icon: coventGardenIcon, label: 'Covent Garden' },
+    ],
+  },
+  {
+    i: 4,
+    number: 2,
+    title: 'Zone 2',
+    side: 'right',
+    anchor: { x: 210, y: 130 },
+    items: [
+      { icon: canaryWharfIcon, label: 'Canary Wharf' },
+      { icon: shoreditchIcon, label: 'Shoreditch' },
+      { icon: towerBridgeIcon, label: 'Tower Bridge' },
+      { icon: stKatharineDocksIcon, label: 'St Katharine Docks' },
+    ],
+  },
+  {
+    i: 3,
+    number: 3,
+    title: 'Zone 3',
+    side: 'left',
+    // biased toward the upper-left of the ring rather than pure
+    // leftmost-x, per an earlier explicit request.
+    anchor: { x: 75.8705, y: 52.5554 },
+    items: [
+      { icon: wembleyStadiumIcon, label: 'Wembley Stadium' },
+      { icon: richmondParkIcon, label: 'Richmond Park' },
+      { icon: wimbledonIcon, label: 'Wimbledon' },
+      { icon: greenwichIcon, label: 'Greenwich' },
+    ],
+  },
+  {
+    i: 2,
+    number: 4,
+    title: 'Zone 4',
+    side: 'right',
+    anchor: { x: 210, y: 190 },
+    items: [
+      { icon: heathrowIcon, label: 'London Heathrow' },
+      { icon: kewGardensIcon, label: 'Kew Gardens' },
+      { icon: westfieldStratfordIcon, label: 'Westfield Stratford' },
+    ],
+  },
+  {
+    i: 1,
+    number: 5,
+    title: 'Zone 5',
+    side: 'left',
+    anchor: { x: 23.3325, y: 39.7264 },
+    items: [
+      { icon: kingstonIcon, label: 'Kingston upon Thames' },
+      { icon: eppingForestIcon, label: 'Epping Forest' },
+      { icon: twickenhamStadiumIcon, label: 'Twickenham Stadium' },
+    ],
+  },
+  {
+    i: 0,
+    number: 6,
+    title: 'Zone 6',
+    side: 'right',
+    anchor: { x: 277, y: 190 },
+    items: [
+      { icon: heathrowTerminal5Icon, label: 'Heathrow Terminal 5' },
+      { icon: londonCityAirportIcon, label: 'London City Airport' },
+      { icon: countrysideIcon, label: 'Countryside / Green Belt' },
+    ],
+  },
+]
+// connector dot radius, in raw screen px — both dots live in the flat,
+// unscaled connector overlay (not the 3D-rotated scene), so they always
+// land exactly where the line's endpoints are computed, no matter how
+// the shape's rotation shuffles which vertex is visually left/rightmost.
+const DOT_R = 3.5
+
 const VB = { w: 310.3488, h: 245.8101 }
+// shared by the shape's own layout() and TraceLine's geometry below, so
+// the decorative trace line keeps tracing the shape's edges at any size.
+const SHAPE_SCALE_FACTOR = 0.58
+// on mobile the stage box's own left/right insets already leave the "a
+// little smaller than the screen" margin (see .stage in the mobile media
+// query), so the shape itself can fill nearly all of that box instead of
+// leaving another ~40% of it empty the way the desktop factor does.
+const MOBILE_SHAPE_SCALE_FACTOR = 0.92
 const GAP = 55
+// the shape's own box is much shorter on mobile (fitted between the intro
+// text and the bottom cards, see MOBILE_STAGE_GAP below), so the desktop
+// layer spacing spreads the exploded stack well past that box — a smaller
+// gap keeps the explosion legible without spilling out of it.
+const MOBILE_GAP = 22
 const MAX_ROT_X = 60
 const MAX_ROT_Z = -42
 const RAD = Math.PI / 180
+// the fixed sticky navbar overlaps the top of the viewport, so centering
+// purely on the full 100vh stage box reads as sitting a bit high relative
+// to the actually-visible area beneath it — nudge the resting shape down
+// to compensate. As the layers separate, ease that nudge back up a bit so
+// the fully-exploded state doesn't end up sitting too low.
+const STAGE_Y_REST = 100
+const STAGE_Y_EXPLODED = 40
+// approximate bottom edge (viewport px) of the fixed sticky navbar (.stickyNavBar
+// in Hero.module.css: top:20px + its own padding/content height) — used to
+// vertically center the intro text group between the navbar and the shape.
+const NAVBAR_BOTTOM = 90
 
-// area labels + their dot markers, positioned in VB units. The reference
-// mockup is a zoomed-in crop (same view the shape reaches at full zoom),
-// so its pixels don't map to the full VB box — instead each dot's pixel
-// position was converted through an affine fit calibrated against the
-// innermost polygon (POLYS[5]): its pixel bounding box in the mockup was
-// matched to its known VB-space bounding box to solve scale + offset,
-// then every dot's pixel coords were run through that same mapping. This
-// pins every dot to its true spot on the actual shape at any zoom level,
-// not just wherever it happened to fall in the mockup image. `side` is
-// which side of the dot the label sits on (matches the mockup).
-const MAP_POINTS = [
-  { label: 'Camden Town', x: 140.0, y: 57.38, side: 'right' },
-  { label: "St. John's Wood", x: 115.26, y: 63.17, side: 'left' },
-  { label: "The Regent's Park", x: 129.58, y: 64.95, side: 'right' },
-  { label: 'Marylebone', x: 133.47, y: 81.22, side: 'left' },
-  { label: 'Notting Hill', x: 89.22, y: 85.02, side: 'left' },
-  { label: 'Soho', x: 144.02, y: 85.02, side: 'right' },
-  { label: 'Mayfair', x: 135.15, y: 91.36, side: 'left' },
-  { label: 'Piccadilly Circus', x: 147.33, y: 92.31, side: 'right' },
-  { label: 'Hyde Park', x: 121.04, y: 95.49, side: 'left' },
-  { label: 'Knightsbridge', x: 123.49, y: 103.96, side: 'right' },
-  { label: 'South Kensington', x: 113.02, y: 108.85, side: 'left' },
-  { label: 'Sloane Square', x: 128.69, y: 111.32, side: 'right' },
-  { label: 'Chelsea', x: 117.22, y: 116.37, side: 'right' },
-  { label: 'Battersea Power Station', x: 138.1, y: 121.24, side: 'right' },
-  { label: 'Nine Elms', x: 144.72, y: 125.64, side: 'right' },
-]
-// short hover description per area, keyed by MAP_POINTS label
-const DESCRIPTIONS = {
-  'Camden Town':
-    'An alternative cultural hotspot famous for its punk heritage, bustling markets, and canal.',
-  "St. John's Wood":
-    'A leafy, affluent residential area home to the famous Abbey Road Studios and zebra crossing.',
-  "The Regent's Park":
-    'A grand royal park housing the London Zoo and stunning, manicured rose gardens.',
-  Marylebone:
-    'A chic and peaceful neighborhood known for its stylish boutiques and the Sherlock Holmes Museum.',
-  'Notting Hill':
-    'An iconic, picturesque neighborhood famous for pastel-colored houses and Portobello Road Market.',
-  Soho: 'A vibrant entertainment hub famous for its lively nightlife, theaters, and colorful streets.',
-  Mayfair:
-    "London's most upscale district, featuring luxury hotels, art galleries, and Michelin-starred dining.",
-  'Piccadilly Circus': "London's iconic, neon-lit square featuring the famous statue of Eros.",
-  'Hyde Park': "The city's largest royal park, offering a vast lake, walking paths, and iconic events.",
-  Knightsbridge: 'An ultra-luxury district home to world-famous department stores like Harrods.',
-  'South Kensington': 'A grand cultural hub home to the Natural History, Science, and V&A Museums.',
-  'Sloane Square': 'A fashionable square at the heart of Chelsea, known for high-end fashion and theaters.',
-  Chelsea:
-    "An affluent area famous for high-end boutiques along King's Road, art galleries, and fine dining.",
-  'Battersea Power Station':
-    'A historic landmark beautifully restored into a bustling modern shopping and dining destination.',
-  'Nine Elms': 'A rapidly developing riverside district known for modern skyscrapers and the US Embassy.',
-}
+// below this width the zone cards move from side columns flanking the
+// shape into a bottom-pinned 2-column grid (see the JSX/CSS), so the
+// shape's own box has to be measured to fit the strip left between the
+// intro text and those cards instead of centering across the full
+// sticky viewport.
+const MOBILE_QUERY = '(max-width: 700px)'
+const MOBILE_STAGE_GAP = 12
 
-const DOT_R = 1.05
-const HIT_R = 3.4
-const DOT_GAP = 0.8
-const FONT_SIZE = 1.8
-// how far below its resting spot a label starts before rising into place
-const LABEL_RISE = 2.6
-
-// scroll (0..1) is split into five phases: trace-line draw, zoom in on
-// the innermost layer, a hold at full zoom (map points reveal), zoom
-// back out (map points hide), then the isometric explosion.
+// scroll (0..1) is split into three phases: the trace line draws in
+// left-to-right, then erases left-to-right the same way, then the
+// isometric explosion starts immediately once the line is gone.
 const P1_END = 0.12
-const P2_END = 0.3
-// reveal (dots + staggered labels) finishes at P2_END + POINTS_FADE — the
-// gap between that and P_HOLD_END is scroll room to actually read the
-// last label before zoom-out starts.
-const P_HOLD_END = 0.52
-const P3_END = 0.66
-const ZOOM_MAX = 4.4
-// extra downward screen-px shift applied once zoomed in — without it the
-// topmost map point (Camden Town) lands right under the fixed navbar
-// (position:fixed, z-index:100, see Hero.module.css .stickyNavBar), which
-// sits on top and blocks hover/click from ever reaching its dot.
-const HOLD_Y_SHIFT = 60
-// duration (in scroll fraction) of the map points' reveal/hide
-const POINTS_FADE = 0.12
-// portion of that reveal spent on the dots growing in before the labels
-// start rising — dots finish, then labels follow (and reverse: labels
-// sink back first, then dots shrink away)
-const DOT_PHASE = 0.45
-// within the labels' share of the reveal, each one animates over this
-// fraction of it, staggered one after another by LABEL_STAGGER
-const LABEL_DURATION = 0.35
-const LABEL_STAGGER = (1 - LABEL_DURATION) / (MAP_POINTS.length - 1)
+const P2_END = 0.24
+
+// the six zone labels reveal one after another (Zone 1 first) over the
+// back part of the explosion, each stealing ZONE_REVEAL_DURATION of that
+// shared window, staggered so they land in sequence rather than at once.
+const ZONE_REVEAL_START = 0.35
+const ZONE_REVEAL_DURATION = 0.5
+const ZONE_STAGGER = (1 - ZONE_REVEAL_DURATION) / (ZONES.length - 1)
 
 function easeInOut(t) {
   return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2
 }
-
-function centroid(pts) {
-  const n = pts.trim().split(/\s+/).map(Number)
-  let x = 0,
-    y = 0,
-    c = 0
-  for (let k = 0; k < n.length; k += 2) {
-    x += n[k]
-    y += n[k + 1]
-    c++
-  }
-  return { x: x / c, y: y / c }
-}
-
-const INNER_CENTROID = centroid(POLYS[POLYS.length - 1])
 
 function svgEl(t, a) {
   const e = document.createElementNS('http://www.w3.org/2000/svg', t)
@@ -244,21 +323,26 @@ function makeSVG() {
 
 // each layer div has `transform-style:preserve-3d` + `will-change:transform`
 // (needed for the isometric explosion), which makes browsers composite it
-// as a bitmap captured at its CURRENT on-screen size — fine at rest, but
-// during the zoom-in (up to ZOOM_MAX) that bitmap gets stretched and turns
-// visibly blocky. Rendering each SVG SUPERSAMPLE× bigger than its intended
-// box, then scaling it back down with CSS, gives the bitmap enough real
-// resolution to stay sharp through the whole zoom range.
+// as a bitmap captured at its CURRENT on-screen size. Rendering each SVG
+// SUPERSAMPLE× bigger than its intended box, then scaling it back down
+// with CSS, keeps that bitmap sharp through the rotation/explosion.
 const SUPERSAMPLE = 5
+// mobile Safari's per-tab GPU/compositing memory budget is far tighter
+// than desktop — up to ~17 of these composited+supersampled elements at
+// SUPERSAMPLE=5, especially once the shape itself got much bigger (see
+// MOBILE_SHAPE_SCALE_FACTOR), was enough raster memory to crash the tab
+// outright. A much smaller factor keeps the layers reasonably crisp
+// without anywhere near that footprint.
+const MOBILE_SUPERSAMPLE = 2
 
 // sizes `svg` to occupy exactly w×h on screen while its raster is
-// SUPERSAMPLE× that — and wraps it in a div genuinely sized w×h (CSS
+// `supersample`× that — and wraps it in a div genuinely sized w×h (CSS
 // transforms don't affect layout) so the caller's positioning math and
 // the parent's shrink-to-fit box are unaffected by the supersampling.
-function sizedSvg(svg, w, h) {
-  svg.setAttribute('width', w * SUPERSAMPLE)
-  svg.setAttribute('height', h * SUPERSAMPLE)
-  svg.style.transform = `scale(${1 / SUPERSAMPLE})`
+function sizedSvg(svg, w, h, supersample) {
+  svg.setAttribute('width', w * supersample)
+  svg.setAttribute('height', h * supersample)
+  svg.style.transform = `scale(${1 / supersample})`
   svg.style.transformOrigin = '0 0'
   const box = document.createElement('div')
   box.style.cssText = `width:${w}px;height:${h}px;`
@@ -267,14 +351,19 @@ function sizedSvg(svg, w, h) {
 }
 
 export default function ZoneIsometric() {
-  const navigate = useNavigate()
+  const { t } = useTranslation()
   const trackRef = useRef(null)
   const stageRef = useRef(null)
   const sceneRef = useRef(null)
   const traceRef = useRef(null)
   const traceWrapRef = useRef(null)
   const introRef = useRef(null)
-  const tooltipRef = useRef(null)
+  const legendRef = useRef(null)
+  const zoneLabelRefs = useRef([])
+  const connectorWrapRef = useRef(null)
+  const connectorPathRefs = useRef([])
+  const connectorStartDotRefs = useRef([])
+  const connectorEndDotRefs = useRef([])
 
   useEffect(() => {
     const track = trackRef.current
@@ -282,31 +371,29 @@ export default function ZoneIsometric() {
     const scene = sceneRef.current
 
     let SW, SH, scale, offX, offY
-    let mapOverlay = null
+    let isMobileNow = false
     const layers = []
     const projections = []
-    const mapPointEls = []
+    const zoneProbes = []
     // preserve-3d + will-change promote each layer to its own GPU-composited
     // bitmap — required for the isometric explosion's translateZ depth
-    // stacking, but during the zoom in/hold/zoom-out phases every layer's
-    // translateZ is 0 and .scene isn't rotated, so there's no 3D happening
-    // at all yet. Composited layers don't reliably re-rasterize at full
-    // resolution as an ANCESTOR's scale() changes dynamically (each nested
-    // layer's own "ideal raster scale" doesn't always track it), which is
-    // what was making the shape/dots look soft/blocky while zoomed in —
-    // toggling 3D mode on only once the explosion actually needs it avoids
-    // that entirely: with no extra composited layers, everything just
-    // repaints as part of .scene's own layer, in lockstep with its scale.
+    // stacking, but during the trace-line phase every layer's translateZ is
+    // 0 and .scene isn't rotated, so there's no 3D happening at all yet.
+    // Toggling 3D mode on only once the explosion actually needs it avoids
+    // promoting layers to their own composited bitmap before that, so
+    // everything just repaints as part of .scene's own layer until then.
     let is3D = false
 
     function build() {
       scene.innerHTML = ''
       layers.length = 0
       projections.length = 0
+      zoneProbes.length = 0
       // fresh elements always start flat (no inline transform-style/
       // will-change) — force frame()'s toggle to re-apply the current 3D
       // state to them on its next run instead of assuming nothing changed.
       is3D = false
+      const supersample = isMobileNow ? MOBILE_SUPERSAMPLE : SUPERSAMPLE
 
       POLYS.forEach((pts, i) => {
         if (i > 0) {
@@ -339,7 +426,7 @@ export default function ZoneIsometric() {
           projSvg.appendChild(svgEl('polygon', { points: pts, fill: `url(#${patId})`, stroke: 'none' }))
           const pw = document.createElement('div')
           pw.style.cssText = `position:absolute;left:${offX}px;top:${offY}px;`
-          pw.appendChild(sizedSvg(projSvg, VB.w * scale, VB.h * scale))
+          pw.appendChild(sizedSvg(projSvg, VB.w * scale, VB.h * scale, supersample))
           scene.appendChild(pw)
           projections.push(pw)
         } else {
@@ -355,147 +442,143 @@ export default function ZoneIsometric() {
         }
         const w = document.createElement('div')
         w.style.cssText = `position:absolute;left:${offX}px;top:${offY}px;`
-        w.appendChild(sizedSvg(svg, VB.w * scale, VB.h * scale))
+        w.appendChild(sizedSvg(svg, VB.w * scale, VB.h * scale, supersample))
         scene.appendChild(w)
         layers.push(w)
       })
 
-      // map points: rendered as one more SVG layer on top of everything
-      // else, in the same VB viewBox as the shape layers above — so it
-      // scales/translates/rotates in lockstep with them and every dot
-      // stays pinned to its exact spot on the shape at any zoom level.
-      // Dots grow in from nothing (r animates 0 -> DOT_R) and labels rise
-      // up into place with a fade (y + opacity), driven per-frame from the
-      // shared reveal progress. (This used to clip each label through a
-      // fixed "slit" via an SVG clipPath instead of fading it — clipPath
-      // forces the browser to composite that content into a separate
-      // offscreen buffer, which doesn't reliably re-rasterize at full
-      // resolution as the shape is scaled up, and was making every label
-      // look soft/blurry once zoomed in.)
-      const pointsSvg = makeSVG()
-      const pointsWrap = document.createElement('div')
-      pointsWrap.style.cssText = `position:absolute;left:${offX}px;top:${offY}px;pointer-events:none;`
-      pointsWrap.appendChild(sizedSvg(pointsSvg, VB.w * scale, VB.h * scale))
-      // appended now (before building the points below) so the SVG is
-      // actually live in the document — text.getComputedTextLength() needs
-      // real layout/font metrics to measure the label width correctly.
-      scene.appendChild(pointsWrap)
-      mapOverlay = pointsWrap
-      mapPointEls.length = 0
-      MAP_POINTS.forEach(({ label, x, y, side }) => {
-        const circle = svgEl('circle', { cx: x, cy: y, r: 0, fill: '#b14f50', style: 'pointer-events:none;' })
-        pointsSvg.appendChild(circle)
-
-        const tx = side === 'left' ? x - DOT_R - DOT_GAP : x + DOT_R + DOT_GAP
-        const text = svgEl('text', {
-          x: tx,
-          y,
-          fill: '#1d3a3a',
-          'font-size': FONT_SIZE,
-          'font-family': "'Lexend Deca', system-ui, sans-serif",
-          'text-anchor': side === 'left' ? 'end' : 'start',
-          'dominant-baseline': 'central',
-          style: 'pointer-events:none;opacity:0;',
+      // one invisible probe per zone: a zero-radius circle at a real
+      // point inside that ring's own polygon, in the same VB coordinate
+      // space — as a child of .scene it automatically inherits the
+      // shared rotate/translateZ, so its live getBoundingClientRect()
+      // each frame gives the exact on-screen spot where that ring
+      // currently sits. The visible dot itself is drawn flat in the
+      // connector overlay at that measured point — never actually rotated.
+      // skipped entirely on mobile: the connector overlay they exist to
+      // feed is hidden there (see .connectorWrap), so they'd just be extra
+      // composited, supersampled elements for zero visual payoff.
+      if (!isMobileNow) {
+        ZONES.forEach((zone) => {
+          const probeSvg = makeSVG()
+          const circle = svgEl('circle', { cx: zone.anchor.x, cy: zone.anchor.y, r: 0 })
+          probeSvg.appendChild(circle)
+          const pw = document.createElement('div')
+          pw.style.cssText = `position:absolute;left:${offX}px;top:${offY}px;`
+          pw.appendChild(sizedSvg(probeSvg, VB.w * scale, VB.h * scale, supersample))
+          scene.appendChild(pw)
+          zoneProbes.push({ zone, wrapEl: pw, circleEl: circle })
         })
-        text.textContent = label
-        pointsSvg.appendChild(text)
+      }
+    }
 
-        const description = DESCRIPTIONS[label]
-        let hitRect = null
-        if (description) {
-          // one combined hit target spanning the dot AND the label — so
-          // hovering either (or the gap between them) reads as a single
-          // continuous element instead of two separate ones with a dead
-          // zone in between.
-          const textW = text.getComputedTextLength()
-          const left = side === 'left' ? tx - textW : x - HIT_R
-          const right = side === 'left' ? x + HIT_R : tx + textW
-          const padY = Math.max(HIT_R, FONT_SIZE * 0.9)
-          hitRect = svgEl('rect', {
-            x: left,
-            y: y - padY,
-            width: right - left,
-            height: padY * 2,
-            fill: '#000',
-            'fill-opacity': '0',
-            style: 'pointer-events:none;cursor:pointer;',
-          })
-          pointsSvg.appendChild(hitRect)
+    // mobile: the intro text (heading + subheading, treated as one group)
+    // sits pinned 10px below the real sticky navbar for the whole time this
+    // section is stuck — measured live off the fixed navbar's own rect
+    // rather than a guessed constant, since its height varies with
+    // content/breakpoint. .sticky itself sits at top:0 while pinned, so a
+    // viewport-relative bottom is also the right offset from .sticky's own
+    // top edge. The sticky navbar only fades/slides into view once its
+    // hero-page counterpart scrolls out (see stickyVisible in Hero.jsx),
+    // so this needs to keep re-measuring on scroll too, not just at
+    // mount/resize — otherwise it stays frozen at whatever the navbar's
+    // (still hidden, translated off-screen) rect was on first layout.
+    function updateMobileIntroTop() {
+      if (!introRef.current) return
+      const navEl = document.querySelector('[data-sticky-nav]')
+      const navBottom = navEl ? navEl.getBoundingClientRect().bottom : 0
+      introRef.current.style.top = `${Math.max(0, navBottom) + 10}px`
+    }
 
-          const showTooltip = () => {
-            const tt = tooltipRef.current
-            if (!tt) return
-            const r = hitRect.getBoundingClientRect()
-            const cy = r.top + r.height / 2
-            tt.textContent = description
-            tt.style.top = `${cy}px`
-            // anchored past the far edge of the combined dot+label area,
-            // so the box never sits on top of the label text itself.
-            if (side === 'left') {
-              tt.style.left = `${r.left - 10}px`
-              tt.style.transform = 'translate(-100%, -50%)'
-            } else {
-              tt.style.left = `${r.right + 10}px`
-              tt.style.transform = 'translate(0, -50%)'
-            }
-            tt.style.opacity = '1'
-          }
-          const hideTooltip = () => {
-            const tt = tooltipRef.current
-            if (tt) tt.style.opacity = '0'
-          }
-          hitRect.addEventListener('mouseenter', showTooltip)
-          hitRect.addEventListener('mouseleave', hideTooltip)
-        }
+    // sizes/positions the stage box to the room left below the intro text,
+    // filling down toward the bottom of the sticky viewport — the zone
+    // cards float on top of it (see .zoneLabelsCol z-index) instead of
+    // needing their own reserved strip, so the shape doesn't have to stop
+    // short of them. Kept separate from build() (cheap rect reads + style
+    // writes only) so it can also re-run on every scroll tick — the intro
+    // text's own top keeps moving as the sticky navbar slides in (see
+    // updateMobileIntroTop), and without re-deriving this from it too, the
+    // stage/legend/trace line stay put at their stale position and end up
+    // overlapped by the now-lower intro text instead of sitting below it.
+    function positionMobileStage() {
+      stage.style.top = ''
+      stage.style.height = ''
+      const stickyRect = stage.parentElement.getBoundingClientRect()
+      const introRect = introRef.current ? introRef.current.getBoundingClientRect() : null
+      const introBottom = introRect ? introRect.bottom - stickyRect.top : 0
 
-        mapPointEls.push({ circle, hitRect, text, restY: y })
-      })
+      // capped rather than stretched all the way to the sticky's bottom
+      // edge — the shape is centered within this box, so a box that
+      // reaches past where the cards float pulls that center down into
+      // the cards themselves, leaving barely any of the shape showing
+      // above them.
+      const top = introBottom + MOBILE_STAGE_GAP
+      const maxHeight = stickyRect.height - MOBILE_STAGE_GAP - top
+      const height = Math.max(160, Math.min(420, maxHeight))
+      stage.style.top = `${top}px`
+      stage.style.height = `${height}px`
+
+      // the trace line's own wrap is a sibling of .stage (not nested
+      // inside it), so it doesn't automatically follow the box just
+      // computed above — without this it stays sized to the full sticky
+      // viewport and draws centered on that instead of on the shape.
+      if (traceWrapRef.current) {
+        traceWrapRef.current.style.top = `${top}px`
+        traceWrapRef.current.style.height = `${height}px`
+      }
+    }
+
+    function reflowMobileIntro() {
+      updateMobileIntroTop()
+      positionMobileStage()
     }
 
     function layout() {
+      isMobileNow = window.matchMedia(MOBILE_QUERY).matches
+
+      if (isMobileNow) {
+        reflowMobileIntro()
+      } else {
+        stage.style.top = ''
+        stage.style.height = ''
+        if (traceWrapRef.current) {
+          traceWrapRef.current.style.top = ''
+          traceWrapRef.current.style.height = ''
+        }
+      }
+
       SW = stage.clientWidth
       SH = stage.clientHeight
-      scale = Math.min((SW * 0.5) / VB.w, (SH * 0.5) / VB.h)
+      const shapeScaleFactor = isMobileNow ? MOBILE_SHAPE_SCALE_FACTOR : SHAPE_SCALE_FACTOR
+      scale = Math.min((SW * shapeScaleFactor) / VB.w, (SH * shapeScaleFactor) / VB.h)
       offX = SW / 2 - (VB.w * scale) / 2
       offY = SH / 2 - (VB.h * scale) / 2
       build()
+
+      // center the intro text group between the navbar and the shape's
+      // resting top edge (stage fills the sticky viewport exactly, so
+      // offY + STAGE_Y_REST is already the shape's top edge in viewport px).
+      // mobile skips this — its top comes from CSS, cleared above.
+      if (introRef.current && !isMobileNow) {
+        const shapeTop = offY + STAGE_Y_REST
+        const midY = (NAVBAR_BOTTOM + shapeTop) / 2
+        introRef.current.style.top = `${midY - introRef.current.offsetHeight / 2}px`
+      }
     }
 
     function frame(t) {
-      // phase 1: trace line draws in, shape stays at rest
-      const lineProgress = Math.min(1, t / P1_END)
+      // phase 1: trace line draws in left-to-right, shape stays at rest
+      const drawProgress = Math.max(0, Math.min(1, t / P1_END))
+      // phase 2: trace line erases left-to-right the same way
+      const eraseProgress = Math.max(0, Math.min(1, (t - P1_END) / (P2_END - P1_END)))
 
-      // phase 2/hold/3: zoom in toward the innermost layer, hold there
-      // (map points reveal), then zoom back out (map points hide)
-      let zoomT = 0
-      if (t <= P1_END) {
-        zoomT = 0
-      } else if (t <= P2_END) {
-        zoomT = (t - P1_END) / (P2_END - P1_END)
-      } else if (t <= P_HOLD_END) {
-        zoomT = 1
-      } else if (t <= P3_END) {
-        zoomT = 1 - (t - P_HOLD_END) / (P3_END - P_HOLD_END)
-      }
-      const zoomEase = easeInOut(Math.max(0, Math.min(1, zoomT)))
-
-      // map points reveal (grow in / rise up) right after zoom-in
-      // completes, stay revealed through the hold, then reverse in
-      // lockstep with the zoom-out (zoomT already ramps 1 -> 0 there)
-      const pointsProgress =
-        t <= P2_END
-          ? 0
-          : t <= P2_END + POINTS_FADE
-            ? (t - P2_END) / POINTS_FADE
-            : zoomT
-
-      // phase 4: the isometric explosion
-      const explosionT = Math.max(0, Math.min(1, (t - P3_END) / (1 - P3_END)))
+      // phase 3: the isometric explosion starts immediately once the
+      // trace line is fully gone
+      const explosionT = Math.max(0, Math.min(1, (t - P2_END) / (1 - P2_END)))
       const e = easeInOut(explosionT)
 
       // flip every layer into (or out of) GPU-composited 3D mode only
       // right as the explosion needs it — see the `is3D` declaration above
-      // for why this is what keeps the zoomed-in view crisp.
+      // for why this is what keeps the view crisp.
       const want3D = explosionT > 0.0005
       if (want3D !== is3D) {
         is3D = want3D
@@ -510,104 +593,157 @@ export default function ZoneIsometric() {
           P.style.transformStyle = mode
           P.style.willChange = wc
         })
-        if (mapOverlay) {
-          mapOverlay.style.transformStyle = mode
-          mapOverlay.style.willChange = wc
-        }
+        zoneProbes.forEach(({ wrapEl }) => {
+          wrapEl.style.transformStyle = mode
+          wrapEl.style.willChange = wc
+        })
       }
-
-      // .scene's transform-origin defaults to its own center (SW/2, SH/2),
-      // so scale() pivots around that point, not (0,0) — the translate
-      // needed to bring the target point to center has to account for it.
-      const targetX = offX + INNER_CENTROID.x * scale
-      const targetY = offY + INNER_CENTROID.y * scale
-      const finalTx = ZOOM_MAX * (SW / 2 - targetX)
-      const finalTy = ZOOM_MAX * (SH / 2 - targetY)
-      const zoomScale = 1 + (ZOOM_MAX - 1) * zoomEase
-      const tx = finalTx * zoomEase
-      const ty = finalTy * zoomEase + HOLD_Y_SHIFT * zoomEase
 
       const rx = MAX_ROT_X * e
       const rz = MAX_ROT_Z * e
-      scene.style.transform = `translate(${tx}px, ${ty}px) scale(${zoomScale}) rotateX(${rx}deg) rotateZ(${rz}deg)`
+      scene.style.transform = `rotateX(${rx}deg) rotateZ(${rz}deg)`
+      // on mobile the stage's box is already fitted exactly between the
+      // intro text and the bottom cards (see layout()), so this extra
+      // desktop-only nudge — tuned to compensate for the fixed navbar over
+      // a full-height stage — would just push the shape out of that box.
+      const stageYRest = isMobileNow ? 0 : STAGE_Y_REST
+      const stageYExploded = isMobileNow ? 0 : STAGE_Y_EXPLODED
+      stage.style.transform = `translateY(${stageYRest + (stageYExploded - stageYRest) * e}px)`
 
+      const gap = isMobileNow ? MOBILE_GAP : GAP
       const center = (POLYS.length - 1) / 2
       layers.forEach((L, i) => {
-        const z = (i - center) * GAP * e
+        const z = (i - center) * gap * e
         L.style.transform = `translateZ(${z}px)`
         if (projections[i]) {
-          const pz = (i - 1 - center) * GAP * e + 1 * e
+          const pz = (i - 1 - center) * gap * e + 1 * e
           projections[i].style.transform = `translateZ(${pz}px)`
           projections[i].style.opacity = e
         }
       })
 
+      // each zone's label reveals in sequence (Zone 1 first) once the
+      // explosion is far enough along — this runs regardless of platform,
+      // unlike the connector line/dots below, which only exist on desktop
+      // (see build() — the probes they depend on are skipped on mobile
+      // since .connectorWrap is hidden there).
+      const zoneWindow = Math.max(
+        0,
+        Math.min(1, (explosionT - ZONE_REVEAL_START) / (1 - ZONE_REVEAL_START)),
+      )
+
+      // the mobile-only colour legend (see .zoneLegend) explains the ring
+      // colours before the cards carrying the same colour dots arrive —
+      // once they start revealing, it fades out fast (over the first
+      // quarter of that window) rather than lingering through the whole
+      // staggered reveal. Harmless to compute on desktop too since the
+      // legend is display:none there regardless of this opacity.
+      if (legendRef.current) {
+        const legendFade = 1 - easeInOut(Math.min(1, zoneWindow / 0.25))
+        legendRef.current.style.opacity = String(Math.max(0, legendFade))
+      }
+
+      ZONES.forEach((zone) => {
+        const idx = zone.number - 1
+        const localT = (zoneWindow - idx * ZONE_STAGGER) / ZONE_REVEAL_DURATION
+        const reveal = easeInOut(Math.max(0, Math.min(1, localT)))
+        const label = zoneLabelRefs.current[idx]
+        if (label) {
+          label.style.opacity = String(reveal)
+          label.style.transform = `translateY(${(1 - reveal) * 12}px)`
+        }
+      })
+
+      // the visible dots and line live in the flat connector overlay (not
+      // the 3D scene) and both derive from the SAME measured probe point
+      // below, so the line always touches both dots with no gap.
+      const connectorWrap = connectorWrapRef.current
+      const wrapRect = connectorWrap ? connectorWrap.getBoundingClientRect() : null
+      zoneProbes.forEach(({ zone, wrapEl, circleEl }) => {
+        const idx = zone.number - 1
+        const z = (zone.i - center) * gap * e
+        wrapEl.style.transform = `translateZ(${z}px)`
+
+        const localT = (zoneWindow - idx * ZONE_STAGGER) / ZONE_REVEAL_DURATION
+        const reveal = easeInOut(Math.max(0, Math.min(1, localT)))
+        const label = zoneLabelRefs.current[idx]
+
+        const path = connectorPathRefs.current[idx]
+        const startDot = connectorStartDotRefs.current[idx]
+        const endDot = connectorEndDotRefs.current[idx]
+        if (wrapRect) {
+          // the probe's live on-screen position — always a real point on
+          // this zone's own ring, tracked through whatever the current
+          // rotation does to it.
+          const probeRect = circleEl.getBoundingClientRect()
+          const startX = probeRect.left + probeRect.width / 2 - wrapRect.left
+          const startY = probeRect.top + probeRect.height / 2 - wrapRect.top
+          let endX = startX
+          let endY = startY
+          if (label) {
+            const labelRect = label.getBoundingClientRect()
+            endX = (zone.side === 'left' ? labelRect.right : labelRect.left) - wrapRect.left
+            endY = labelRect.top + labelRect.height / 2 - wrapRect.top
+          }
+          if (path) {
+            // elbow connector with two turns: horizontal from the dot to
+            // the midpoint, vertical down/up to the label's y, then
+            // horizontal into the label — never a diagonal — while both
+            // endpoints stay exactly where the dot/label actually are.
+            const midX = (startX + endX) / 2
+            path.setAttribute(
+              'd',
+              `M ${startX} ${startY} L ${midX} ${startY} L ${midX} ${endY} L ${endX} ${endY}`,
+            )
+            path.style.strokeDashoffset = String(1 - reveal)
+            path.style.opacity = String(reveal)
+          }
+          if (startDot) {
+            startDot.setAttribute('cx', String(startX))
+            startDot.setAttribute('cy', String(startY))
+            startDot.setAttribute('r', String(DOT_R * reveal))
+          }
+          if (endDot) {
+            endDot.setAttribute('cx', String(endX))
+            endDot.setAttribute('cy', String(endY))
+            endDot.setAttribute('r', String(DOT_R * reveal))
+          }
+        }
+      })
+
       if (traceRef.current) {
-        traceRef.current.style.strokeDashoffset = String(1 - lineProgress)
+        if (isMobileNow) {
+          // the desktop erase-sweep (below) slides the same dash back off
+          // the path a second time, which on a short mobile scroll distance
+          // reads as the line drawing in twice in a row — mobile instead
+          // holds the fully-drawn line and just fades it out over the same
+          // window (see traceWrapRef opacity below).
+          traceRef.current.style.strokeDashoffset = String(1 - drawProgress)
+        } else {
+          // pathLength="1" + stroke-dasharray:1 (dash 1, gap 1) means the
+          // dash exactly covers the path when dashoffset is 0. Pushing the
+          // offset from 1 -> 0 reveals the path start-to-end (the draw-in);
+          // continuing 0 -> -1 slides that same dash off the end, erasing it
+          // start-to-end too — both sweeps read as left-to-right since the
+          // path itself runs left to right (see TRACE_POINTS_PX/M start).
+          traceRef.current.style.strokeDashoffset = String(1 - drawProgress - eraseProgress)
+        }
       }
       if (traceWrapRef.current) {
-        // zoom in together with the shape (no rotation yet at this point,
-        // so the shared translate/scale keeps the line lined up); scaling
-        // the whole wrapper also grows the stroke thickness in the same
-        // ratio automatically. Stays visible through the hold (still
-        // there when the map points appear) and fades out together with
-        // the zoom-out, same timing as the points.
-        traceWrapRef.current.style.transform = `translate(${tx}px, ${ty}px) scale(${zoomScale})`
-        const lineOpacity = t <= P_HOLD_END ? 1 : zoomT
-        traceWrapRef.current.style.opacity = String(lineOpacity)
-      }
-      if (mapOverlay) {
-        // mapOverlay is a direct child of .scene, so it already inherits
-        // .scene's translate/scale/rotate transform for free — no extra
-        // transform needed here, same as layers/projections only adding a
-        // local translateZ on top of the inherited parent transform.
-        // Dots grow in together first (r: 0 -> DOT_R), then labels rise up
-        // one after another through their fixed clip "slit"
-        // (y: restY + LABEL_RISE -> restY) — and reverse: labels sink back
-        // in the same order first, then dots shrink away, in lockstep with
-        // the zoom-out.
-        const p = Math.max(0, Math.min(1, pointsProgress))
-        const dotReveal = easeInOut(Math.max(0, Math.min(1, p / DOT_PHASE)))
-        const textPhase = Math.max(0, Math.min(1, (p - DOT_PHASE) / (1 - DOT_PHASE)))
-        // the hit rect only turns on once THAT point's own label has
-        // actually finished rising into place — not the moment the dots
-        // start growing — and (every point) turns off the instant
-        // zoom-out starts (t > P_HOLD_END), rather than fading out
-        // gradually along with the visual reveal.
-        const inHold = t <= P_HOLD_END
-        let anyHitActive = false
-        mapPointEls.forEach(({ circle, hitRect, text, restY }, i) => {
-          circle.setAttribute('r', DOT_R * dotReveal)
-          const localT = (textPhase - i * LABEL_STAGGER) / LABEL_DURATION
-          const textReveal = easeInOut(Math.max(0, Math.min(1, localT)))
-          text.setAttribute('y', restY + LABEL_RISE * (1 - textReveal))
-          text.style.opacity = String(textReveal)
-          const hitActive = inHold && textReveal >= 0.98
-          if (hitActive) anyHitActive = true
-          if (hitRect) hitRect.style.pointerEvents = hitActive ? 'auto' : 'none'
-        })
-        // scrolling away while a tooltip is open won't fire mouseleave (the
-        // dot moves out from under the cursor without a real mouse event),
-        // so force it closed once no point's hit target is active anymore.
-        if (!anyHitActive && tooltipRef.current) tooltipRef.current.style.opacity = '0'
-      }
-      if (introRef.current) {
-        // exits straight up off the top of the screen during zoom-in
-        // (independent of the shape's own centering translate) and comes
-        // back down into place during zoom-out; opacity fades the same way.
-        const introTy = -SH * 0.7 * zoomEase
-        introRef.current.style.transform = `translateY(${introTy}px) scale(${zoomScale})`
-        introRef.current.style.opacity = String(1 - zoomEase)
+        if (isMobileNow) {
+          traceWrapRef.current.style.opacity = String(1 - eraseProgress)
+        } else {
+          // nothing left to paint once the erase sweep finishes (and the
+          // explosion hasn't started yet at that point), so just hide it —
+          // avoids the compositor tracking an invisible layer for no reason.
+          traceWrapRef.current.style.opacity = eraseProgress >= 1 ? '0' : '1'
+        }
       }
     }
 
     // A fast reverse scroll (jumping back out of the explosion into the
-    // zoomed hold) can move `t` — and so the shape's CSS scale — by a
-    // large amount in a single tick. The GPU layers behind the shape
-    // (will-change + preserve-3d, needed for the isometric explosion)
-    // then have to re-rasterize at a very different resolution all at
-    // once, and visibly show a stale/blocky bitmap until they catch up —
-    // that's the "pixel pixel" artifact. Smoothing the rendered value
+    // flat trace-line phase) can move `t` — and so the shape's rotation —
+    // by a large amount in a single tick. Smoothing the rendered value
     // toward the real scroll position every frame, instead of snapping to
     // it directly, keeps the change-per-frame small regardless of how
     // fast the user actually scrolls, which the compositor can always
@@ -630,6 +766,7 @@ export default function ZoneIsometric() {
     }
 
     function onScroll() {
+      if (isMobileNow) reflowMobileIntro()
       const scrollable = track.offsetHeight - window.innerHeight
       const rect = track.getBoundingClientRect()
       targetT = Math.min(1, Math.max(0, -rect.top / scrollable))
@@ -657,7 +794,23 @@ export default function ZoneIsometric() {
     currentT = targetT
     frame(currentT)
 
+    // on mobile, layout() measures the intro text's real rendered height to
+    // size/position the stage box against it (see MOBILE_STAGE_GAP above) —
+    // if the custom fonts (Petrona/Lexend Deca) haven't loaded yet at mount,
+    // that measurement is taken against fallback-font metrics, then the
+    // swap to the real font reflows the text taller without anything
+    // re-running layout() for it, leaving the stage's box stuck starting
+    // above where the text actually ends.
+    let cancelled = false
+    document.fonts.ready.then(() => {
+      if (cancelled) return
+      layout()
+      onScroll()
+      currentT = targetT
+    })
+
     return () => {
+      cancelled = true
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleResize)
       if (scrollRaf) cancelAnimationFrame(scrollRaf)
@@ -669,23 +822,73 @@ export default function ZoneIsometric() {
     <section className={styles.section}>
       <div className={styles.track} ref={trackRef}>
         <div className={styles.sticky}>
-          <div className={styles.introText}>
-            <div ref={introRef}>
-              <h2 className={styles.heading}>Area Guides</h2>
-              <p className={styles.subheading}>
-                Your ultimate guide to the capital. Discover London’s top attractions, elite
-                student life, and the unique experience of everyday living in this global hub.
-              </p>
-            </div>
+          <div className={styles.introText} ref={introRef}>
+            <h2 className={styles.heading}>{t('zoneIsometric.heading')}</h2>
+            <p className={styles.subheading}>{t('zoneIsometric.subheading')}</p>
           </div>
           <div className={styles.stage} ref={stageRef}>
             <div className={styles.scene} ref={sceneRef} />
+            <div className={styles.zoneLegend} ref={legendRef}>
+              {ZONES.map((zone) => (
+                <span key={zone.number} className={styles.zoneLegendItem}>
+                  <span
+                    className={styles.zoneLegendDot}
+                    style={{ background: RAMPS[zone.i].f }}
+                  />
+                  {zone.title}
+                </span>
+              ))}
+            </div>
           </div>
           <TraceLine innerRef={traceRef} wrapRef={traceWrapRef} />
-          <div className={styles.ctaWrap}>
-            <Button label="DISCOVER LONDON" onClick={() => navigate('/discover-london')} />
+
+          <div className={`${styles.zoneLabelsCol} ${styles.zoneLabelsLeft}`}>
+            {ZONES.filter((zone) => zone.side === 'left').map((zone) => (
+              <ZoneLabel
+                key={zone.number}
+                zone={zone}
+                labelRef={(el) => (zoneLabelRefs.current[zone.number - 1] = el)}
+              />
+            ))}
           </div>
-          <div className={styles.tooltip} ref={tooltipRef} />
+          <div className={`${styles.zoneLabelsCol} ${styles.zoneLabelsRight}`}>
+            {ZONES.filter((zone) => zone.side === 'right').map((zone) => (
+              <ZoneLabel
+                key={zone.number}
+                zone={zone}
+                labelRef={(el) => (zoneLabelRefs.current[zone.number - 1] = el)}
+              />
+            ))}
+          </div>
+
+          <div className={styles.connectorWrap} ref={connectorWrapRef}>
+            <svg className={styles.connectorSvg}>
+              {ZONES.map((zone) => (
+                <path
+                  key={zone.number}
+                  ref={(el) => (connectorPathRefs.current[zone.number - 1] = el)}
+                  className={styles.connectorPath}
+                  pathLength="1"
+                />
+              ))}
+              {ZONES.map((zone) => (
+                <circle
+                  key={zone.number}
+                  ref={(el) => (connectorStartDotRefs.current[zone.number - 1] = el)}
+                  className={styles.connectorDot}
+                  r="0"
+                />
+              ))}
+              {ZONES.map((zone) => (
+                <circle
+                  key={zone.number}
+                  ref={(el) => (connectorEndDotRefs.current[zone.number - 1] = el)}
+                  className={styles.connectorDot}
+                  r="0"
+                />
+              ))}
+            </svg>
+          </div>
         </div>
       </div>
     </section>

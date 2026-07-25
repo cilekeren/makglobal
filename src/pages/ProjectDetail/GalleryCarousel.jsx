@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useTranslation } from 'react-i18next'
 import ArrowIcon from '../../components/common/ArrowIcon'
 import styles from './GalleryCarousel.module.css'
 
@@ -10,6 +11,7 @@ import styles from './GalleryCarousel.module.css'
 const SNAP_DELAY = 520
 
 export default function GalleryCarousel({ images, name }) {
+  const { t } = useTranslation()
   const total = images.length
   const [pos, setPos] = useState(total)
   const [instant, setInstant] = useState(false)
@@ -120,7 +122,7 @@ export default function GalleryCarousel({ images, name }) {
 
       {total > 1 && (
         <div className={styles.controls}>
-          <button type="button" className={styles.navBtn} onClick={() => goToStep(-1)} aria-label="Previous image">
+          <button type="button" className={styles.navBtn} onClick={() => goToStep(-1)} aria-label={t('projectDetail.previousImage')}>
             <ArrowIcon lineLength={0} className={`${styles.navArrow} ${styles.navArrowPrev}`} />
           </button>
 
@@ -135,7 +137,7 @@ export default function GalleryCarousel({ images, name }) {
                   ref={(el) => (thumbRefs.current[i] = el)}
                   type="button"
                   className={styles.thumbBtn}
-                  aria-label={`Go to image ${(i % total) + 1}`}
+                  aria-label={t('projectDetail.goToImage', { number: (i % total) + 1 })}
                   onClick={() => goToThumb(i)}
                 >
                   {src ? (
@@ -148,7 +150,7 @@ export default function GalleryCarousel({ images, name }) {
             </div>
           </div>
 
-          <button type="button" className={styles.navBtn} onClick={() => goToStep(1)} aria-label="Next image">
+          <button type="button" className={styles.navBtn} onClick={() => goToStep(1)} aria-label={t('projectDetail.nextImage')}>
             <ArrowIcon lineLength={0} className={styles.navArrow} />
           </button>
         </div>
@@ -165,7 +167,7 @@ export default function GalleryCarousel({ images, name }) {
                   e.stopPropagation()
                   goToStep(-1)
                 }}
-                aria-label="Previous image"
+                aria-label={t('projectDetail.previousImage')}
               >
                 <ArrowIcon lineLength={0} className={`${styles.lightboxArrow} ${styles.lightboxArrowPrev}`} />
               </button>
@@ -176,7 +178,7 @@ export default function GalleryCarousel({ images, name }) {
                 type="button"
                 className={styles.lightboxClose}
                 onClick={() => setLightboxOpen(false)}
-                aria-label="Close"
+                aria-label={t('projectDetail.close')}
               >
                 <svg viewBox="0 0 20 20" className={styles.closeIcon}>
                   <line x1="3" y1="3" x2="17" y2="17" />
@@ -199,7 +201,7 @@ export default function GalleryCarousel({ images, name }) {
                   e.stopPropagation()
                   goToStep(1)
                 }}
-                aria-label="Next image"
+                aria-label={t('projectDetail.nextImage')}
               >
                 <ArrowIcon lineLength={0} className={styles.lightboxArrow} />
               </button>

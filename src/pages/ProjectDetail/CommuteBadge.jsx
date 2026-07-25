@@ -1,6 +1,8 @@
+import { useTranslation } from 'react-i18next'
 import styles from './CommuteBadge.module.css'
 
 export default function CommuteBadge({ minutes }) {
+  const { t } = useTranslation()
   return (
     <div className={styles.badge}>
       <svg viewBox="0 0 120 120" className={styles.ring}>
@@ -12,7 +14,7 @@ export default function CommuteBadge({ minutes }) {
         <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
       </svg>
 
-      <span className={styles.text}>{minutes} MINS</span>
+      <span className={styles.text}>{t('projectDetail.mins', { count: minutes })}</span>
 
       <svg viewBox="0 0 24 24" className={styles.houseIcon}>
         <path

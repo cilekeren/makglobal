@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { createRoot } from 'react-dom/client'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import Button from '../../components/common/Button'
@@ -12,6 +13,15 @@ const LONDON_CENTER = [51.4995, -0.14]
 const MARKER_SIZE = 38
 
 function MapCard({ project, onNavigate }) {
+  const { t } = useTranslation()
+  const price = project.prices?.[0]?.price || project.price
+  const priceText =
+    price === 'Price on Request' || !price
+      ? t('common.priceOnRequest')
+      : project.prices?.[0]?.price
+        ? `${t('projectsMap.from')} ${price}`
+        : price
+
   return (
     <div className={styles.mapCard} onClick={onNavigate}>
       {project.image ? (
@@ -22,13 +32,11 @@ function MapCard({ project, onNavigate }) {
 
       <div className={styles.mapCardBody}>
         <h3 className={styles.mapCardName}>{project.name}</h3>
-        <div className={styles.mapCardPrice}>
-          {project.prices?.[0]?.price ? `From ${project.prices[0].price}` : project.price || 'Price on Request'}
-        </div>
+        <div className={styles.mapCardPrice}>{priceText}</div>
 
         <div className={styles.mapCardBtnWrap}>
           <Button
-            label="DETAILS"
+            label={t('common.details')}
             variant="filled"
             color="#163a3d"
             textColor="#fff"

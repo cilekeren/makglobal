@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import heroStyles from '../../components/Hero/Hero.module.css'
 import Navbar from '../../components/Navbar/Navbar'
 import ArrowIcon from '../../components/common/ArrowIcon'
@@ -9,6 +10,7 @@ import { PROJECTS } from '../../data/projects'
 import styles from './Projects.module.css'
 
 export default function Projects() {
+  const { t } = useTranslation()
   return (
     <>
       <div className={heroStyles.heroOuter}>
@@ -22,12 +24,8 @@ export default function Projects() {
       </div>
 
       <section className={styles.intro}>
-        <h1 className={styles.heading}>PROJECTS</h1>
-        <p className={styles.subheading}>
-          Explore premium UK real estate at its finest. Featuring the latest and most exclusive
-          developments from the country&rsquo;s top builders, our portfolio offers unmatched quality,
-          prime locations, and exceptional investment potential.
-        </p>
+        <h1 className={styles.heading}>{t('projects.heading')}</h1>
+        <p className={styles.subheading}>{t('projects.subheading')}</p>
 
         <ArrowIcon lineLength={18} className={styles.scrollArrow} />
       </section>

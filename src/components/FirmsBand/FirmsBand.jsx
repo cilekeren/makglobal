@@ -1,13 +1,14 @@
 import { Fragment, useLayoutEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import barrattLondonLogo from '../../assets/firms/barratt_london.svg'
 import berkeleyLogo from '../../assets/firms/berkeley.svg'
-import theOwoLogo from '../../assets/firms/the_owo.svg'
-import emaarLogo from '../../assets/firms/emaar.svg'
 import londonSquareLogo from '../../assets/firms/london_square.svg'
 import ballymoreLogo from '../../assets/firms/Ballymore_Group.svg'
 import redrowLogo from '../../assets/firms/Redrow_plc_Logo.svg'
 import hillGroupLogo from '../../assets/firms/hill_group.svg'
 import knightDragonLogo from '../../assets/firms/knight_dragon.svg'
+import bpsLogo from '../../assets/firms/bps_logo.svg'
+import ghelamcoLogo from '../../assets/firms/ghelamco_logo.svg'
 import styles from './FirmsBand.module.css'
 
 const LOGO_HEIGHT = 42.5
@@ -21,8 +22,6 @@ const LOGOS = [
     scale: 0.85,
   },
   { src: berkeleyLogo, alt: 'Berkeley Group', ratio: 36.1794 / 12.2008 },
-  { src: theOwoLogo, alt: 'The OWO', ratio: 23.9259 / 9.8844 },
-  { src: emaarLogo, alt: 'Emaar', ratio: 31.5227 / 6.236, scale: 0.55 },
   {
     src: londonSquareLogo,
     alt: 'London Square',
@@ -43,6 +42,8 @@ const LOGOS = [
     ratio: 220.62 / 118.47,
     scale: 1.25,
   },
+  { src: bpsLogo, alt: 'BPS', ratio: 3324 / 2316, scale: 1.3 },
+  { src: ghelamcoLogo, alt: 'Ghelamco', ratio: 490 / 109, scale: 0.7 },
 ]
 
 function LogoSet({ hidden, innerRef }) {
@@ -67,6 +68,7 @@ function LogoSet({ hidden, innerRef }) {
 }
 
 export default function FirmsBand() {
+  const { t } = useTranslation()
   const bandRef = useRef(null)
   const set1Ref = useRef(null)
   const set2Ref = useRef(null)
@@ -101,7 +103,7 @@ export default function FirmsBand() {
   }, [])
 
   return (
-    <section className={styles.band} aria-label="Partner developers" ref={bandRef}>
+    <section className={styles.band} aria-label={t('firmsBand.ariaLabel')} ref={bandRef}>
       {distance > 0 && (
         <style>{`
           @keyframes firmsMarqueeSlide {

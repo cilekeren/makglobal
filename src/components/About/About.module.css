@@ -51,7 +51,7 @@
   max-width: 640px;
   font-family: 'Lexend Deca', sans-serif;
   font-weight: 300;
-  font-size: clamp(13px, 1vw, 15px);
+  font-size: clamp(12px, 0.85vw, 14px);
   line-height: 1.7;
   color: #cfe0dd;
 }
@@ -67,5 +67,28 @@
 
   .overlay {
     background: rgba(9, 26, 27, 0.75);
+  }
+
+  .content {
+    text-align: center;
+  }
+
+  .body {
+    /* max-width keeps it narrower than the container, so it needs its
+       own centering — text-align on .content only centers inline
+       content, not this block's own position. */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section {
+    /* width:100% (base rule) plus a horizontal margin would overflow the
+       viewport by 2x the margin — auto lets the margin actually inset it. */
+    width: auto;
+    margin: 16px;
+    /* same corner radius as the hero image's own inset/rounded treatment
+       (.hero in Hero.module.css) — the site's standard for a full-bleed
+       photo section pulled in from the viewport edges. */
+    border-radius: 6px;
   }
 }

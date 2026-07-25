@@ -80,5 +80,18 @@
 @media (max-width: 600px) {
   .grid {
     grid-template-columns: 1fr;
+    /* the desktop clamp() floors at 64px — too much empty white space
+       before the first card on a short mobile viewport. */
+    padding-top: 32px;
+    /* matches .heroOuter's own mobile inset (10px at <=700px, see
+       Hero.module.css) so a single mobile card ends up exactly as wide as
+       the hero image above it — heroOuter's padding shrinks from 20px to
+       10px below that breakpoint, not the same 20px as its desktop rule. */
+    padding-left: 10px;
+    padding-right: 10px;
+    /* matches .grid's own row `gap` so the space after the last card (down
+       to the map below) reads the same as the space between cards, instead
+       of the much larger desktop bottom padding. */
+    padding-bottom: clamp(16px, 2.4vw, 40px);
   }
 }

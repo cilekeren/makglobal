@@ -1,0 +1,230 @@
+{
+  "common": {
+    "learnMore": "DAHA FAZLA BİLGİ",
+    "viewProjects": "PROJELERİ İNCELE",
+    "discoverLondon": "LONDRA’YI KEŞFEDİN",
+    "callUs": "BİZİ ARAYIN",
+    "details": "DETAYLAR",
+    "priceOnRequest": "Fiyat İçin İletişime Geçin",
+    "ready": "Teslime Hazır"
+  },
+  "nav": {
+    "projects": "PROJELER",
+    "buyersGuide": "ALICI REHBERİ",
+    "buyersGuideItems": [
+      "Londra’da Gayrimenkul Satın Alma Süreci",
+      "Uluslararası Alıcı Rehberi",
+      "Vergiler ve Ücretler",
+      "Finansman Seçenekleri",
+      "Sıkça Sorulan Sorular"
+    ],
+    "services": "HİZMETLER",
+    "discoverLondon": "LONDRA’YI KEŞFEDİN",
+    "aboutUs": "HAKKIMIZDA",
+    "talkToUs": "BİZE ULAŞIN!",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat",
+    "primaryNav": "Ana menü",
+    "mobileNav": "Mobil menü"
+  },
+  "hero": {
+    "headingLine1": "İngiltere’de Gayrimenkul",
+    "headingLine2": "Almayı mı Düşünüyorsunuz?",
+    "subtextLine1": "Hedeflerinize, tercih ettiğiniz konuma ve bütçenize göre,",
+    "subtextLine2": "yatırım hedeflerinizle uyumlu projeleri belirlemenize yardımcı oluyoruz."
+  },
+  "buyingJourney": {
+    "heading": "İngiltere’de Gayrimenkul Satın Alma Rehberiniz",
+    "subheading": "İlk danışma görüşmenizden anahtar tesliminize kadar, İngiltere’de gayrimenkul satın almanın her aşamasında size rehberlik ediyoruz.",
+    "bookConsultant": "DANIŞMANLIK ALIN",
+    "steps": {
+      "s1": {
+        "title": "Danışmanlık ve Yatırım Planlaması",
+        "body": "Size özel bir gayrimenkul stratejisi oluşturmak için hedeflerinizi, bütçenizi ve yaşam tarzınızı anlıyoruz."
+      },
+      "s2": {
+        "title": "Gayrimenkul Seçimi",
+        "body": "İhtiyaçlarınıza uygun, özenle seçilmiş projeleri sizinle paylaşıyoruz."
+      },
+      "s3": {
+        "title": "Finansman ve Bütçe Onayı",
+        "body": "İlerlemeden önce bütçenizi, finansman seçeneklerinizi ve toplam satın alma maliyetlerinizi netleştiriyoruz."
+      },
+      "s4": {
+        "title": "Rezervasyon ve Güvence",
+        "body": "Seçtiğiniz mülkü basit bir rezervasyon süreciyle güvence altına alıyoruz."
+      },
+      "s5": {
+        "title": "Hukuki İncelemeler",
+        "body": "Güvenilir avukatlarla hukuki incelemeleri ve belgeleri tamamlıyoruz."
+      },
+      "s6": {
+        "title": "Sözleşme İmzası",
+        "body": "Sözleşmeleri imzalayarak satın almanızı yasal olarak bağlayıcı hale getiriyoruz."
+      },
+      "s7": {
+        "title": "Teslimat ve Anahtar Teslimi",
+        "body": "Satın alma işleminizi tamamlıyor ve yeni mülkünüzün anahtarlarını teslim ediyoruz."
+      }
+    }
+  },
+  "projectDetail": {
+    "developedBy": "geliştiren",
+    "from": "BAŞLANGIÇ",
+    "location": "KONUM",
+    "londonUk": "Londra, İngiltere",
+    "completion": "TESLİM",
+    "tbc": "Belirlenecek",
+    "amenities": "OLANAKLAR",
+    "backToProjects": "PROJELERE DÖN",
+    "mins": "{{count}} DK",
+    "previousImage": "Önceki görsel",
+    "nextImage": "Sonraki görsel",
+    "goToImage": "{{number}}. görsele git",
+    "close": "Kapat",
+    "imageDisclaimer": "Görseller ilgili geliştiriciler tarafından sağlanmaktadır ve yalnızca bilgilendirme amaçlıdır. Bilgisayar destekli (CGI) veya yapay zeka ile oluşturulmuş olabilir ve tamamlanan projeden farklılık gösterebilir. MAK Global, görsellerin doğruluğundan sorumlu değildir. Alıcıların karar vermeden önce tüm detayları doğrudan geliştiriciyle teyit etmesi gerekmektedir."
+  },
+  "areaCards": {
+    "lifestyle": "Yaşam Tarzı",
+    "education": "Eğitim",
+    "experiences": "Deneyimler"
+  },
+  "firmsBand": {
+    "ariaLabel": "İş ortağı geliştiriciler"
+  },
+  "projectsMap": {
+    "from": "Başlangıç"
+  },
+  "projects": {
+    "heading": "PROJELER",
+    "subheading": "İngiltere’nin en seçkin gayrimenkullerini keşfedin. Ülkenin önde gelen inşaat firmalarının en yeni ve en özel projelerini bir araya getiren portföyümüz; eşsiz kalite, ayrıcalıklı konumlar ve olağanüstü yatırım potansiyeli sunuyor."
+  },
+  "featuredProjects": {
+    "heading": "Öne Çıkan Projeler",
+    "subheadingLine1": "Londra’nın en seçkin projelerinden özenle derlenmiş",
+    "subheadingLine2": "sizin için hazırlanmış bir seçki.",
+    "bed": "Yatak Odalı",
+    "newBuild": "Yeni Yapı",
+    "from": "Başlangıç",
+    "previousProject": "Önceki proje",
+    "nextProject": "Sonraki proje",
+    "goTo": "{{name}} projesine git",
+    "ctaLine1": "Mükemmel yatırımı mı arıyorsunuz?",
+    "ctaLine2": "Yakında tamamlanacak ve tamamlanmış geniş proje yelpazemize göz atın.",
+    "viewAllProjects": "TÜM PROJELERİ İNCELE"
+  },
+  "about": {
+    "heading": "Hakkımızda",
+    "bodyParagraph1": "MAK Global, yerli ve yabancı alıcıların Londra’da kolayca gayrimenkul satın almasına yardımcı olur. Doğru bilgi, güvenilir iş ortakları ve özenle seçilmiş fırsatlar sunarak, karmaşık yurt dışı satın alma sürecini sizin için sadeleştiriyoruz.",
+    "bodyParagraph2": "Güçlü inşaat altyapımız sayesinde yalnızca gayrimenkul satmıyoruz; planlama, geliştirme, teslimat ve satış sonrası destek dahil olmak üzere sürecin her aşamasında size rehberlik ediyoruz. İlk görüşmemizden anahtarlarınızı teslim alana kadar amacımız, doğru kararlar vermenize ve uzun vadeli yatırım değeri elde etmenize yardımcı olmaktır."
+  },
+  "zoneIsometric": {
+    "heading": "Londra Bölge Rehberleri",
+    "subheading": "Başkente dair eksiksiz rehberiniz. Londra’nın en gözde noktalarını, seçkin öğrenci yaşamını ve bu küresel merkezde günlük yaşamın eşsiz deneyimini keşfedin."
+  },
+  "footer": {
+    "contact": "İletişim",
+    "faq": "SSS",
+    "ctaText": "Satın alma süreci hakkında daha fazla bilgi almak ve yatırım hedeflerinize uygun fırsatları keşfetmek için ekibimizle görüşün.",
+    "purposeOptions": {
+      "investment": "Yatırım",
+      "home": "Oturmak İçin Konut",
+      "education": "Çocuğumun Eğitimi",
+      "buyToLet": "Kiraya Vermek İçin",
+      "holiday": "Tatil / İkinci Ev",
+      "notSure": "Henüz Emin Değilim"
+    },
+    "budgetOptions": {
+      "under400k": "400.000 £'a kadar",
+      "from400kTo600k": "400.000 £ - 600.000 £",
+      "from600kTo800k": "600.000 £ - 800.000 £",
+      "over800k": "800.000 £ ve üzeri"
+    },
+    "nameLabel": "AD SOYAD",
+    "emailLabel": "E-POSTA",
+    "phoneLabel": "TELEFON",
+    "purposeLabel": "AMAÇ",
+    "purposePlaceholder": "Amaç seçin",
+    "budgetLabel": "TAHMİNİ BÜTÇE",
+    "budgetPlaceholder": "Bütçe seçin",
+    "messageLabel": "EK BİLGİ",
+    "sending": "GÖNDERİLİYOR...",
+    "submit": "İDEAL MÜLKÜMÜ BUL",
+    "statusSent": "Teşekkürler — en kısa sürede sizinle iletişime geçeceğiz.",
+    "statusMissingSelects": "Lütfen bir amaç ve tahmini bütçe seçin.",
+    "statusError": "Bir şeyler ters gitti. Lütfen tekrar deneyin ya da doğrudan e-posta ile ulaşın."
+  },
+  "services": {
+    "heading": "İhtiyaçlarınıza Özel Hizmet",
+    "body": "Her alıcının ihtiyacı farklıdır. İster oturmak için, ister ikinci bir ev, ister yatırım amacıyla bir satın alma planlıyor olun, amacımız hedeflerinize uygun rehberlik sağlamaktır.",
+    "servicesHeading": "Hizmetlerimiz",
+    "list": {
+      "propertySourcing": {
+        "title": "Gayrimenkul Bulma",
+        "body": "Bütçenize, hedeflerinize ve tercih ettiğiniz konumlara uygun projeleri belirlemenize yardımcı oluyoruz. Portföyümüzdeki fırsatlar; konum, geliştirici geçmişi ve piyasa dinamikleri göz önünde bulundurularak özenle seçiliyor."
+      },
+      "investmentAdvisory": {
+        "title": "Yatırım Danışmanlığı",
+        "body": "Müşterilerimizin yatırım hedeflerini anlayarak, uzun vadeli değer yaratabilecek fırsatları değerlendirmelerine yardımcı oluyoruz."
+      },
+      "reservationSupport": {
+        "title": "Rezervasyon Süreci Desteği",
+        "body": "Doğru mülk belirlendikten sonra, rezervasyon aşamasında sürecin sorunsuz ilerlemesi için gereken rehberliği sağlıyoruz."
+      },
+      "developerLiaison": {
+        "title": "Geliştirici İlişkileri",
+        "body": "Satın alma süreci boyunca, geliştirici ile alıcı arasındaki iletişimi destekleyerek gerekli bilgi ve güncellemelerin zamanında paylaşılmasına yardımcı oluyoruz."
+      },
+      "solicitorIntroductions": {
+        "title": "Avukat Yönlendirmesi",
+        "body": "Müşterilerimizi, uluslararası alıcılarla çalışma konusunda deneyimli, bağımsız ve güvenilir avukatlarla buluşturabiliyoruz."
+      },
+      "propertyManagement": {
+        "title": "Mülk Yönetimi Yönlendirmesi",
+        "body": "Satın alma işleminden sonra, müşterilerimizi mülk yönetimi ve kiralama hizmetleri sunan güvenilir iş ortaklarına yönlendirebiliyoruz."
+      }
+    }
+  },
+  "aboutUs": {
+    "heading": "Hikayemiz",
+    "storyBody1": "MAK Global, Londra’da gayrimenkul satın almak isteyen hem yerli hem de yabancı alıcılara güvenilir rehberlik sunmak amacıyla kuruldu.",
+    "storyBody2": "Yurt dışında gayrimenkul satın almanın karmaşık bir süreç olabileceğinin farkındayız. Bu yüzden doğru bilgi, güvenilir iş ortakları ve özenle seçilmiş fırsatlar sunarak müşterilerimiz için bu süreci daha anlaşılır ve erişilebilir hale getiriyoruz.",
+    "reasonsHeading": "Müşteriler Neden Bizimle Çalışıyor",
+    "backToHome": "ANA SAYFAYA DÖN",
+    "ourServices": "HİZMETLERİMİZ",
+    "reasons": {
+      "industryKnowledge": {
+        "title": "Satışın Ötesinde Sektör Bilgisi",
+        "body": "İnşaat ve gayrimenkul alanındaki deneyimimiz sayesinde projeleri yalnızca satış açısından değil; geliştirme, teslimat ve uzun vadeli değer potansiyeli açısından da değerlendiriyoruz."
+      },
+      "carefulSelection": {
+        "title": "Özenle Seçilmiş Fırsatlar",
+        "body": "Portföyümüzdeki projeler; konum, geliştirici geçmişi ve piyasa dinamikleri göz önünde bulundurularak özenle seçiliyor."
+      },
+      "guidanceThroughout": {
+        "title": "Sürecin Her Aşamasında Rehberlik",
+        "body": "İlk görüşmeden anahtar tesliminize kadar, müşterilerimize daha bilinçli kararlar vermelerine yardımcı olmak için her aşamada rehberlik ediyoruz."
+      },
+      "internationalExperience": {
+        "title": "Uluslararası Alıcı Deneyimi",
+        "body": "Uluslararası alıcıların karşılaşabileceği hukuki süreçler, finansman seçenekleri ve satın alma prosedürlerinde destek sağlıyoruz."
+      },
+      "trustedNetwork": {
+        "title": "Güvenilir Profesyonel Ağ",
+        "body": "Deneyimli avukatlar, ipotek danışmanları, geliştiriciler ve mülk yönetimi uzmanlarından oluşan güvenilir bir ağla çalışıyoruz."
+      },
+      "longTermApproach": {
+        "title": "Uzun Vadeli Bir Yaklaşım",
+        "body": "Amacımız yalnızca bir satışı tamamlamak değil; müşterilerimizle uzun vadeli, güvene dayalı ilişkiler kurmaktır."
+      }
+    }
+  },
+  "discoverLondon": {
+    "videoTitle": "Londra’yı Keşfedin",
+    "underConstruction": "Yapım Aşamasında",
+    "bodyLine1": "Sizlere yalnızca bir ev değil, bir yuva bulmanıza yardımcı olmak için en iyi yerel hikayeleri, gayrimenkul içgörülerini ve semt öne çıkanlarını bir araya getiriyoruz.",
+    "bodyLine2": "Londra’yı bir yerli gibi keşfetmek için yakında tekrar uğrayın!",
+    "cameraLocation": "Abbey Road, St John’s Wood, Londra",
+    "live": "CANLI"
+  }
+}

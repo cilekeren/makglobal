@@ -1,14 +1,26 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import Button from '../../components/common/Button'
 import { startCardHeroTransition } from '../../lib/pageTransition'
 import styles from './ProjectCard.module.css'
 
+const MOBILE_QUERY = '(max-width: 700px)'
+
 export default function ProjectCard({ project }) {
+  const { t } = useTranslation()
   const [hovered, setHovered] = useState(false)
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia(MOBILE_QUERY).matches)
   const navigate = useNavigate()
   const imgRef = useRef(null)
   const titleRef = useRef(null)
+
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_QUERY)
+    const onChange = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
 
   const goToDetails = () =>
     startCardHeroTransition({
@@ -40,20 +52,35 @@ export default function ProjectCard({ project }) {
       )}
 
       <h3 ref={titleRef} className={styles.projectName}>{project.name}</h3>
-      <p className={styles.price}>{project.price || 'Price on Request'}</p>
+      <div className={styles.developerLogoSlot}>
+        {project.developerLogo && (
+          <img
+            src={project.developerLogo}
+            alt={project.developerName || ''}
+            className={`${styles.developerLogo} ${
+              project.developerName === 'London Square' ? styles.developerLogoLarge : ''
+            } ${project.developerName?.startsWith('Barratt London') ? styles.developerLogoSmall : ''} ${
+              project.developerName === 'Berkeley' ? styles.developerLogoBerkeley : ''
+            }`}
+          />
+        )}
+      </div>
+      <div className={styles.priceRow}>
+        <p className={styles.price}>{project.price || t('common.priceOnRequest')}</p>
 
-      <div className={styles.detailsBtnWrap}>
-        <Button
-          label="DETAILS"
-          variant="filled"
-          color="#163a3d"
-          textColor="#fff"
-          scale={2.1}
-          strokeScale={3}
-          padding={10}
-          arrowLength={24}
-          hovered={hovered}
-        />
+        <div className={styles.detailsBtnWrap}>
+          <Button
+            label={t('common.details')}
+            variant="filled"
+            color="#163a3d"
+            textColor="#fff"
+            scale={isMobile ? 1.8 : 2.1}
+            strokeScale={3}
+            padding={10}
+            arrowLength={24}
+            hovered={hovered}
+          />
+        </div>
       </div>
     </div>
   )

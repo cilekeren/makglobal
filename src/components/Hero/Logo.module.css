@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: clamp(3px, 0.4vw, 7px);
-  width: clamp(140px, 12vw, 206px);
+  width: clamp(166px, 12vw, 206px);
 }
 
 .logoDark {
@@ -15,6 +15,12 @@
 .logoDarkCompact {
   height: clamp(16px, 1.8vw, 22px);
   margin-left: 14px;
+}
+
+@media (max-width: 700px) {
+  .logoDarkCompact {
+    height: 18px;
+  }
 }
 
 .row {

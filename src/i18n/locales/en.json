@@ -1,0 +1,230 @@
+{
+  "common": {
+    "learnMore": "LEARN MORE",
+    "viewProjects": "VIEW PROJECTS",
+    "discoverLondon": "DISCOVER LONDON",
+    "callUs": "CALL US",
+    "details": "DETAILS",
+    "priceOnRequest": "Price on Request",
+    "ready": "Ready"
+  },
+  "nav": {
+    "projects": "PROJECTS",
+    "buyersGuide": "BUYER’S GUIDE",
+    "buyersGuideItems": [
+      "Property Buying Process in London",
+      "International Buyer’s Guide",
+      "Taxes and Fees",
+      "Financing Options",
+      "FAQ’s"
+    ],
+    "services": "SERVICES",
+    "discoverLondon": "DISCOVER LONDON",
+    "aboutUs": "ABOUT US",
+    "talkToUs": "TALK TO US!",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "primaryNav": "Primary",
+    "mobileNav": "Mobile"
+  },
+  "hero": {
+    "headingLine1": "Considering Purchasing",
+    "headingLine2": "Property in the UK?",
+    "subtextLine1": "Based on your objectives, preferred location, and budget,",
+    "subtextLine2": "we help you identify developments that match your investment goals."
+  },
+  "buyingJourney": {
+    "heading": "Your Guide to Buying Property in the UK",
+    "subheading": "From your first consultation to key handover, we'll guide you through every stage of buying property in the UK.",
+    "bookConsultant": "BOOK A CONSULTANT",
+    "steps": {
+      "s1": {
+        "title": "Consultation & Investment Planning",
+        "body": "Understand your goals, budget, and lifestyle to build a tailored property strategy."
+      },
+      "s2": {
+        "title": "Property Selection",
+        "body": "Explore carefully selected developments that match your requirements."
+      },
+      "s3": {
+        "title": "Financing & Budget Confirmation",
+        "body": "Understand your budget, financing options, and total purchase costs before moving forward."
+      },
+      "s4": {
+        "title": "Reservation & Securing Your Property",
+        "body": "Secure your chosen property through a straightforward reservation process."
+      },
+      "s5": {
+        "title": "Legal Checks",
+        "body": "Complete legal checks and documentation with trusted solicitors."
+      },
+      "s6": {
+        "title": "Exchange of Contracts",
+        "body": "Exchange contracts and make your purchase legally binding."
+      },
+      "s7": {
+        "title": "Completion & Key Handover",
+        "body": "Complete your purchase and receive the keys to your new property."
+      }
+    }
+  },
+  "projectDetail": {
+    "developedBy": "developed by",
+    "from": "FROM",
+    "location": "LOCATION",
+    "londonUk": "London, UK",
+    "completion": "COMPLETION",
+    "tbc": "TBC",
+    "amenities": "AMENITIES",
+    "backToProjects": "BACK TO PROJECTS",
+    "mins": "{{count}} MINS",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "goToImage": "Go to image {{number}}",
+    "close": "Close",
+    "imageDisclaimer": "Images are provided by the respective developers and are for illustrative purposes only. They may be CGI or AI-generated and may differ from the completed development. MAK Global is not responsible for their accuracy. Buyers should verify all details directly with the developer before making any decision."
+  },
+  "areaCards": {
+    "lifestyle": "Lifestyle",
+    "education": "Education",
+    "experiences": "Experiences"
+  },
+  "firmsBand": {
+    "ariaLabel": "Partner developers"
+  },
+  "projectsMap": {
+    "from": "From"
+  },
+  "projects": {
+    "heading": "PROJECTS",
+    "subheading": "Explore premium UK real estate at its finest. Featuring the latest and most exclusive developments from the country's top builders, our portfolio offers unmatched quality, prime locations, and exceptional investment potential."
+  },
+  "featuredProjects": {
+    "heading": "Featured Projects",
+    "subheadingLine1": "A curated selection of London's finest developments,",
+    "subheadingLine2": "handpicked for you.",
+    "bed": "Bed",
+    "newBuild": "New Build",
+    "from": "From",
+    "previousProject": "Previous project",
+    "nextProject": "Next project",
+    "goTo": "Go to {{name}}",
+    "ctaLine1": "Looking for the perfect investment?",
+    "ctaLine2": "Browse our extensive range of upcoming and completed projects.",
+    "viewAllProjects": "VIEW ALL PROJECTS"
+  },
+  "about": {
+    "heading": "About Us",
+    "bodyParagraph1": "MAK Global helps local and international buyers easily purchase property in London. We simplify the complex overseas buying process by providing accurate information, trusted partners, and carefully selected opportunities.",
+    "bodyParagraph2": "Thanks to our strong background in construction, we don't just sell properties—we guide you through every single stage, including planning, development, delivery, and after-sales support. From our very first meeting until you get your keys, our goal is to help you make the right decisions and secure long-term investment value."
+  },
+  "zoneIsometric": {
+    "heading": "Zone Guides in London",
+    "subheading": "Your ultimate guide to the capital. Discover London's top attractions, elite student life, and the unique experience of everyday living in this global hub."
+  },
+  "footer": {
+    "contact": "Contact",
+    "faq": "FAQ",
+    "ctaText": "Speak with our team to learn more about the purchasing process and explore opportunities that match your investment goals.",
+    "purposeOptions": {
+      "investment": "Investment",
+      "home": "Home to Live In",
+      "education": "Child's Education",
+      "buyToLet": "Buy-to-Let",
+      "holiday": "Holiday / Second Home",
+      "notSure": "Not Sure Yet"
+    },
+    "budgetOptions": {
+      "under400k": "Up to £400K",
+      "from400kTo600k": "£400K-£600K",
+      "from600kTo800k": "£600K-£800K",
+      "over800k": "£800K+"
+    },
+    "nameLabel": "NAME",
+    "emailLabel": "E-MAIL",
+    "phoneLabel": "PHONE",
+    "purposeLabel": "PURPOSE",
+    "purposePlaceholder": "Select purpose",
+    "budgetLabel": "ESTIMATED BUDGET",
+    "budgetPlaceholder": "Select budget",
+    "messageLabel": "ADDITIONAL INFORMATION",
+    "sending": "SENDING...",
+    "submit": "FIND MY IDEAL PROPERTY",
+    "statusSent": "Thank you — we'll be in touch shortly.",
+    "statusMissingSelects": "Please select a purpose and estimated budget.",
+    "statusError": "Something went wrong. Please try again or email us directly."
+  },
+  "services": {
+    "heading": "A Service Tailored To Your Needs",
+    "body": "Every buyer's needs are different. Whether you're planning a purchase for personal living, a second home, or investment purposes, our goal is to provide guidance suited to your objectives.",
+    "servicesHeading": "Our Services",
+    "list": {
+      "propertySourcing": {
+        "title": "Property Sourcing",
+        "body": "We help you identify projects that match your budget, goals, and preferred locations. The opportunities in our portfolio are carefully selected based on location, developer track record, and market dynamics."
+      },
+      "investmentAdvisory": {
+        "title": "Investment Advisory",
+        "body": "By understanding our clients' investment objectives, we help them evaluate opportunities that can create long-term value."
+      },
+      "reservationSupport": {
+        "title": "Reservation Process Support",
+        "body": "Once the right property has been identified, we provide the guidance needed during the reservation stage to help the process move forward smoothly."
+      },
+      "developerLiaison": {
+        "title": "Developer Liaison",
+        "body": "Throughout the purchasing process, we support communication between the developer and the buyer, helping ensure necessary information and updates are shared in a timely manner."
+      },
+      "solicitorIntroductions": {
+        "title": "Solicitor Introductions",
+        "body": "We can connect our clients with independent, trusted solicitors experienced in working with international buyers."
+      },
+      "propertyManagement": {
+        "title": "Property Management Referrals",
+        "body": "After the purchase, we can refer clients to trusted partners offering property management and rental services."
+      }
+    }
+  },
+  "aboutUs": {
+    "heading": "Our Story",
+    "storyBody1": "MAK Global was founded to provide trusted guidance to both local and international buyers looking to purchase property in London.",
+    "storyBody2": "We understand that buying property overseas can be a complex process. That's why we make it clearer and more accessible for our clients — offering accurate information, trusted partners, and carefully selected opportunities.",
+    "reasonsHeading": "Why Clients Work With Us",
+    "backToHome": "BACK TO HOME",
+    "ourServices": "OUR SERVICES",
+    "reasons": {
+      "industryKnowledge": {
+        "title": "Industry Knowledge Beyond Sales",
+        "body": "Thanks to our experience in construction and real estate, we evaluate projects not only from a sales perspective, but also in terms of development, delivery, and long-term value potential."
+      },
+      "carefulSelection": {
+        "title": "Carefully Selected Opportunities",
+        "body": "The projects in our portfolio are carefully selected based on location, developer track record, and market dynamics."
+      },
+      "guidanceThroughout": {
+        "title": "Guidance Throughout The Journey",
+        "body": "From the first meeting to key handover, we guide our clients at every stage to help them make more informed decisions."
+      },
+      "internationalExperience": {
+        "title": "International Buyer Experience",
+        "body": "We provide support with the legal processes, financing options, and purchasing procedures that international buyers may encounter."
+      },
+      "trustedNetwork": {
+        "title": "Trusted Professional Network",
+        "body": "We work with a trusted network of experienced solicitors, mortgage advisors, developers, and property management specialists."
+      },
+      "longTermApproach": {
+        "title": "A Long-Term Approach",
+        "body": "Our goal is not just to complete a sale, but to build long-term, trust-based relationships with our clients."
+      }
+    }
+  },
+  "discoverLondon": {
+    "videoTitle": "Discover London",
+    "underConstruction": "Under Construction",
+    "bodyLine1": "We are collecting the best local stories, property insights, and neighborhood highlights to help you find not just a house, but a home.",
+    "bodyLine2": "Check back soon to explore London like a local!",
+    "cameraLocation": "Abbey Road, St John's Wood, London",
+    "live": "LIVE"
+  }
+}

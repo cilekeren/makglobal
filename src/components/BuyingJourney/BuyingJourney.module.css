@@ -126,3 +126,123 @@
   top: 115.894%;
   transform: translateX(-50%);
 }
+
+.mobileDecor {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .subheading {
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .mobileDecor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(16px, 5vw, 28px);
+    margin: 0 0 clamp(24px, 6vw, 40px);
+  }
+
+  .mobileDecorVideoWrap {
+    position: relative;
+    width: clamp(150px, 42vw, 210px);
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+  }
+
+  .mobileDecorVideo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .mobileDecorStamp {
+    position: absolute;
+    right: -6%;
+    bottom: -6%;
+    width: clamp(52px, 17vw, 76px);
+    aspect-ratio: 1 / 1;
+  }
+
+  /* rendered (not display:none) so getBBox/getCTM on its contents still
+     work, but clipped to nothing and off to the side so it's never seen. */
+  .mobileIconSource {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .mobileSteps {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(40px, 10vw, 56px);
+    width: 100%;
+    margin-top: clamp(32px, 8vw, 48px);
+  }
+
+  .mobileStep {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    padding-top: clamp(20px, 5vw, 28px);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .mobileStep::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    border-top: 1px solid rgba(31, 75, 78, 0.2);
+  }
+
+  .mobileStepVisible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobileStepIcon {
+    width: clamp(88px, 28vw, 116px);
+    aspect-ratio: 1 / 1;
+  }
+
+  .mobileStepTitle {
+    margin: clamp(4px, 1.5vw, 8px) 0 0;
+    font-family: 'Petrona', serif;
+    font-weight: 300;
+    font-size: clamp(22px, 6vw, 28px);
+    color: #0a3332;
+  }
+
+  .mobileStepBody {
+    margin: clamp(8px, 2vw, 12px) 0 0;
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 300;
+    font-size: clamp(14px, 3.6vw, 16px);
+    line-height: 1.6;
+    color: #2c4a4d;
+  }
+
+  .mobileCtaWrap {
+    display: flex;
+    justify-content: center;
+    margin: clamp(48px, 10vw, 64px) 0 clamp(48px, 8vw, 64px);
+  }
+}
