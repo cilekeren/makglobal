@@ -18,9 +18,9 @@ export const PROJECTS = [
     location: { text: 'Oval', zone: 'Zone 1' },
     completion: { quarter: 'Q3 2026', year: 'Q1/Q2 2028' },
     prices: [
-      { type: '1+1', price: 'Price on Request' },
-      { type: '2+1', price: 'Price on Request' },
-      { type: '3+1', price: 'Price on Request' },
+      { type: '1+1', price: '£680,000.00' },
+      { type: '2+1', price: '£905,000.00' },
+      { type: '3+1', price: '£1,550,000.00' },
     ],
     gallery: [
       '/Projects/Oval Village/oval_village_1.webp',
@@ -151,9 +151,10 @@ export const PROJECTS = [
     location: { text: 'Camden', zone: 'Zone 2' },
     completion: { quarter: 'Ready', year: 'Q4-2026' },
     prices: [
-      { type: '1+1', price: 'Price on Request' },
-      { type: '2+1', price: 'Price on Request' },
-      { type: '3+1', price: 'Price on Request' },
+      { type: 'Studio', price: '£587,000.00' },
+      { type: '1+1', price: '£740,000.00' },
+      { type: '2+1', price: '£1,175,000.00' },
+      { type: '3+1', price: '£1,400,000.00' },
     ],
     gallery: [
       '/Projects/Camdens Good Yard/01_4._concierge_2_v1740411969.webp',

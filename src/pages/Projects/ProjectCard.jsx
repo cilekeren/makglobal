@@ -9,6 +9,10 @@ const MOBILE_QUERY = '(max-width: 700px)'
 
 export default function ProjectCard({ project }) {
   const { t } = useTranslation()
+  // multiple price tiers can exist (1+1, 2+1, ...) — always show the
+  // lowest one (prices[0]) as the card's headline "from" price, same as
+  // the FROM box on the project's own detail page.
+  const price = project.prices?.[0]?.price || project.price
   const [hovered, setHovered] = useState(false)
   const [isMobile, setIsMobile] = useState(() => window.matchMedia(MOBILE_QUERY).matches)
   const navigate = useNavigate()
@@ -66,7 +70,11 @@ export default function ProjectCard({ project }) {
         )}
       </div>
       <div className={styles.priceRow}>
-        <p className={styles.price}>{project.price || t('common.priceOnRequest')}</p>
+        <p className={styles.price}>
+          {!price || price === 'Price on Request'
+            ? t('common.priceOnRequest')
+            : `${t('featuredProjects.from')} ${price}`}
+        </p>
 
         <div className={styles.detailsBtnWrap}>
           <Button
