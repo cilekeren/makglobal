@@ -192,6 +192,9 @@
   max-width: 520px;
   display: flex;
   flex-direction: column;
+  /* clears the fixed .stickyNavBar when a same-page CTA (e.g. Buyer's
+     Guide sections) scrolls straight to #contact-form. */
+  scroll-margin-top: 140px;
 }
 
 .label {

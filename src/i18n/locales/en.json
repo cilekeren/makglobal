@@ -190,6 +190,7 @@
     "storyBody1": "MAK Global was founded to provide trusted guidance to both local and international buyers looking to purchase property in London.",
     "storyBody2": "We understand that buying property overseas can be a complex process. That's why we make it clearer and more accessible for our clients — offering accurate information, trusted partners, and carefully selected opportunities.",
     "reasonsHeading": "Why Clients Work With Us",
+    "partnersHeading": "Our Partners",
     "backToHome": "BACK TO HOME",
     "ourServices": "OUR SERVICES",
     "reasons": {
@@ -226,5 +227,102 @@
     "bodyLine2": "Check back soon to explore London like a local!",
     "cameraLocation": "Abbey Road, St John's Wood, London",
     "live": "LIVE"
+  },
+  "buyersGuidePage": {
+    "heading": "Buyer’s Guide",
+    "intro": "From the buying process and financing to taxes and frequently asked questions — everything international buyers need to know about purchasing property in London, in one place.",
+    "internationalBuyersGuide": {
+      "whyInvestHeading": "Why Invest in UK Property?",
+      "whyInvest": [
+        "Stable and transparent property market",
+        "Strong rental demand",
+        "Long-term capital growth potential",
+        "Open market for international buyers",
+        "World-class infrastructure and connectivity",
+        "A global destination for living, education and business"
+      ],
+      "ctaHeading": "Considering Purchasing Property in the UK?",
+      "ctaButton": "Speak With An Advisor"
+    },
+    "taxesAndFees": {
+      "q": "What Taxes Apply When Buying Property?",
+      "a1": "When purchasing a property, buyers are generally subject to purchase-related taxes such as Stamp Duty Land Tax (SDLT). The amount payable depends on the structure of the purchase and your individual circumstances, and is detailed for you by your solicitor during the transaction.",
+      "a2": "Once you own the property, any ongoing tax obligations and annual filings can be handled with guidance from professional accountants and tax advisors."
+    },
+    "financingOptions": {
+      "options": [
+        {
+          "title": "Cash Buyers",
+          "body": "Purchasing the property outright with equity. As there is no mortgage process involved, the purchase generally moves faster."
+        },
+        {
+          "title": "UK Mortgages",
+          "body": "Buyers who reside or earn income in the UK can access a range of mortgage products. Eligibility is assessed based on income, credit history, and overall financial profile."
+        },
+        {
+          "title": "International Mortgages",
+          "body": "Some banks and specialist lenders offer mortgages to buyers living abroad. Lending terms vary depending on country of residence and individual financial circumstances."
+        },
+        {
+          "title": "Payment Plans",
+          "body": "On new-build developments, payment plans offered by developers allow the purchase price to be paid in stages throughout construction. Payment plans vary by project."
+        }
+      ],
+      "ctaHeading": "Which Financing Option Is Right For You?",
+      "ctaBody": "Whether you are purchasing with cash or exploring mortgage options, our team can help you understand the available routes and identify suitable opportunities.",
+      "ctaButton": "Speak With An Advisor"
+    },
+    "faqs": {
+      "items": [
+        {
+          "q": "Who Can Buy Property in the UK?",
+          "a": "To purchase property in the UK, you do not need to be a British citizen or resident. International investors, foreign nationals, and individuals living abroad can all buy residential property in the UK."
+        },
+        {
+          "q": "Required Documents",
+          "a": "Certain documents are requested throughout the purchasing process for identity verification and legal requirements. These typically include a passport, proof of address, and documentation showing the source of funds. Requirements may vary depending on the nature of the purchase."
+        },
+        {
+          "q": "Identity Verification & AML Checks",
+          "a": "All buyers in the UK go through identity and source-of-funds verification as part of anti-money laundering (AML) regulations. These checks are a standard and legal part of every purchase."
+        },
+        {
+          "q": "Transferring Funds to the UK",
+          "a": "For international buyers, purchase payments are made through secure banking channels — usually via SWIFT transfer — once your solicitor has completed the required legal checks and verification process."
+        },
+        {
+          "q": "Can I Obtain a Mortgage?",
+          "a": "Yes. Both UK residents and international investors can access mortgage options. Eligibility is assessed based on income, credit history, and overall financial profile."
+        },
+        {
+          "q": "Can I Rent Out My Property?",
+          "a": "Yes. Many investors generate rental income by letting out their property. There is strong tenant demand across many areas of London and the wider UK, with potential rental yields varying by location, property features, and market conditions. Upon request, MAK Global guides you step by step through the letting process — from finding a suitable tenant to property management — providing the necessary information throughout. However, mortgage terms, tenancy regulations, and building management rules should be taken into account."
+        },
+        {
+          "q": "How Long Does the Purchase Process Take?",
+          "a": "The process can vary depending on the type of property being purchased. Completed properties can typically be purchased within a few weeks, while for new-build developments the completion date depends on the developer’s delivery schedule."
+        },
+        {
+          "q": "Do I Need a Solicitor to Purchase Property in the UK?",
+          "a": "Yes. Purchasing property in the UK requires working with a solicitor or licensed conveyancer. Your solicitor handles critical stages on your behalf, including reviewing contracts, conducting title checks, carrying out legal due diligence, transferring funds, and completing the purchase."
+        },
+        {
+          "q": "Do I Need to Visit the UK to Buy Property?",
+          "a": "No. You can purchase property without travelling to the UK. Reservation, legal processes, and identity verification can all be completed remotely through secure digital channels with your solicitor’s support."
+        },
+        {
+          "q": "What Is the Difference Between Freehold and Leasehold?",
+          "a": "Freehold is a form of ownership where you own the property and the land it stands on outright, with no time limit. Leasehold means you have the right to use the property for a fixed period, while ownership of the land remains with another party."
+        },
+        {
+          "q": "Do You Need to Open a UK Bank Account?",
+          "a": "In most cases, opening a UK bank account is not required. Purchases can be completed through international bank transfers. However, in some situations, a local bank account may provide added convenience."
+        },
+        {
+          "q": "Is Support Available in Turkish?",
+          "a": "You won’t face any issues. At MAK Global, we provide Turkish-language support at every stage of the purchasing process. Our team includes Turkish-speaking consultants, and where needed, we can connect you with solicitors, accountants, and mortgage specialists who offer service in Turkish. From reservation through to completion, we provide clear and transparent guidance at every stage — helping you manage the process confidently even without English."
+        }
+      ]
+    }
   }
 }

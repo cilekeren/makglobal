@@ -109,10 +109,10 @@ export default function Footer() {
 
   const NAV_ITEMS = [
     { label: t('nav.projects'), to: '/projects' },
-    { label: t('nav.buyersGuide') },
+    { label: t('nav.buyersGuide'), to: '/buyers-guide' },
     { label: t('nav.services'), to: '/services' },
     { label: t('nav.discoverLondon'), to: '/discover-london' },
-    { label: t('footer.faq') },
+    { label: t('footer.faq'), to: '/buyers-guide#faqs' },
     { label: t('nav.aboutUs'), to: '/about' },
   ]
 
@@ -268,7 +268,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form id="contact-form" className={styles.form} onSubmit={handleSubmit}>
           <label className={styles.label} htmlFor="footer-name">
             {t('footer.nameLabel')}
           </label>

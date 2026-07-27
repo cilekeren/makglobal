@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
+import FirmsBand from '../../components/FirmsBand/FirmsBand'
 import Button from '../../components/common/Button'
 import aboutVisual from '../../assets/about/about-visual.webp'
 import whyIcon1 from '../../assets/about/why_icon_1.svg'
@@ -72,6 +73,11 @@ export default function AboutUs() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className={styles.partnersSection}>
+        <h2 className={styles.partnersHeading}>{t('aboutUs.partnersHeading')}</h2>
+        <FirmsBand />
       </section>
 
       <section className={styles.backSection}>

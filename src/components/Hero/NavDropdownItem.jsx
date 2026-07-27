@@ -1,9 +1,10 @@
 import { useLayoutEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { pillPathD, PILL_STROKE_W } from './pillPath'
 import makMark from '../../assets/hero/nav-mak-mark.svg'
 import styles from './Hero.module.css'
 
-export default function NavDropdownItem({ label, items }) {
+export default function NavDropdownItem({ label, to, items }) {
   const pillBoxRef = useRef(null)
   const [pillSize, setPillSize] = useState({ w: 0, h: 0 })
   const [activeIndex, setActiveIndex] = useState(0)
@@ -31,14 +32,25 @@ export default function NavDropdownItem({ label, items }) {
       onMouseLeave={() => setOpen(false)}
       onBlur={handleBlur}
     >
-      <a
-        href="#"
-        className={styles.navItem}
-        onMouseEnter={() => setOpen(true)}
-        onFocus={() => setOpen(true)}
-      >
-        {label}
-      </a>
+      {to ? (
+        <Link
+          to={to}
+          className={styles.navItem}
+          onMouseEnter={() => setOpen(true)}
+          onFocus={() => setOpen(true)}
+        >
+          {label}
+        </Link>
+      ) : (
+        <a
+          href="#"
+          className={styles.navItem}
+          onMouseEnter={() => setOpen(true)}
+          onFocus={() => setOpen(true)}
+        >
+          {label}
+        </a>
+      )}
 
       <span className={styles.pillBox} ref={pillBoxRef}>
         {pillSize.w > 0 && (
@@ -73,24 +85,34 @@ export default function NavDropdownItem({ label, items }) {
 
       <div className={styles.dropdown}>
         <ul className={styles.dropdownList} onMouseLeave={() => setActiveIndex(0)}>
-          {items.map((entry, i) => (
-            <li
-              key={entry}
-              className={styles.dropdownItem}
-              onMouseEnter={() => setActiveIndex(i)}
-            >
-              <span className={styles.bullet}>
-                <img
-                  src={makMark}
-                  alt=""
-                  className={`${styles.bulletMark} ${
-                    i === activeIndex ? styles.bulletMarkActive : styles.bulletMarkPassive
-                  }`}
-                />
-              </span>
-              <span>{entry}</span>
-            </li>
-          ))}
+          {items.map((entry, i) => {
+            const label = typeof entry === 'string' ? entry : entry.label
+            const to = typeof entry === 'string' ? undefined : entry.to
+            return (
+              <li
+                key={label}
+                className={styles.dropdownItem}
+                onMouseEnter={() => setActiveIndex(i)}
+              >
+                <span className={styles.bullet}>
+                  <img
+                    src={makMark}
+                    alt=""
+                    className={`${styles.bulletMark} ${
+                      i === activeIndex ? styles.bulletMarkActive : styles.bulletMarkPassive
+                    }`}
+                  />
+                </span>
+                {to ? (
+                  <Link to={to} className={styles.dropdownItemLink}>
+                    {label}
+                  </Link>
+                ) : (
+                  <span>{label}</span>
+                )}
+              </li>
+            )
+          })}
         </ul>
       </div>
     </div>

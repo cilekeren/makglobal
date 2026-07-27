@@ -195,6 +195,29 @@
   }
 }
 
+/* same heading/section treatment as .reasonsHeading/.reasonsSection
+   above — FirmsBand (the homepage's own developer-logo marquee) renders
+   itself full-width right below with its own padding, so this section
+   only needs to supply the heading. */
+.partnersSection {
+  width: 100%;
+  background: #fff;
+  padding: clamp(64px, 7vw, 96px) 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.partnersHeading {
+  margin: 0;
+  padding: 0 24px;
+  font-family: 'Petrona', serif;
+  font-weight: 200;
+  font-size: clamp(36px, 4.2vw, 56px);
+  color: #163a3d;
+}
+
 .backSection {
   display: flex;
   justify-content: center;

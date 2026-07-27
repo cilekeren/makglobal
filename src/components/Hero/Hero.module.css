@@ -307,6 +307,11 @@ html[lang='tr'] .navItem {
   white-space: nowrap;
 }
 
+.dropdownItemLink {
+  color: inherit;
+  text-decoration: none;
+}
+
 .bullet {
   position: relative;
   display: flex;

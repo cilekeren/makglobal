@@ -190,6 +190,7 @@
     "storyBody1": "MAK Global, Londra’da gayrimenkul satın almak isteyen hem yerli hem de yabancı alıcılara güvenilir rehberlik sunmak amacıyla kuruldu.",
     "storyBody2": "Yurt dışında gayrimenkul satın almanın karmaşık bir süreç olabileceğinin farkındayız. Bu yüzden doğru bilgi, güvenilir iş ortakları ve özenle seçilmiş fırsatlar sunarak müşterilerimiz için bu süreci daha anlaşılır ve erişilebilir hale getiriyoruz.",
     "reasonsHeading": "Müşteriler Neden Bizimle Çalışıyor",
+    "partnersHeading": "Partnerlerimiz",
     "backToHome": "ANA SAYFAYA DÖN",
     "ourServices": "HİZMETLERİMİZ",
     "reasons": {
@@ -226,5 +227,102 @@
     "bodyLine2": "Londra’yı bir yerli gibi keşfetmek için yakında tekrar uğrayın!",
     "cameraLocation": "Abbey Road, St John’s Wood, Londra",
     "live": "CANLI"
+  },
+  "buyersGuidePage": {
+    "heading": "Alıcı Rehberi",
+    "intro": "Satın alma sürecinden finansmana, vergilerden sıkça sorulan sorulara kadar — Londra’da gayrimenkul satın almak isteyen uluslararası alıcıların bilmesi gereken her şey tek bir sayfada.",
+    "internationalBuyersGuide": {
+      "whyInvestHeading": "Neden İngiltere’de Gayrimenkul Yatırımı?",
+      "whyInvest": [
+        "Güvenilir ve köklü gayrimenkul piyasası",
+        "Güçlü kira getirisi potansiyeli",
+        "Uzun vadeli sermaye büyümesi fırsatı",
+        "Uluslararası yatırımcılara açık bir pazar",
+        "Gelişmiş ulaşım ve altyapı yatırımları",
+        "Yaşam, eğitim ve kariyer için dünyanın önde gelen destinasyonlarından biri"
+      ],
+      "ctaHeading": "İngiltere’de Gayrimenkul Satın Almayı mı Düşünüyorsunuz?",
+      "ctaButton": "Bir Danışmanla Görüşün"
+    },
+    "taxesAndFees": {
+      "q": "Mülk Satın Alırken Hangi Vergiler Uygulanır?",
+      "a1": "Mülk satın alırken alıcılar genellikle Stamp Duty Land Tax (SDLT) gibi satın alma vergilerine tabi olabilirler. Uygulanacak vergi tutarı, satın alma yapısına ve bireysel durumunuza bağlı olarak değişmekte olup, satın alma sürecinde avukatınız tarafından tarafınıza detaylı olarak bildirilmektedir.",
+      "a2": "Mülk sahibi olduktan sonra ortaya çıkabilecek vergi yükümlülükleri ve yıllık beyannameler konusunda ise profesyonel muhasebeciler ve vergi danışmanları tarafından gerekli yönlendirmeler sağlanabilmektedir."
+    },
+    "financingOptions": {
+      "options": [
+        {
+          "title": "Nakit Alım",
+          "body": "Gayrimenkulün tamamının öz sermaye ile satın alınmasıdır. Mortgage süreci bulunmadığından satın alma işlemi genellikle daha hızlı ilerler."
+        },
+        {
+          "title": "UK Mortgage Seçenekleri",
+          "body": "Birleşik Krallık’ta ikamet eden veya gelir elde eden alıcılar, çeşitli mortgage ürünlerinden faydalanabilirler. Uygunluk kriterleri gelir durumu, kredi geçmişi ve finansal profil doğrultusunda değerlendirilir."
+        },
+        {
+          "title": "Uluslararası Alıcılar İçin Mortgage",
+          "body": "Bazı bankalar ve uzman kredi kuruluşları, yurtdışında yaşayan alıcılara mortgage imkânı sunmaktadır. Kredi koşulları, ikamet edilen ülkeye ve bireysel finansal duruma göre değişiklik gösterebilir."
+        },
+        {
+          "title": "Ödeme Planları",
+          "body": "Yeni projelerde geliştiriciler tarafından sunulan ödeme planları sayesinde satın alma bedeli, inşaat süreci boyunca belirli aşamalara bölünerek ödenebilir. Ödeme planları projeye göre farklılık gösterebilir."
+        }
+      ],
+      "ctaHeading": "Size En Uygun Finansman Seçeneği Hangisi?",
+      "ctaBody": "İster nakit ile satın alın, ister mortgage seçeneklerini değerlendirin, ekibimiz mevcut yolları anlamanıza ve size uygun fırsatları belirlemenize yardımcı olabilir.",
+      "ctaButton": "Bir Danışmanla Görüşün"
+    },
+    "faqs": {
+      "items": [
+        {
+          "q": "Kimler İngiltere’de Gayrimenkul Satın Alabilir?",
+          "a": "İngiltere’de gayrimenkul satın almak için İngiliz vatandaşı veya oturum sahibi olmanız gerekmez. Uluslararası yatırımcılar, yabancı vatandaşlar ve yurtdışında yaşayan bireyler de İngiltere’de konut satın alabilirler."
+        },
+        {
+          "q": "Gerekli Belgeler Nelerdir?",
+          "a": "Satın alma süreci boyunca kimlik doğrulama ve yasal gereklilikler kapsamında belirli belgeler talep edilir. Bunlar genellikle pasaport, adres kanıtı ve fon kaynağını gösteren belgeleri içerir. Gerekli evraklar satın alma şekline göre değişiklik gösterebilir."
+        },
+        {
+          "q": "Kimlik Doğrulama ve AML Kontrolleri",
+          "a": "İngiltere’de tüm alıcılar, kara para aklamayı önleme (AML) düzenlemeleri kapsamında kimlik ve fon kaynağı doğrulama süreçlerinden geçer. Bu kontroller satın alma işleminin standart ve yasal bir parçasıdır."
+        },
+        {
+          "q": "Parayı İngiltere’ye Nasıl Transfer Edebilirim?",
+          "a": "Uluslararası alıcılar için satın alma ödemeleri, avukatınızın gerekli yasal kontrolleri ve doğrulama süreçlerini tamamlamasının ardından güvenli bankacılık kanalları aracılığıyla, genellikle SWIFT transferi yoluyla gerçekleştirilmektedir."
+        },
+        {
+          "q": "Mortgage Kullanabilir miyim?",
+          "a": "Evet. Hem Birleşik Krallık’ta yaşayan alıcılar hem de uluslararası yatırımcılar mortgage seçeneklerinden yararlanabilmektedir. Uygunluk kriterleri gelir durumu, kredi geçmişi ve finansal profil doğrultusunda değerlendirilir."
+        },
+        {
+          "q": "Mülkümü Kiraya Verebilir miyim?",
+          "a": "Evet. Birçok yatırımcı satın aldığı mülkü kiraya vererek kira geliri elde etmektedir. Londra ve Birleşik Krallık’ın birçok bölgesinde güçlü kiracı talebi bulunmakta olup, potansiyel kira getirisi mülkün konumuna, özelliklerine ve piyasa koşullarına göre değişiklik göstermektedir. Talebiniz doğrultusunda kiralama süreci, uygun kiracı bulunmasından mülk yönetimine kadar MAK Global tarafından adım adım yönlendirilmekte ve süreç boyunca gerekli bilgilendirmeler sağlanmaktadır. Ancak mortgage koşulları, kira düzenlemeleri ve bina yönetim kuralları dikkate alınmalıdır."
+        },
+        {
+          "q": "Satın Alma Ne Kadar Sürer?",
+          "a": "Süreç satın alınan mülkün türüne göre değişiklik gösterebilir. Hazır konutlarda işlemler genellikle birkaç hafta içerisinde tamamlanabilirken, yeni projelerde teslim tarihi geliştiricinin programına bağlıdır."
+        },
+        {
+          "q": "İngiltere’de Gayrimenkul Satın Alırken Avukat Kullanmak Zorunlu mu?",
+          "a": "Evet. İngiltere’de gayrimenkul satın alma sürecinde bir avukat (solicitor) veya lisanslı conveyancer ile çalışılması gerekmektedir. Avukatınız; sözleşmelerin incelenmesi, mülkiyet araştırmaları, yasal kontroller, fon transferleri ve satın alma işleminin tamamlanması gibi kritik aşamaları sizin adınıza yürütür."
+        },
+        {
+          "q": "Ev Satın Almak İçin İngiltere’ye Gelmem Gerekiyor mu?",
+          "a": "Hayır. İngiltere’ye gelmeden de gayrimenkul satın alabilirsiniz. Rezervasyon, yasal süreçler ve kimlik doğrulama işlemleri avukatınızın desteğiyle güvenli dijital kanallar üzerinden uzaktan tamamlanabilmektedir."
+        },
+        {
+          "q": "Freehold ve Leasehold Arasındaki Fark Nedir?",
+          "a": "Freehold, mülkün ve üzerinde bulunduğu arsanın süresiz olarak size ait olduğu mülkiyet türüdür. Leasehold ise mülkü belirli bir süre boyunca kullanma hakkına sahip olduğunuz, ancak arsanın mülkiyetinin başka bir tarafa ait olduğu yapıdır."
+        },
+        {
+          "q": "İngiltere’de Banka Hesabı Açmak Gerekli mi?",
+          "a": "Birçok durumda İngiltere’de banka hesabı açmak zorunlu değildir. Satın alma işlemleri uluslararası banka transferleri aracılığıyla gerçekleştirilebilir. Ancak bazı durumlarda yerel banka hesabı ek kolaylık sağlayabilir."
+        },
+        {
+          "q": "Türkçe Destek Sağlıyor musunuz?",
+          "a": "Hiçbir sorun yaşamazsınız. MAK Global olarak, satın alma sürecinin her aşamasında Türkçe destek sunuyoruz. Ekibimizde Türkçe konuşan danışmanlar bulunmakta olup, ihtiyaç duymanız halinde sizi Türkçe hizmet verebilen avukatlar, muhasebeciler ve mortgage uzmanlarıyla buluşturabiliyoruz. Rezervasyondan tamamlanma sürecine kadar tüm aşamalarda gerekli bilgilendirmeleri anlaşılır ve şeffaf bir şekilde sağlayarak, İngilizce bilmeden de süreci güvenle yönetmenize yardımcı oluyoruz."
+        }
+      ]
+    }
   }
 }
