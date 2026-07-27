@@ -13,6 +13,7 @@ import whyIcon5 from '../../assets/about/why_icon_5.svg'
 import whyIcon6 from '../../assets/about/why_icon_6.svg'
 import makStampRing from '../../assets/journey/mak-stamp-ring.svg'
 import makStampCenter from '../../assets/journey/mak-stamp-center.svg'
+import { useSEO } from '../../lib/seo'
 import styles from './AboutUs.module.css'
 
 const REASON_IDS = [
@@ -27,6 +28,8 @@ const REASON_IDS = [
 export default function AboutUs() {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  useSEO({ title: t('seo.about.title'), description: t('seo.about.description') })
+
   const STORY_BODY = [t('aboutUs.storyBody1'), t('aboutUs.storyBody2')]
   const REASONS = REASON_IDS.map(([id, icon]) => ({
     id,

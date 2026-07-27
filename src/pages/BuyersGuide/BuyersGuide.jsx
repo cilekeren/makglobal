@@ -14,6 +14,7 @@ import capitalGrowthImg from '../../assets/why-invest/capital-growth.jpg'
 import internationalBuyersImg from '../../assets/why-invest/international-buyers.jpg'
 import infrastructureImg from '../../assets/why-invest/infrastructure.jpg'
 import globalDestinationImg from '../../assets/why-invest/global-destination.jpg'
+import { useSEO } from '../../lib/seo'
 import styles from './BuyersGuide.module.css'
 
 // same order as buyersGuidePage.internationalBuyersGuide.whyInvest in
@@ -47,6 +48,7 @@ function scrollToContact() {
 
 export default function BuyersGuide() {
   const { t } = useTranslation()
+  useSEO({ title: t('seo.buyersGuide.title'), description: t('seo.buyersGuide.description') })
 
   // same array, same order as the navbar's Buyer's Guide dropdown
   // (nav.buyersGuideItems / NavContent.jsx's BUYERS_GUIDE_ANCHORS) — used

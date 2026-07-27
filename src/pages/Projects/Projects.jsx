@@ -7,10 +7,13 @@ import ProjectCard from './ProjectCard'
 import ProjectsMap from './ProjectsMap'
 import Footer from '../../components/Footer/Footer'
 import { PROJECTS } from '../../data/projects'
+import { useSEO } from '../../lib/seo'
 import styles from './Projects.module.css'
 
 export default function Projects() {
   const { t } = useTranslation()
+  useSEO({ title: t('seo.projects.title'), description: t('seo.projects.description') })
+
   return (
     <>
       <div className={heroStyles.heroOuter}>

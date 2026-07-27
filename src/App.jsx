@@ -9,6 +9,7 @@ import DiscoverLondon from './pages/DiscoverLondon/DiscoverLondon'
 import AboutUs from './pages/AboutUs/AboutUs'
 import Services from './pages/Services/Services'
 import BuyersGuide from './pages/BuyersGuide/BuyersGuide'
+import NotFound from './pages/NotFound/NotFound'
 
 function App() {
   const lenisRef = useRef(null)
@@ -74,6 +75,7 @@ function App() {
       <Route path="/about" element={<AboutUs />} />
       <Route path="/services" element={<Services />} />
       <Route path="/buyers-guide" element={<BuyersGuide />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }

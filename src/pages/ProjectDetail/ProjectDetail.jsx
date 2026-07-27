@@ -12,7 +12,17 @@ import CommuteBadge from './CommuteBadge'
 import GalleryCarousel from './GalleryCarousel'
 import ProjectLocationMap from './ProjectLocationMap'
 import { AMENITY_ICONS } from './amenityIcons'
+import { useSEO } from '../../lib/seo'
 import styles from './ProjectDetail.module.css'
+
+// project descriptions are full marketing paragraphs; meta descriptions
+// should read as a short snippet (~155 chars) — cut at the last whole
+// word instead of mid-word so it doesn't end abruptly.
+function truncate(text, max = 155) {
+  if (!text || text.length <= max) return text
+  const cut = text.slice(0, max)
+  return `${cut.slice(0, cut.lastIndexOf(' '))}…`
+}
 
 // Wraps each character of an element's text in its own span so GSAP can
 // stagger them in one at a time for a typewriter reveal. Keeps the real
@@ -108,6 +118,12 @@ export default function ProjectDetail() {
       )
     }
   }, [project])
+
+  useSEO({
+    title: project?.name,
+    description: truncate(project?.description?.[lang]),
+    noindex: !project,
+  })
 
   if (!project) {
     return <Navigate to="/projects" replace />

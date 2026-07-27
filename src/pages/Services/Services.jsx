@@ -4,6 +4,7 @@ import Footer from '../../components/Footer/Footer'
 import aboutVisual from '../../assets/about/about-visual.webp'
 import makStampRing from '../../assets/journey/mak-stamp-ring.svg'
 import makStampCenter from '../../assets/journey/mak-stamp-center.svg'
+import { useSEO } from '../../lib/seo'
 import styles from './Services.module.css'
 
 const SERVICE_IDS = [
@@ -17,6 +18,8 @@ const SERVICE_IDS = [
 
 export default function Services() {
   const { t } = useTranslation()
+  useSEO({ title: t('seo.services.title'), description: t('seo.services.description') })
+
   const SERVICES = SERVICE_IDS.map((id) => ({
     id,
     title: t(`services.list.${id}.title`),

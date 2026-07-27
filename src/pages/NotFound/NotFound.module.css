@@ -1,0 +1,45 @@
+.band {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #0a3332;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(120px, 14vw, 180px) 24px 64px;
+}
+
+.code {
+  margin: 0;
+  font-family: 'Petrona', serif;
+  font-weight: 200;
+  font-size: clamp(72px, 11vw, 140px);
+  line-height: 1;
+  color: #e2c27a;
+}
+
+.heading {
+  margin: clamp(12px, 1.5vw, 20px) 0 0;
+  font-family: 'Petrona', serif;
+  font-weight: 300;
+  font-size: clamp(28px, 3vw, 40px);
+  color: #ededed;
+}
+
+.body {
+  max-width: 480px;
+  margin: clamp(12px, 1.5vw, 16px) 0 clamp(28px, 3.5vw, 40px);
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 300;
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.7;
+  color: #ededed;
+}

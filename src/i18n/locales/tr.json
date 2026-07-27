@@ -324,5 +324,34 @@
         }
       ]
     }
+  },
+  "seo": {
+    "home": {
+      "description": "MAK Global, yerli ve yabancı alıcıların Londra’da gayrimenkul satın almasına yardımcı olur — özenle seçilmiş projeler, güvenilir iş ortakları ve satın alma sürecinin her aşamasında rehberlik."
+    },
+    "projects": {
+      "title": "Projeler",
+      "description": "MAK Global tarafından özenle seçilmiş, İngiltere’nin önde gelen gayrimenkul projelerini keşfedin — Londra’nın en gözde bölgelerinde, önde gelen geliştiricilerden yeni yapı daireler."
+    },
+    "buyersGuide": {
+      "title": "Alıcı Rehberi",
+      "description": "Londra’da gayrimenkul satın almak isteyen uluslararası alıcıların bilmesi gereken her şey — satın alma süreci, finansman, vergiler ve sıkça sorulan sorular."
+    },
+    "services": {
+      "title": "Hizmetler",
+      "description": "Gayrimenkul bulma, yatırım danışmanlığı, rezervasyon süreci desteği ve güvenilir avukat/mortgage yönlendirmeleri — MAK Global’ın alıcılara sunduğu tüm hizmetler."
+    },
+    "discoverLondon": {
+      "title": "Londra’yı Keşfedin",
+      "description": "Sadece bir ev değil, bir yuva bulmanıza yardımcı olacak yerel hikayeler, gayrimenkul içgörüleri ve semt öne çıkanları."
+    },
+    "about": {
+      "title": "Hakkımızda",
+      "description": "MAK Global, Londra’da gayrimenkul satın almak isteyen yerli ve yabancı alıcılara ilk görüşmeden anahtar teslimine kadar güvenilir rehberlik sunar."
+    },
+    "notFound": {
+      "title": "Sayfa Bulunamadı",
+      "description": "Aradığınız sayfa mevcut değil."
+    }
   }
 }

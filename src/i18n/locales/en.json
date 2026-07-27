@@ -324,5 +324,34 @@
         }
       ]
     }
+  },
+  "seo": {
+    "home": {
+      "description": "MAK Global helps local and international buyers purchase property in London — carefully selected developments, trusted partners, and guidance through every stage of the buying process."
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "Explore premium UK real estate developments handpicked by MAK Global — new-build apartments across London's most sought-after zones, from top developers."
+    },
+    "buyersGuide": {
+      "title": "Buyer’s Guide",
+      "description": "Everything international buyers need to know about purchasing property in London — the buying process, financing, taxes, and frequently asked questions."
+    },
+    "services": {
+      "title": "Services",
+      "description": "Property sourcing, investment advisory, reservation support, and trusted solicitor and mortgage introductions — MAK Global's full range of buyer services."
+    },
+    "discoverLondon": {
+      "title": "Discover London",
+      "description": "Local stories, property insights, and neighbourhood highlights to help you find not just a house, but a home in London."
+    },
+    "about": {
+      "title": "About Us",
+      "description": "MAK Global provides trusted guidance to local and international buyers purchasing property in London, from first consultation to key handover."
+    },
+    "notFound": {
+      "title": "Page Not Found",
+      "description": "The page you’re looking for doesn’t exist."
+    }
   }
 }

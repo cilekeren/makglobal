@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
+import { useSEO } from '../../lib/seo'
 import styles from './DiscoverLondon.module.css'
 
 const YOUTUBE_VIDEO_ID = 'M3EYAY2MftI'
@@ -8,6 +9,15 @@ const YOUTUBE_EMBED_SRC = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?aut
 
 export default function DiscoverLondon() {
   const { t } = useTranslation()
+  // noindex: the page is a placeholder ("Under Construction") right now —
+  // nothing to rank on yet, and indexing it risks Google associating the
+  // domain with thin/empty content. Drop this once real content ships.
+  useSEO({
+    title: t('seo.discoverLondon.title'),
+    description: t('seo.discoverLondon.description'),
+    noindex: true,
+  })
+
   return (
     <>
       <section className={styles.videoHero}>
