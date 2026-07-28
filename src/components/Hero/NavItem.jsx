@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { pillPathD, PILL_STROKE_W } from './pillPath'
 import styles from './Hero.module.css'
 
-export default function NavItem({ label, to }) {
+export default function NavItem({ label, to, onClick }) {
   const pillBoxRef = useRef(null)
   const [pillSize, setPillSize] = useState({ w: 0, h: 0 })
 
@@ -23,6 +23,17 @@ export default function NavItem({ label, to }) {
         <Link to={to} className={styles.navItem}>
           {label}
         </Link>
+      ) : onClick ? (
+        <a
+          href="#contact"
+          className={styles.navItem}
+          onClick={(e) => {
+            e.preventDefault()
+            onClick()
+          }}
+        >
+          {label}
+        </a>
       ) : (
         <a href="#" className={styles.navItem}>
           {label}

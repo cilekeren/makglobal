@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import Logo from './Logo'
 import NavDropdownItem from './NavDropdownItem'
 import NavItem from './NavItem'
+import { scrollToId } from '../../lib/lenis'
 import navDivider from '../../assets/hero/nav-divider.svg'
 import navDividerDark from '../../assets/hero/nav-divider-dark.svg'
 import styles from './Hero.module.css'
@@ -37,7 +38,7 @@ export default function NavContent({ sticky = false }) {
     { label: t('nav.services'), to: '/services' },
     { label: t('nav.discoverLondon'), to: '/discover-london' },
     { label: t('nav.aboutUs'), to: '/about' },
-    { label: t('nav.talkToUs') },
+    { label: t('nav.talkToUs'), onClick: () => scrollToId('contact') },
   ]
 
   return (
@@ -51,7 +52,7 @@ export default function NavContent({ sticky = false }) {
           item.dropdown ? (
             <NavDropdownItem key={item.label} label={item.label} to={item.to} items={item.dropdown} />
           ) : (
-            <NavItem key={item.label} label={item.label} to={item.to} />
+            <NavItem key={item.label} label={item.label} to={item.to} onClick={item.onClick} />
           ),
         )}
       </nav>
@@ -96,7 +97,16 @@ export default function NavContent({ sticky = false }) {
                 {item.label}
               </Link>
             ) : (
-              <a key={item.label} href="#" className={styles.mobileNavItem}>
+              <a
+                key={item.label}
+                href="#contact"
+                className={styles.mobileNavItem}
+                onClick={(e) => {
+                  e.preventDefault()
+                  closeMobile()
+                  item.onClick?.()
+                }}
+              >
                 {item.label}
               </a>
             ),

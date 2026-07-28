@@ -191,7 +191,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className={styles.footer}>
+    <footer id="contact" className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.left}>
           <h2 className={styles.heading}>{t('footer.contact')}</h2>

@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Lenis from 'lenis'
 import 'lenis/dist/lenis.css'
+import { setLenis } from './lib/lenis'
 import Home from './pages/Home/Home'
 import Projects from './pages/Projects/Projects'
 import ProjectDetail from './pages/ProjectDetail/ProjectDetail'
@@ -24,6 +25,7 @@ function App() {
     // getBoundingClientRect() exactly as before.
     const lenis = new Lenis()
     lenisRef.current = lenis
+    setLenis(lenis)
     let rafId
     function raf(time) {
       lenis.raf(time)
@@ -34,6 +36,7 @@ function App() {
       cancelAnimationFrame(rafId)
       lenis.destroy()
       lenisRef.current = null
+      setLenis(null)
     }
   }, [])
 
