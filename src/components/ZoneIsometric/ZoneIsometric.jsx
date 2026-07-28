@@ -447,20 +447,34 @@ export default function ZoneIsometric() {
         layers.push(w)
       })
 
-      // one invisible probe per zone: a zero-radius circle at a real
-      // point inside that ring's own polygon, in the same VB coordinate
-      // space — as a child of .scene it automatically inherits the
-      // shared rotate/translateZ, so its live getBoundingClientRect()
-      // each frame gives the exact on-screen spot where that ring
-      // currently sits. The visible dot itself is drawn flat in the
-      // connector overlay at that measured point — never actually rotated.
+      // one invisible probe per zone: a circle at a real point inside that
+      // ring's own polygon, in the same VB coordinate space — as a child
+      // of .scene it automatically inherits the shared rotate/translateZ,
+      // so its live getBoundingClientRect() each frame gives the exact
+      // on-screen spot where that ring currently sits. The visible dot
+      // itself is drawn flat in the connector overlay at that measured
+      // point — never actually rotated.
       // skipped entirely on mobile: the connector overlay they exist to
       // feed is hidden there (see .connectorWrap), so they'd just be extra
       // composited, supersampled elements for zero visual payoff.
       if (!isMobileNow) {
         ZONES.forEach((zone) => {
           const probeSvg = makeSVG()
-          const circle = svgEl('circle', { cx: zone.anchor.x, cy: zone.anchor.y, r: 0 })
+          // r must be > 0 (was 0) — Safari has a bug where getBoundingClientRect()
+          // on a zero-area SVG shape nested inside a `transform-style: preserve-3d`
+          // ancestor doesn't get projected through the 3D transform correctly and
+          // collapses to a wrong point (Chrome projects it fine either way), which
+          // is what was sending the zone connector lines to the wrong spot only in
+          // Safari. A hairline radius gives it real (if visually imperceptible)
+          // geometry so that code path behaves like any other shape; opacity:0
+          // keeps it invisible in every browser regardless (doesn't affect the
+          // geometric bounds getBoundingClientRect() measures).
+          const circle = svgEl('circle', {
+            cx: zone.anchor.x,
+            cy: zone.anchor.y,
+            r: 0.05,
+            opacity: 0,
+          })
           probeSvg.appendChild(circle)
           const pw = document.createElement('div')
           pw.style.cssText = `position:absolute;left:${offX}px;top:${offY}px;`
