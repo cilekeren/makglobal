@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Logo from './Logo'
 import NavDropdownItem from './NavDropdownItem'
 import NavItem from './NavItem'
-import { scrollToId } from '../../lib/lenis'
+import { scrollToId, scrollToTop } from '../../lib/lenis'
 import navDivider from '../../assets/hero/nav-divider.svg'
 import navDividerDark from '../../assets/hero/nav-divider-dark.svg'
 import styles from './Hero.module.css'
@@ -23,6 +23,7 @@ const BUYERS_GUIDE_ANCHORS = [
 
 export default function NavContent({ sticky = false }) {
   const { t, i18n } = useTranslation()
+  const location = useLocation()
   const [mobileOpen, setMobileOpen] = useState(false)
   const closeMobile = () => setMobileOpen(false)
 
@@ -43,7 +44,17 @@ export default function NavContent({ sticky = false }) {
 
   return (
     <>
-      <Link to="/" className={styles.logoSlot} onClick={closeMobile}>
+      <Link
+        to="/"
+        className={styles.logoSlot}
+        onClick={(e) => {
+          closeMobile()
+          if (location.pathname === '/') {
+            e.preventDefault()
+            scrollToTop()
+          }
+        }}
+      >
         <Logo dark={sticky} compact={sticky} />
       </Link>
 

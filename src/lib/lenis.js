@@ -22,3 +22,15 @@ export function scrollToId(id) {
     el.scrollIntoView({ behavior: 'smooth' })
   }
 }
+
+// Same-route logo click doesn't trigger a route change, so App.jsx's
+// pathname-watching scroll-to-top effect never fires -- this covers that
+// case by driving Lenis directly, the same way scrollToId does.
+export function scrollToTop() {
+  if (instance) {
+    instance.resize()
+    instance.scrollTo(0, { offset: 0 })
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+}
