@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import Button from '../common/Button'
 import HeroSlider from './HeroSlider'
 import NavContent from './NavContent'
@@ -8,6 +9,7 @@ import styles from './Hero.module.css'
 
 export default function Hero() {
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const rootRef = useRef(null)
   const navRef = useRef(null)
   const lineRefs = useRef([])
@@ -87,7 +89,7 @@ export default function Hero() {
           </p>
         </div>
 
-        <Button label={t('common.viewProjects')} innerRef={buttonRef} />
+        <Button label={t('common.viewProjects')} innerRef={buttonRef} onClick={() => navigate('/projects')} />
       </div>
     </section>
 
