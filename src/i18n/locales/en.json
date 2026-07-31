@@ -8,6 +8,13 @@
     "priceOnRequest": "Price on Request",
     "ready": "Ready"
   },
+  "cookieConsent": {
+    "heading": "We Use Cookies",
+    "body": "We use essential, analytics and functional cookies to run this site securely and understand how visitors explore our property listings.",
+    "linkLabel": "Read our Cookie Policy",
+    "acceptAll": "Accept All",
+    "essentialOnly": "Essential Only"
+  },
   "nav": {
     "projects": "PROJECTS",
     "buyersGuide": "BUYER’S GUIDE",
@@ -152,7 +159,12 @@
     "submit": "FIND MY IDEAL PROPERTY",
     "statusSent": "Thank you — we'll be in touch shortly.",
     "statusMissingSelects": "Please select a purpose and estimated budget.",
-    "statusError": "Something went wrong. Please try again or email us directly."
+    "statusError": "Something went wrong. Please try again or email us directly.",
+    "legal": {
+      "cookiePolicy": "Cookie Policy",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service"
+    }
   },
   "services": {
     "heading": "A Service Tailored To Your Needs",

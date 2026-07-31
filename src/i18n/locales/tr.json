@@ -8,6 +8,13 @@
     "priceOnRequest": "Fiyat İçin İletişime Geçin",
     "ready": "Teslime Hazır"
   },
+  "cookieConsent": {
+    "heading": "Çerez Kullanımı",
+    "body": "Sitemizi güvenli şekilde çalıştırmak ve emlak ilanlarımızı nasıl incelediğinizi anlamak için zorunlu, analitik ve işlevsel çerezler kullanıyoruz.",
+    "linkLabel": "Çerez Politikamızı inceleyin",
+    "acceptAll": "Tümünü Kabul Et",
+    "essentialOnly": "Yalnızca Zorunlu"
+  },
   "nav": {
     "projects": "PROJELER",
     "buyersGuide": "ALICI REHBERİ",
@@ -152,7 +159,12 @@
     "submit": "İDEAL MÜLKÜMÜ BUL",
     "statusSent": "Teşekkürler — en kısa sürede sizinle iletişime geçeceğiz.",
     "statusMissingSelects": "Lütfen bir amaç ve tahmini bütçe seçin.",
-    "statusError": "Bir şeyler ters gitti. Lütfen tekrar deneyin ya da doğrudan e-posta ile ulaşın."
+    "statusError": "Bir şeyler ters gitti. Lütfen tekrar deneyin ya da doğrudan e-posta ile ulaşın.",
+    "legal": {
+      "cookiePolicy": "Çerez Politikası",
+      "privacyPolicy": "Gizlilik Politikası",
+      "termsOfService": "Kullanım Koşulları"
+    }
   },
   "services": {
     "heading": "İhtiyaçlarınıza Özel Hizmet",

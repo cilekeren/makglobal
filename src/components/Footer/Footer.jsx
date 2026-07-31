@@ -230,7 +230,7 @@ export default function Footer() {
 
           <div className={styles.social}>
             <a
-              href="https://www.instagram.com"
+              href="https://www.instagram.com/makglobalinvestment"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialIcon}
@@ -265,6 +265,20 @@ export default function Footer() {
               <br />
               Mayfair, London, W1J 6BD
             </p>
+
+            <nav className={styles.legalLinks} aria-label="Legal">
+              <Link to="/cookie-policy" className={styles.legalLink}>
+                {t('footer.legal.cookiePolicy')}
+              </Link>
+              <span className={styles.legalDivider} aria-hidden="true">|</span>
+              <Link to="/privacy-policy" className={styles.legalLink}>
+                {t('footer.legal.privacyPolicy')}
+              </Link>
+              <span className={styles.legalDivider} aria-hidden="true">|</span>
+              <Link to="/terms-of-service" className={styles.legalLink}>
+                {t('footer.legal.termsOfService')}
+              </Link>
+            </nav>
           </div>
         </div>
 
