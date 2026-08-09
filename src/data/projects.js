@@ -18,9 +18,9 @@ export const PROJECTS = [
     location: { text: 'Oval', zone: 'Zone 1' },
     completion: { quarter: 'Q3 2026', year: 'Q1/Q2 2028' },
     prices: [
-      { type: '1+1', price: '£680,000.00' },
-      { type: '2+1', price: '£905,000.00' },
-      { type: '3+1', price: '£1,550,000.00' },
+      { type: '1+1', price: '£680,000' },
+      { type: '2+1', price: '£905,000' },
+      { type: '3+1', price: '£1,550,000' },
     ],
     gallery: [
       '/Projects/Oval Village/oval_village_1.webp',
@@ -87,8 +87,8 @@ export const PROJECTS = [
     completion: { quarter: 'Q2-Q3 2027', year: 'Q3-Q4 2029' },
     prices: [
       { type: '1+1', price: '£725,000' },
-      { type: '2+1', price: '£1,190,000.00' },
-      { type: '3+1', price: '£2,250,000.00' },
+      { type: '2+1', price: '£1,190,000' },
+      { type: '3+1', price: '£2,250,000' },
     ],
     gallery: [
       '/Projects/Kings Road Park/01_vb1858794_v1648230861.webp',
@@ -151,10 +151,10 @@ export const PROJECTS = [
     location: { text: 'Camden', zone: 'Zone 2' },
     completion: { quarter: 'Ready', year: 'Q4-2026' },
     prices: [
-      { type: 'Studio', price: '£587,000.00' },
-      { type: '1+1', price: '£740,000.00' },
-      { type: '2+1', price: '£1,175,000.00' },
-      { type: '3+1', price: '£1,400,000.00' },
+      { type: 'Studio', price: '£587,000' },
+      { type: '1+1', price: '£740,000' },
+      { type: '2+1', price: '£1,175,000' },
+      { type: '3+1', price: '£1,400,000' },
     ],
     gallery: [
       '/Projects/Camdens Good Yard/01_4._concierge_2_v1740411969.webp',
@@ -216,8 +216,8 @@ export const PROJECTS = [
     location: { text: 'White City', zone: 'Zone 2' },
     completion: { quarter: 'Ready', year: 'Q3-Q4 2027' },
     prices: [
-      { type: '1+1', price: '£745,000.00' },
-      { type: '2+1', price: '£1,000,000.00' },
+      { type: '1+1', price: '£745,000' },
+      { type: '2+1', price: '£1,000,000' },
     ],
     gallery: [
       '/Projects/White City Living/01_0027_v1758193455.webp',
@@ -280,8 +280,8 @@ export const PROJECTS = [
     location: { text: 'Wimbledon Town Centre', zone: '' },
     completion: { quarter: 'Q3 2028', year: '' },
     prices: [
-      { type: '1+1', price: '£485,000.00' },
-      { type: '2+1', price: '£770,000.00' },
+      { type: '1+1', price: '£485,000' },
+      { type: '2+1', price: '£770,000' },
     ],
     gallery: [
       '/Projects/Wimbledon Bridge House/2_Bed_Apt_Plot_609_Living.webp',
@@ -350,8 +350,8 @@ export const PROJECTS = [
     location: { text: 'Kingston Upon Thames', zone: 'Zone 6' },
     completion: { quarter: 'Q4 2026', year: 'Q3/Q4 2027' },
     prices: [
-      { type: '1+1', price: '£490,000.00' },
-      { type: '2+1', price: '£795,000.00' },
+      { type: '1+1', price: '£490,000' },
+      { type: '2+1', price: '£795,000' },
     ],
     gallery: [
       '/Projects/County Hall Kingston/2c78dc9108540b4aa92e78a04c83f23b03494131 copy.webp',
@@ -406,8 +406,8 @@ export const PROJECTS = [
     location: { text: 'Colindale', zone: 'Zone 4' },
     completion: { quarter: 'Ready', year: '' },
     prices: [
-      { type: '1+1', price: '£400,000.00' },
-      { type: '2+1', price: '£500,000.00' },
+      { type: '1+1', price: '£400,000' },
+      { type: '2+1', price: '£500,000' },
     ],
     gallery: [
       '/Projects/Colindale Gardens/64778.webp',
@@ -465,8 +465,8 @@ export const PROJECTS = [
     location: { text: 'North Acton', zone: 'Zone 2' },
     completion: { quarter: 'Ready', year: '' },
     prices: [
-      { type: '1+1', price: '£440,000.00' },
-      { type: '2+1', price: '£595,000.00' },
+      { type: '1+1', price: '£440,000' },
+      { type: '2+1', price: '£595,000' },
     ],
     gallery: [
       '/Projects/Royal Gateway/4282_Royal Gateway_Int_Amenities_Gym_FINAL.webp',
@@ -521,9 +521,9 @@ export const PROJECTS = [
     location: { text: 'Chelsea, London SW10', zone: 'Zone 2' },
     completion: { quarter: 'Ready', year: '' },
     prices: [
-      { type: '1+1', price: '£400,000.00' },
-      { type: '2+1', price: '£495,000.00' },
-      { type: '3+1', price: '£700,000.00' },
+      { type: '1+1', price: '£400,000' },
+      { type: '2+1', price: '£495,000' },
+      { type: '3+1', price: '£700,000' },
     ],
     gallery: [
       '/Projects/Bermondsey Heights/_09A9177 edit.webp',

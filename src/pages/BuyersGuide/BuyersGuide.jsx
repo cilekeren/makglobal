@@ -67,17 +67,19 @@ export default function BuyersGuide() {
 
           <Navbar />
         </section>
+
+        <section className={styles.introBand}>
+          <h1 className={styles.heading}>{sectionLabels[1]}</h1>
+          <p className={styles.body}>{t('buyersGuidePage.intro')}</p>
+
+          <div className={styles.stampWrap}>
+            <img className={styles.stampRing} src={makStampRing} alt="" />
+            <img className={styles.stampCenter} src={makStampCenter} alt="" />
+          </div>
+        </section>
+
+        <div className={styles.stampGap} aria-hidden="true" />
       </div>
-
-      <section className={styles.introBand}>
-        <h1 className={styles.heading}>{sectionLabels[1]}</h1>
-        <p className={styles.body}>{t('buyersGuidePage.intro')}</p>
-
-        <div className={styles.stampWrap}>
-          <img className={styles.stampRing} src={makStampRing} alt="" />
-          <img className={styles.stampCenter} src={makStampCenter} alt="" />
-        </div>
-      </section>
 
       <section id="international-buyers-guide" className={styles.section}>
         <h2 className={styles.sectionHeading}>

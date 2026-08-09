@@ -39,7 +39,7 @@ export default function NavContent({ sticky = false }) {
     { label: t('nav.services'), to: '/services' },
     { label: t('nav.discoverLondon'), to: '/discover-london' },
     { label: t('nav.aboutUs'), to: '/about' },
-    { label: t('nav.talkToUs'), onClick: () => scrollToId('contact') },
+    { label: t('nav.talkToUs'), onClick: () => scrollToId('contact'), highlight: true },
   ]
 
   return (
@@ -63,7 +63,13 @@ export default function NavContent({ sticky = false }) {
           item.dropdown ? (
             <NavDropdownItem key={item.label} label={item.label} to={item.to} items={item.dropdown} />
           ) : (
-            <NavItem key={item.label} label={item.label} to={item.to} onClick={item.onClick} />
+            <NavItem
+              key={item.label}
+              label={item.label}
+              to={item.to}
+              onClick={item.onClick}
+              highlight={item.highlight}
+            />
           ),
         )}
       </nav>

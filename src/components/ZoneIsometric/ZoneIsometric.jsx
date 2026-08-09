@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './ZoneIsometric.module.css'
 import buckinghamPalaceIcon from '../../assets/zones/buckingham-palace.svg'
@@ -23,37 +23,6 @@ import heathrowTerminal5Icon from '../../assets/zones/heathrow-terminal-5.svg'
 import londonCityAirportIcon from '../../assets/zones/london-city-airport.svg'
 import countrysideIcon from '../../assets/zones/countryside.svg'
 
-// Vertices of the decorative trace line, as [dx, dy] offsets from the
-// isometric shape's own center — measured pixel-for-pixel from the
-// reference mockup (1760x1394, where the shape rendered at REF_SCALE).
-// Offsets are converted to shape-relative units so the whole line
-// scales together with the isometric shape instead of staying a fixed
-// pixel shift (which broke apart from the shape on resize). The first
-// and last points are the flat ends and always stretch to the actual
-// left/right edge of the container.
-const STAGE_MAX_W = 1100
-// shrinks the middle zigzag toward center so it takes up less of the
-// screen, leaving the flat left/right runs proportionally longer.
-const ZOOM_OUT = 0.63
-const TRACE_POINTS_PX = [
-  [-302, 206.5],
-  [-298, 56],
-  [-258, 56],
-  [-240, 70],
-  [-170, 70],
-  [-88, -11],
-  [0, -11],
-  [28, -32.5],
-  [158, -32.5],
-  [162, 38.5],
-  [212, 38.5],
-  [218, -19],
-  [260, -19],
-  [266, 29.5],
-  [356, 29.5],
-  [404, -13.5],
-]
-
 function ZoneLabel({ zone, labelRef }) {
   return (
     <div className={styles.zoneLabel} ref={labelRef} style={{ '--zone-color': RAMPS[zone.i].f }}>
@@ -69,63 +38,6 @@ function ZoneLabel({ zone, labelRef }) {
           </li>
         ))}
       </ul>
-    </div>
-  )
-}
-
-function TraceLine({ innerRef, wrapRef }) {
-  const [size, setSize] = useState({ w: 0, h: 0 })
-
-  useLayoutEffect(() => {
-    const el = wrapRef.current
-    const ro = new ResizeObserver((entries) => {
-      const { width, height } = entries[0].contentRect
-      setSize({ w: width, h: height })
-    })
-    ro.observe(el)
-    return () => ro.disconnect()
-  }, [])
-
-  // fixed baseline (always the original 0.5 fit-fraction, NOT
-  // SHAPE_SCALE_FACTOR) so that scale/refScale below reflects how much
-  // bigger the actual shape now is than that baseline — which is exactly
-  // the extra zoom the trace line's geometry needs to keep matching it.
-  const refScale = (STAGE_MAX_W * 0.5) / VB.w
-  const SW = Math.min(size.w, STAGE_MAX_W)
-  const SH = size.h
-  const shapeScaleFactor =
-    size.w > 0 && window.matchMedia(MOBILE_QUERY).matches ? MOBILE_SHAPE_SCALE_FACTOR : SHAPE_SCALE_FACTOR
-  const scale = Math.min((SW * shapeScaleFactor) / VB.w, (SH * shapeScaleFactor) / VB.h)
-  const k = (scale / refScale) * ZOOM_OUT
-
-  const cx = size.w / 2
-  const cy = size.h / 2
-  const firstY = cy + 206.5 * k
-  const lastY = cy + TRACE_POINTS_PX[TRACE_POINTS_PX.length - 1][1] * k
-
-  const d = size.w
-    ? [
-        `M -200 ${firstY}`,
-        ...TRACE_POINTS_PX.map(([dx, dy]) => `L ${cx + dx * k} ${cy + dy * k}`),
-        `L ${size.w + 200} ${lastY}`,
-      ].join(' ')
-    : ''
-
-  return (
-    <div className={styles.traceWrap} ref={wrapRef}>
-      {d && (
-        <svg className={styles.traceSvg} width={size.w} height={size.h}>
-          <path
-            ref={innerRef}
-            d={d}
-            fill="none"
-            stroke="#78F6FD"
-            strokeWidth="1.3"
-            pathLength="1"
-            vectorEffect="non-scaling-stroke"
-          />
-        </svg>
-      )}
     </div>
   )
 }
@@ -241,8 +153,6 @@ const ZONES = [
 const DOT_R = 3.5
 
 const VB = { w: 310.3488, h: 245.8101 }
-// shared by the shape's own layout() and TraceLine's geometry below, so
-// the decorative trace line keeps tracing the shape's edges at any size.
 const SHAPE_SCALE_FACTOR = 0.58
 // on mobile the stage box's own left/right insets already leave the "a
 // little smaller than the screen" margin (see .stage in the mobile media
@@ -278,16 +188,17 @@ const NAVBAR_BOTTOM = 90
 const MOBILE_QUERY = '(max-width: 700px)'
 const MOBILE_STAGE_GAP = 12
 
-// scroll (0..1) is split into three phases: the trace line draws in
-// left-to-right, then erases left-to-right the same way, then the
-// isometric explosion starts immediately once the line is gone.
-const P1_END = 0.12
-const P2_END = 0.24
-
 // the six zone labels reveal one after another (Zone 1 first) over the
 // back part of the explosion, each stealing ZONE_REVEAL_DURATION of that
 // shared window, staggered so they land in sequence rather than at once.
-const ZONE_REVEAL_START = 0.35
+// The window closes well before explosionT reaches 1 (not AT 1) because
+// easeInOut(explosionT) — the shape's own rotation/separation — visually
+// flattens out and reads as "finished" around explosionT ~0.85-0.9 already;
+// ending the reveal exactly at 1 left the last couple of zones (5/6) still
+// fading in after users had already stopped scrolling, looking stuck
+// half-drawn/missing.
+const ZONE_REVEAL_START = 0.15
+const ZONE_REVEAL_END = 0.75
 const ZONE_REVEAL_DURATION = 0.5
 const ZONE_STAGGER = (1 - ZONE_REVEAL_DURATION) / (ZONES.length - 1)
 
@@ -355,8 +266,6 @@ export default function ZoneIsometric() {
   const trackRef = useRef(null)
   const stageRef = useRef(null)
   const sceneRef = useRef(null)
-  const traceRef = useRef(null)
-  const traceWrapRef = useRef(null)
   const introRef = useRef(null)
   const legendRef = useRef(null)
   const zoneLabelRefs = useRef([])
@@ -377,7 +286,7 @@ export default function ZoneIsometric() {
     const zoneProbes = []
     // preserve-3d + will-change promote each layer to its own GPU-composited
     // bitmap — required for the isometric explosion's translateZ depth
-    // stacking, but during the trace-line phase every layer's translateZ is
+    // stacking, but right at scroll start every layer's translateZ is
     // 0 and .scene isn't rotated, so there's no 3D happening at all yet.
     // Toggling 3D mode on only once the explosion actually needs it avoids
     // promoting layers to their own composited bitmap before that, so
@@ -511,7 +420,7 @@ export default function ZoneIsometric() {
     // writes only) so it can also re-run on every scroll tick — the intro
     // text's own top keeps moving as the sticky navbar slides in (see
     // updateMobileIntroTop), and without re-deriving this from it too, the
-    // stage/legend/trace line stay put at their stale position and end up
+    // stage/legend stay put at their stale position and end up
     // overlapped by the now-lower intro text instead of sitting below it.
     function positionMobileStage() {
       stage.style.top = ''
@@ -530,15 +439,6 @@ export default function ZoneIsometric() {
       const height = Math.max(160, Math.min(420, maxHeight))
       stage.style.top = `${top}px`
       stage.style.height = `${height}px`
-
-      // the trace line's own wrap is a sibling of .stage (not nested
-      // inside it), so it doesn't automatically follow the box just
-      // computed above — without this it stays sized to the full sticky
-      // viewport and draws centered on that instead of on the shape.
-      if (traceWrapRef.current) {
-        traceWrapRef.current.style.top = `${top}px`
-        traceWrapRef.current.style.height = `${height}px`
-      }
     }
 
     function reflowMobileIntro() {
@@ -554,10 +454,6 @@ export default function ZoneIsometric() {
       } else {
         stage.style.top = ''
         stage.style.height = ''
-        if (traceWrapRef.current) {
-          traceWrapRef.current.style.top = ''
-          traceWrapRef.current.style.height = ''
-        }
       }
 
       SW = stage.clientWidth
@@ -580,14 +476,7 @@ export default function ZoneIsometric() {
     }
 
     function frame(t) {
-      // phase 1: trace line draws in left-to-right, shape stays at rest
-      const drawProgress = Math.max(0, Math.min(1, t / P1_END))
-      // phase 2: trace line erases left-to-right the same way
-      const eraseProgress = Math.max(0, Math.min(1, (t - P1_END) / (P2_END - P1_END)))
-
-      // phase 3: the isometric explosion starts immediately once the
-      // trace line is fully gone
-      const explosionT = Math.max(0, Math.min(1, (t - P2_END) / (1 - P2_END)))
+      const explosionT = Math.max(0, Math.min(1, t))
       const e = easeInOut(explosionT)
 
       // flip every layer into (or out of) GPU-composited 3D mode only
@@ -643,7 +532,7 @@ export default function ZoneIsometric() {
       // since .connectorWrap is hidden there).
       const zoneWindow = Math.max(
         0,
-        Math.min(1, (explosionT - ZONE_REVEAL_START) / (1 - ZONE_REVEAL_START)),
+        Math.min(1, (explosionT - ZONE_REVEAL_START) / (ZONE_REVEAL_END - ZONE_REVEAL_START)),
       )
 
       // the mobile-only colour legend (see .zoneLegend) explains the ring
@@ -704,13 +593,45 @@ export default function ZoneIsometric() {
             // the midpoint, vertical down/up to the label's y, then
             // horizontal into the label — never a diagonal — while both
             // endpoints stay exactly where the dot/label actually are.
+            //
+            // The "grow" reveal used to be done by setting a full-length
+            // `d` once and animating stroke-dashoffset against a
+            // pathLength="1"-normalized stroke-dasharray. That trick
+            // assumes the browser renormalizes the dash pattern against
+            // the path's CURRENT geometric length every time `d` changes
+            // — but here `d` is rewritten every single frame (the elbow's
+            // segment lengths keep changing as the shape rotates/explodes),
+            // and Chrome doesn't reliably redo that normalization on every
+            // attribute change. The dash unit ends up stale relative to
+            // the real path length, so the "1 dash / 1 gap" pattern
+            // repeats along the path instead of covering it exactly once
+            // — visually the line appears to draw, gap out partway, then
+            // draw again ("twice"), never actually reaching the card.
+            // Building the truncated `d` by hand below draws exactly
+            // `reveal` of the path's own length every frame, with no
+            // dependency on any browser's dasharray/pathLength rendering
+            // behavior.
             const midX = (startX + endX) / 2
-            path.setAttribute(
-              'd',
-              `M ${startX} ${startY} L ${midX} ${startY} L ${midX} ${endY} L ${endX} ${endY}`,
-            )
-            path.style.strokeDashoffset = String(1 - reveal)
-            path.style.opacity = String(reveal)
+            const seg1 = Math.abs(midX - startX)
+            const seg2 = Math.abs(endY - startY)
+            const seg3 = Math.abs(endX - midX)
+            const total = seg1 + seg2 + seg3
+            const drawLen = total * reveal
+            let d
+            if (total <= 0 || drawLen <= 0) {
+              d = `M ${startX} ${startY}`
+            } else if (drawLen <= seg1) {
+              const x = startX + (midX - startX) * (drawLen / seg1)
+              d = `M ${startX} ${startY} L ${x} ${startY}`
+            } else if (drawLen <= seg1 + seg2) {
+              const y = startY + (endY - startY) * ((drawLen - seg1) / seg2)
+              d = `M ${startX} ${startY} L ${midX} ${startY} L ${midX} ${y}`
+            } else {
+              const x = midX + (endX - midX) * ((drawLen - seg1 - seg2) / seg3)
+              d = `M ${startX} ${startY} L ${midX} ${startY} L ${midX} ${endY} L ${x} ${endY}`
+            }
+            path.setAttribute('d', d)
+            path.style.opacity = String(reveal > 0 ? 1 : 0)
           }
           if (startDot) {
             startDot.setAttribute('cx', String(startX))
@@ -724,39 +645,10 @@ export default function ZoneIsometric() {
           }
         }
       })
-
-      if (traceRef.current) {
-        if (isMobileNow) {
-          // the desktop erase-sweep (below) slides the same dash back off
-          // the path a second time, which on a short mobile scroll distance
-          // reads as the line drawing in twice in a row — mobile instead
-          // holds the fully-drawn line and just fades it out over the same
-          // window (see traceWrapRef opacity below).
-          traceRef.current.style.strokeDashoffset = String(1 - drawProgress)
-        } else {
-          // pathLength="1" + stroke-dasharray:1 (dash 1, gap 1) means the
-          // dash exactly covers the path when dashoffset is 0. Pushing the
-          // offset from 1 -> 0 reveals the path start-to-end (the draw-in);
-          // continuing 0 -> -1 slides that same dash off the end, erasing it
-          // start-to-end too — both sweeps read as left-to-right since the
-          // path itself runs left to right (see TRACE_POINTS_PX/M start).
-          traceRef.current.style.strokeDashoffset = String(1 - drawProgress - eraseProgress)
-        }
-      }
-      if (traceWrapRef.current) {
-        if (isMobileNow) {
-          traceWrapRef.current.style.opacity = String(1 - eraseProgress)
-        } else {
-          // nothing left to paint once the erase sweep finishes (and the
-          // explosion hasn't started yet at that point), so just hide it —
-          // avoids the compositor tracking an invisible layer for no reason.
-          traceWrapRef.current.style.opacity = eraseProgress >= 1 ? '0' : '1'
-        }
-      }
     }
 
-    // A fast reverse scroll (jumping back out of the explosion into the
-    // flat trace-line phase) can move `t` — and so the shape's rotation —
+    // A fast reverse scroll (jumping back out of the explosion toward the
+    // resting shape) can move `t` — and so the shape's rotation —
     // by a large amount in a single tick. Smoothing the rendered value
     // toward the real scroll position every frame, instead of snapping to
     // it directly, keeps the change-per-frame small regardless of how
@@ -823,12 +715,43 @@ export default function ZoneIsometric() {
       currentT = targetT
     })
 
+    // Once the user stops scrolling, tick() settles and stops rAF-ing
+    // (see the comment above it) — frame() then never runs again until the
+    // next scroll/resize, so the connector lines/dots stay drawn at
+    // whatever the zone label cards' rects were at that exact instant.
+    // If a card's box still changes after that (icon <img>s finishing
+    // their late/uncached load, a web font swapping in after
+    // document.fonts.ready already resolved, anything else reflowing a
+    // card) — timing that varies by network/cache and so differs between
+    // browsers/sessions — nothing re-reads the new rects, and the line
+    // ends up permanently detached from the card it's supposed to touch.
+    // Observing document/window-level size wouldn't catch this: .sticky is
+    // overflow:hidden with a fixed height, so a card growing/shrinking
+    // inside it never changes the page's own box. Watching each label card
+    // directly and re-running frame() (cheap: a handful of
+    // getBoundingClientRect() reads plus attribute writes) whenever one's
+    // box changes keeps the connector glued to the cards' real live
+    // position instead of a stale snapshot.
+    let resizeObserverRaf = null
+    const resizeObserver = new ResizeObserver(() => {
+      if (resizeObserverRaf) return
+      resizeObserverRaf = requestAnimationFrame(() => {
+        resizeObserverRaf = null
+        frame(currentT)
+      })
+    })
+    zoneLabelRefs.current.forEach((el) => {
+      if (el) resizeObserver.observe(el)
+    })
+
     return () => {
       cancelled = true
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleResize)
       if (scrollRaf) cancelAnimationFrame(scrollRaf)
       if (tickRaf) cancelAnimationFrame(tickRaf)
+      resizeObserver.disconnect()
+      if (resizeObserverRaf) cancelAnimationFrame(resizeObserverRaf)
     }
   }, [])
 
@@ -854,7 +777,6 @@ export default function ZoneIsometric() {
               ))}
             </div>
           </div>
-          <TraceLine innerRef={traceRef} wrapRef={traceWrapRef} />
 
           <div className={`${styles.zoneLabelsCol} ${styles.zoneLabelsLeft}`}>
             {ZONES.filter((zone) => zone.side === 'left').map((zone) => (
@@ -882,7 +804,6 @@ export default function ZoneIsometric() {
                   key={zone.number}
                   ref={(el) => (connectorPathRefs.current[zone.number - 1] = el)}
                   className={styles.connectorPath}
-                  pathLength="1"
                 />
               ))}
               {ZONES.map((zone) => (

@@ -30,7 +30,6 @@ export default function AboutUs() {
   const navigate = useNavigate()
   useSEO({ title: t('seo.about.title'), description: t('seo.about.description') })
 
-  const STORY_BODY = [t('aboutUs.storyBody1'), t('aboutUs.storyBody2')]
   const REASONS = REASON_IDS.map(([id, icon]) => ({
     id,
     icon,
@@ -47,21 +46,19 @@ export default function AboutUs() {
 
           <Navbar />
         </section>
+
+        <section className={styles.storyBand}>
+          <h1 className={styles.heading}>{t('aboutUs.heading')}</h1>
+          <p className={styles.body}>{t('aboutUs.storyBody')}</p>
+
+          <div className={styles.stampWrap}>
+            <img className={styles.stampRing} src={makStampRing} alt="" />
+            <img className={styles.stampCenter} src={makStampCenter} alt="" />
+          </div>
+        </section>
+
+        <div className={styles.stampGap} aria-hidden="true" />
       </div>
-
-      <section className={styles.storyBand}>
-        <h1 className={styles.heading}>{t('aboutUs.heading')}</h1>
-        {STORY_BODY.map((paragraph) => (
-          <p key={paragraph} className={styles.body}>
-            {paragraph}
-          </p>
-        ))}
-
-        <div className={styles.stampWrap}>
-          <img className={styles.stampRing} src={makStampRing} alt="" />
-          <img className={styles.stampCenter} src={makStampCenter} alt="" />
-        </div>
-      </section>
 
       <section className={styles.reasonsSection}>
         <h2 className={styles.reasonsHeading}>{t('aboutUs.reasonsHeading')}</h2>

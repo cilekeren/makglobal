@@ -1,70 +1,84 @@
+/* the fold: .hero + .introBand together always fill exactly one viewport
+   on load, with .introBand flush against the viewport's bottom edge and
+   .hero (flex: 1) taking whatever space is left above it — 100dvh rather
+   than 100vh so mobile browsers' collapsing address bar doesn't leave a
+   sliver of the next section peeking in under .introBand at first paint. */
 .heroOuter {
+  /* shared with .stampWrap (width) and .stampGap (how much of the stamp's
+     own height needs clearing below .introBand) so the two can never
+     drift out of sync. */
+  --stamp-size: clamp(90px, 9vw, 140px);
   background: #fff;
-  padding: 20px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 
 .hero {
   position: relative;
   width: 100%;
-  min-height: clamp(460px, 40vw, 630px);
+  flex: 1 1 auto;
+  /* floor so the image doesn't collapse away to nothing on a short
+     viewport — kept low (just past the navbar's own height) because
+     .introBand + .stampGap below take priority for the fold's space: the
+     whole stamp staying visible with its 20px clearance matters more here
+     than how much photo is left showing above it. */
+  min-height: 200px;
   overflow: hidden;
-  border-radius: 6px;
   background: #0a3332;
 }
 
+/* .hero is far wider than it is tall, so object-fit: cover already crops
+   top/bottom, never the sides (this photo's width matches the container
+   exactly at any hero aspect ratio this page uses). 60% keeps the desk
+   items (notebook/mug/newspaper) in frame while still leaving a hint of
+   the overhanging plant visible at the very top, instead of losing it
+   entirely — including as .hero itself gets shorter on tighter viewports
+   (see its min-height floor above). */
 .bgImage {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 75% center;
+  object-position: center 60%;
 }
 
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(9, 26, 27, 0.95) 0%,
-    rgba(9, 26, 27, 0.88) 42%,
-    rgba(9, 26, 27, 0.35) 62%,
-    rgba(9, 26, 27, 0) 75%
-  );
-}
-
-@media (max-width: 720px) {
-  .bgImage {
-    object-position: 85% center;
-  }
-
-  .overlay {
-    background: rgba(9, 26, 27, 0.75);
-  }
-}
-
-/* same background as the homepage's Zone Guides section
-   (ZoneIsometric.module.css .section: #175459), matching AboutUs.module.css's
-   .storyBand treatment. */
+/* same darker navy-teal as BuyersGuide.module.css's .introBand. */
 .introBand {
   position: relative;
-  background: #175459;
+  /* never let the flex column above shrink this below its own content
+     height — .hero is the one that gives up space, down to its floor. */
+  flex-shrink: 0;
+  background: #0a3332;
   padding: clamp(56px, 7vw, 96px) 24px;
   text-align: center;
 }
 
-/* straddles the boundary with .servicesSection below: horizontally centered
-   on the midpoint between the section's center and left edge, vertically
-   centered on the band's own bottom edge so half sits on the teal band and
-   half on the white section that follows. */
+/* horizontally centered on the midpoint between the section's center and
+   left edge, vertically centered on the band's own bottom edge so 43% of
+   it hangs below .introBand — see .stampGap below for why that doesn't
+   run past the fold. */
 .stampWrap {
   position: absolute;
   left: 25%;
   bottom: 0;
   transform: translate(-50%, 43%);
-  width: clamp(90px, 9vw, 140px);
+  width: var(--stamp-size);
   aspect-ratio: 1 / 1;
   pointer-events: none;
+}
+
+/* .stampWrap hangs 43% of its own height below .introBand's bottom edge
+   (see above). Reserving that same amount of space here, inside the fold,
+   plus a fixed 20px, means the flex column above shrinks .hero to make
+   room for it — so on first load the whole stamp is visible above the
+   viewport's bottom edge with exactly 20px of clearance under it, at any
+   screen size, instead of the stamp's lower half running past the fold. */
+.stampGap {
+  flex-shrink: 0;
+  height: calc(var(--stamp-size) * 0.43 + 20px);
 }
 
 .stampRing,

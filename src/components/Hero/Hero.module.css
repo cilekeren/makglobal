@@ -1,6 +1,5 @@
 .heroOuter {
   background: #fff;
-  padding: 20px;
 }
 
 .hero {
@@ -8,7 +7,6 @@
   width: 100%;
   height: 100svh;
   overflow: hidden;
-  border-radius: 6px;
   background: #02131e;
   color: #fff;
 }
@@ -174,20 +172,22 @@ html[lang='tr'] .navItems {
   border-radius: 999px;
   font-family: 'Petrona', serif;
   font-weight: 400;
-  font-size: clamp(14px, 1.15vw, 19px);
+  font-size: clamp(12px, 0.95vw, 16px);
   letter-spacing: 0.6px;
   color: #fff;
   white-space: nowrap;
   text-decoration: none;
 }
 
-/* Turkish labels ("ALICI REHBERİ", "LONDRA'YI KEŞFEDİN"...) run noticeably
-   longer than their English counterparts — at the same size the nav row
-   no longer fits the EN/TR switcher on the same line and wraps it down,
-   so it's scaled down a bit specifically for :lang(tr) instead of shrinking
-   the English layout too. */
-html[lang='tr'] .navItem {
-  font-size: clamp(12px, 0.95vw, 16px);
+/* only in the initial on-hero navbar (.navbar without .stickyNavBar) —
+   the sticky pill's .navItem is already restyled to a plain dark-on-light
+   look once scrolled (see .stickyNavBar .navItem below), so this reset
+   would just fight that; the sticky bar's own compact/light styling reads
+   as "distinct" on its own without needing this too. */
+.navbar:not(.stickyNavBar) .navItemHighlight {
+  background: #e2c27a;
+  color: #0a3332;
+  padding: 10px 18px;
 }
 
 .navItemWrap {
@@ -201,6 +201,15 @@ html[lang='tr'] .navItem {
   pointer-events: none;
 }
 
+/* the default -8px/-14px halo is asymmetric (a wider horizontal gap than
+   vertical) — fine when the item itself is plain text, but distracting
+   once the item has a visible solid-pill edge to compare it against. One
+   equal value on every side keeps the gap between the pill's own edge and
+   the hover ring the same on all four sides instead. */
+.navbar:not(.stickyNavBar) .navItemWrapHighlight .pillBox {
+  inset: -8px;
+}
+
 .pillSvg {
   display: block;
   width: 100%;
@@ -208,11 +217,26 @@ html[lang='tr'] .navItem {
   overflow: visible;
 }
 
+/* dasharray/dashoffset are tuned with margin on both sides instead of
+   landing exactly on pathLength=1 — with dash exactly equal to the path
+   length, the dash-to-gap transition lands exactly on the path's own
+   start/end seam (pillPathD's closed loop starts and ends at the same
+   point, bottom-center), and at the "hidden" offset that used to be
+   exactly where the pattern's phase boundary fell too — two edges meeting
+   at one coincident point left a stray 1px fleck visible there even at
+   rest (rasterization rounding, not a real gap; shrinking the dash to
+   dodge it just traded that for an actual visible gap in the ring once
+   revealed). Instead: dash (1.1) comfortably overshoots the path's own
+   length (1) so the ring is always drawn solid with no boundary anywhere
+   along it once shown, and the hidden offset (2.1) sits in the dead
+   center of the now much bigger gap (3) — a full 1 unit of clearance from
+   the dash on either side — so nothing in the path is ever near a
+   transition while hidden either. */
 .pillPath {
   fill: none;
   stroke: #e2c27a;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
+  stroke-dasharray: 1.1 3;
+  stroke-dashoffset: 2.1;
   transition: stroke-dashoffset 0.7s ease 0s;
 }
 
@@ -400,7 +424,7 @@ html[lang='tr'] .navItem {
 .heading {
   margin: 0;
   font-family: 'Petrona', serif;
-  font-weight: 300;
+  font-weight: 200;
   font-size: clamp(32px, 4.7vw, 85.492px);
   letter-spacing: clamp(-2px, -0.25vw, -4.2746px);
   color: #ededed;
@@ -448,12 +472,8 @@ html[lang='tr'] .navItem {
 }
 
 @media (max-width: 700px) {
-  .heroOuter {
-    padding: 10px;
-  }
-
   .hero {
-    height: calc(100svh - 20px);
+    height: 100svh;
   }
 
   .navItems {

@@ -1,26 +1,49 @@
 import { useEffect, useRef, useState } from 'react'
-import slide2 from '../../assets/hero/slider/slide-2.jpg'
 import slide3 from '../../assets/hero/slider/slide-3.jpg'
 import slide4 from '../../assets/hero/slider/slide-4.jpg'
-import slide5 from '../../assets/hero/slider/slide-5.webp'
 import slide6 from '../../assets/hero/slider/slide-6.webp'
 import slide7 from '../../assets/hero/slider/slide-7.webp'
 import slide8 from '../../assets/hero/slider/slide-8.webp'
-import slide9 from '../../assets/hero/slider/slide-9.webp'
 import slide10 from '../../assets/hero/slider/slide-10.webp'
 import slide11 from '../../assets/hero/slider/slide-11.webp'
+import slide12 from '../../assets/hero/slider/slide-12.webp'
+import slide13 from '../../assets/hero/slider/slide-13.webp'
+import slide14 from '../../assets/hero/slider/slide-14.webp'
+import slide15 from '../../assets/hero/slider/slide-15.webp'
+import slide16 from '../../assets/hero/slider/slide-16.webp'
+import slide17 from '../../assets/hero/slider/slide-17.webp'
+import slide18 from '../../assets/hero/slider/slide-18.webp'
 import styles from './Hero.module.css'
 
-const SLIDES = [slide2, slide3, slide4, slide5, slide6, slide7, slide8, slide9, slide10, slide11]
+const SLIDES = [
+  slide3,
+  slide4,
+  slide6,
+  slide7,
+  slide8,
+  slide10,
+  slide11,
+  slide12,
+  slide13,
+  slide14,
+  slide15,
+  slide16,
+  slide17,
+  slide18,
+]
 
 const INTERVAL_MS = 6000
 // a slide can't come up again until at least this many other slides have
 // shown since it last did.
-const NO_REPEAT_WINDOW = 3
+const NO_REPEAT_WINDOW = 5
+
+function randomSlideIndex() {
+  return Math.floor(Math.random() * SLIDES.length)
+}
 
 export default function HeroSlider() {
-  const [index, setIndex] = useState(0)
-  const recentRef = useRef([0])
+  const [index, setIndex] = useState(randomSlideIndex)
+  const recentRef = useRef([index])
 
   useEffect(() => {
     const id = setInterval(() => {

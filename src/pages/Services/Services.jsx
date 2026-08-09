@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
-import aboutVisual from '../../assets/about/about-visual.webp'
+import heroStyles from '../../components/Hero/Hero.module.css'
+import servicesVisual from '../../assets/services/services-hero.webp'
 import makStampRing from '../../assets/journey/mak-stamp-ring.svg'
 import makStampCenter from '../../assets/journey/mak-stamp-center.svg'
 import { useSEO } from '../../lib/seo'
@@ -30,22 +31,24 @@ export default function Services() {
     <>
       <div className={styles.heroOuter}>
         <section className={styles.hero}>
-          <img src={aboutVisual} className={styles.bgImage} alt="" />
-          <div className={styles.overlay} />
+          <img src={servicesVisual} className={styles.bgImage} alt="" />
+          <div className={heroStyles.vignetteTop} />
 
           <Navbar />
         </section>
+
+        <section className={styles.introBand}>
+          <h1 className={styles.heading}>{t('services.heading')}</h1>
+          <p className={styles.body}>{t('services.body')}</p>
+
+          <div className={styles.stampWrap}>
+            <img className={styles.stampRing} src={makStampRing} alt="" />
+            <img className={styles.stampCenter} src={makStampCenter} alt="" />
+          </div>
+        </section>
+
+        <div className={styles.stampGap} aria-hidden="true" />
       </div>
-
-      <section className={styles.introBand}>
-        <h1 className={styles.heading}>{t('services.heading')}</h1>
-        <p className={styles.body}>{t('services.body')}</p>
-
-        <div className={styles.stampWrap}>
-          <img className={styles.stampRing} src={makStampRing} alt="" />
-          <img className={styles.stampCenter} src={makStampCenter} alt="" />
-        </div>
-      </section>
 
       <section className={styles.servicesSection}>
         <h2 className={styles.servicesHeading}>{t('services.servicesHeading')}</h2>

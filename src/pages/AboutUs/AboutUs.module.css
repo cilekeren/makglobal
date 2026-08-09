@@ -1,14 +1,31 @@
+/* the fold: .hero + .storyBand together always fill exactly one viewport
+   on load, with .storyBand flush against the viewport's bottom edge and
+   .hero (flex: 1) taking whatever space is left above it — 100dvh rather
+   than 100vh so mobile browsers' collapsing address bar doesn't leave a
+   sliver of the next section peeking in under .storyBand at first paint. */
 .heroOuter {
+  /* shared with .stampWrap (width) and .stampGap (how much of the stamp's
+     own height needs clearing below .storyBand) so the two can never
+     drift out of sync. */
+  --stamp-size: clamp(90px, 9vw, 140px);
   background: #fff;
-  padding: 20px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 
 .hero {
   position: relative;
   width: 100%;
-  min-height: clamp(460px, 40vw, 630px);
+  flex: 1 1 auto;
+  /* floor so the image doesn't collapse away to nothing on a short
+     viewport — kept low (just past the navbar's own height) because
+     .storyBand + .stampGap below take priority for the fold's space: the
+     whole stamp staying visible with its 20px clearance matters more here
+     than how much photo is left showing above it. */
+  min-height: 200px;
   overflow: hidden;
-  border-radius: 6px;
   background: #0a3332;
 }
 
@@ -43,28 +60,41 @@
   }
 }
 
-/* same background as the homepage's Zone Guides section
-   (ZoneIsometric.module.css .section: #175459), so this band reads as
-   the same brand teal. */
+/* same darker navy-teal as Services.module.css's .introBand (itself
+   matching BuyersGuide.module.css's .introBand). */
 .storyBand {
   position: relative;
-  background: #175459;
+  /* never let the flex column above shrink this below its own content
+     height — .hero is the one that gives up space, down to its floor. */
+  flex-shrink: 0;
+  background: #0a3332;
   padding: clamp(56px, 7vw, 96px) 24px;
   text-align: center;
 }
 
-/* straddles the boundary with .reasonsSection below: horizontally centered
-   on the midpoint between the section's center and left edge, vertically
-   centered on the band's own bottom edge so half sits on the teal band and
-   half on the white section that follows. */
+/* horizontally centered on the midpoint between the section's center and
+   left edge, vertically centered on the band's own bottom edge so 43% of
+   it hangs below .storyBand — see .stampGap below for why that doesn't
+   run past the fold. */
 .stampWrap {
   position: absolute;
   left: 25%;
   bottom: 0;
   transform: translate(-50%, 43%);
-  width: clamp(90px, 9vw, 140px);
+  width: var(--stamp-size);
   aspect-ratio: 1 / 1;
   pointer-events: none;
+}
+
+/* .stampWrap hangs 43% of its own height below .storyBand's bottom edge
+   (see above). Reserving that same amount of space here, inside the fold,
+   plus a fixed 20px, means the flex column above shrinks .hero to make
+   room for it — so on first load the whole stamp is visible above the
+   viewport's bottom edge with exactly 20px of clearance under it, at any
+   screen size, instead of the stamp's lower half running past the fold. */
+.stampGap {
+  flex-shrink: 0;
+  height: calc(var(--stamp-size) * 0.43 + 20px);
 }
 
 .stampRing,
@@ -97,7 +127,7 @@
 }
 
 .body {
-  max-width: clamp(480px, 34vw, 640px);
+  max-width: clamp(560px, 40vw, 720px);
   margin: clamp(16px, 2vw, 24px) auto 0;
   font-family: 'Lexend Deca', sans-serif;
   font-weight: 300;

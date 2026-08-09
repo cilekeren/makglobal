@@ -103,7 +103,7 @@
     "from": "From"
   },
   "projects": {
-    "heading": "PROJECTS",
+    "heading": "Projects",
     "subheading": "Explore premium UK real estate at its finest. Featuring the latest and most exclusive developments from the country's top builders, our portfolio offers unmatched quality, prime locations, and exceptional investment potential."
   },
   "featuredProjects": {
@@ -199,8 +199,7 @@
   },
   "aboutUs": {
     "heading": "Our Story",
-    "storyBody1": "MAK Global was founded to provide trusted guidance to both local and international buyers looking to purchase property in London.",
-    "storyBody2": "We understand that buying property overseas can be a complex process. That's why we make it clearer and more accessible for our clients — offering accurate information, trusted partners, and carefully selected opportunities.",
+    "storyBody": "MAK Global was founded to provide trusted guidance to both local and international buyers looking to purchase property in London. We understand that buying property overseas can be a complex process. That's why we make it clearer and more accessible for our clients — offering accurate information, trusted partners, and carefully selected opportunities.",
     "reasonsHeading": "Why Clients Work With Us",
     "partnersHeading": "Our Partners",
     "backToHome": "BACK TO HOME",
