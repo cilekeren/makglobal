@@ -187,11 +187,12 @@
   opacity: 0.6;
 }
 
-.legalLinks {
+.legalBar {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  margin: clamp(10px, 1.2vw, 14px) 0 0;
+  padding: 0 clamp(24px, 4vw, 64px) clamp(16px, 2vw, 24px);
 }
 
 .legalLink {
@@ -214,6 +215,130 @@
   font-size: clamp(11px, 0.8vw, 13px);
   color: #fff;
   opacity: 0.35;
+}
+
+.compliance {
+  margin-top: clamp(32px, 3.6vw, 44px);
+}
+
+.complianceRow {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 400;
+  font-size: clamp(11px, 0.8vw, 13px);
+  color: #fff;
+  opacity: 0.85;
+}
+
+.complianceRow:not(:first-child) {
+  margin-top: clamp(8px, 1vw, 12px);
+}
+
+.complianceValue {
+  margin: 2px 0 0;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 600;
+  font-size: clamp(11px, 0.8vw, 13px);
+  color: #fff;
+  opacity: 0.85;
+}
+
+.complianceLogos {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2vw, 24px);
+  margin-top: clamp(14px, 1.6vw, 20px);
+}
+
+.complianceLogo {
+  height: clamp(20px, 1.8vw, 26px);
+  width: auto;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.icoLogo {
+  height: clamp(16px, 1.4vw, 20px);
+  width: auto;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+  /* raster logo ships navy-on-transparent; this recolors it white to match
+     the HMRC svg (which is edited to fill="#fff" directly) since a webp
+     can't have its fill swapped via CSS the way an inline-able svg can. */
+  filter: brightness(0) invert(1);
+}
+
+.complianceLogos a:hover .complianceLogo,
+.complianceLogos a:hover .icoLogo {
+  opacity: 1;
+}
+
+.infoTooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.infoIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  color: #fff;
+  opacity: 0.75;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.infoIcon:hover,
+.infoIcon:focus-visible {
+  opacity: 1;
+  outline: none;
+}
+
+.infoPopup {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(100% + 10px);
+  z-index: 20;
+  width: min(280px, 70vw);
+  background: #fff;
+  color: #3a3a3a;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 12px 14px;
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.bottomBar {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: clamp(16px, 2vw, 24px) clamp(24px, 4vw, 64px);
+}
+
+.bottomBarText {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 300;
+  font-size: clamp(11px, 0.75vw, 12px);
+  color: #fff;
+  opacity: 0.6;
+  text-align: left;
 }
 
 .form {
@@ -389,6 +514,11 @@
   .ctaBlock {
     align-items: center;
     max-width: 100%;
+  }
+
+  .complianceRow,
+  .complianceLogos {
+    justify-content: center;
   }
 
   .social {

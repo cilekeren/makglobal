@@ -164,6 +164,16 @@
       "cookiePolicy": "Çerez Politikası",
       "privacyPolicy": "Gizlilik Politikası",
       "termsOfService": "Kullanım Koşulları"
+    },
+    "compliance": {
+      "hmrcLabel": "HMRC nezdinde Kara Para Aklamayı Önleme Denetimi kapsamında kayıtlıdır",
+      "hmrcInfo": "MAK Global, Birleşik Krallık mevzuatına uygun, şeffaf ve uyumlu gayrimenkul işlemlerini desteklemek amacıyla Kara Para Aklamayı Önleme denetimi kapsamında HM Revenue & Customs (HMRC) nezdinde kayıtlıdır.",
+      "hmrcNumber": "Kayıt No. XZML00000214323.",
+      "icoLabel": "Bilgi Komisyonerliği Ofisi (ICO) nezdinde kayıtlıdır",
+      "icoInfo": "MAK Global, kişisel verileri sorumlu bir şekilde ve Birleşik Krallık veri koruma gerekliliklerine uygun olarak işleme taahhüdümüzü yansıtacak biçimde, veri koruma sorumlulukları kapsamında ICO nezdinde kayıtlıdır.",
+      "icoNumber": "ICO Kayıt No. ZC095181",
+      "copyright": "© 2026 MAK Global Estates Limited. Tüm hakları saklıdır.",
+      "companyNumber": "Şirket No: 15723748"
     }
   },
   "services": {

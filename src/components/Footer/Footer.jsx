@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { FaInstagram, FaLinkedinIn } from 'react-icons/fa6'
+import { FaInstagram, FaLinkedinIn, FaCircleInfo } from 'react-icons/fa6'
 import logoIcon from '../../assets/hero/logo-mark2.svg'
 import logoMak from '../../assets/hero/logo-mark.svg'
 import logoGlobal from '../../assets/hero/logo-text.svg'
 import navMarkWhite from '../../assets/hero/nav-mak-mark-white.svg'
 import navMarkMaroon from '../../assets/hero/nav-mak-mark-maroon.svg'
+import hmrcLogo from '../../assets/footer/hmrc-logo.svg'
+import icoLogo from '../../assets/footer/ico-logo.webp'
 import Button from '../common/Button'
 import styles from './Footer.module.css'
 
@@ -73,6 +75,53 @@ function FormSelect({ id, placeholder, options, value, onChange }) {
         </ul>
       )}
     </div>
+  )
+}
+
+// info icon that shows an explanatory popup on hover (desktop) or tap
+// (mobile) — reuses FormSelect's open/close-on-outside-click mechanism above.
+function InfoTooltip({ text }) {
+  const [open, setOpen] = useState(false)
+  const rootRef = useRef(null)
+
+  useEffect(() => {
+    if (!open) return
+    const onDocClick = (e) => {
+      if (rootRef.current && !rootRef.current.contains(e.target)) setOpen(false)
+    }
+    const onKey = (e) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('mousedown', onDocClick)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onDocClick)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  return (
+    <span
+      className={styles.infoTooltip}
+      ref={rootRef}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        className={styles.infoIcon}
+        aria-label="More information"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+      >
+        <FaCircleInfo />
+      </button>
+      {open && (
+        <span className={styles.infoPopup} role="tooltip">
+          {text}
+        </span>
+      )}
+    </span>
   )
 }
 
@@ -266,19 +315,38 @@ export default function Footer() {
               Mayfair, London, W1J 6BD
             </p>
 
-            <nav className={styles.legalLinks} aria-label="Legal">
-              <Link to="/cookie-policy" className={styles.legalLink}>
-                {t('footer.legal.cookiePolicy')}
-              </Link>
-              <span className={styles.legalDivider} aria-hidden="true">|</span>
-              <Link to="/privacy-policy" className={styles.legalLink}>
-                {t('footer.legal.privacyPolicy')}
-              </Link>
-              <span className={styles.legalDivider} aria-hidden="true">|</span>
-              <Link to="/terms-of-service" className={styles.legalLink}>
-                {t('footer.legal.termsOfService')}
-              </Link>
-            </nav>
+            <div className={styles.compliance}>
+              <p className={styles.complianceRow}>
+                <span className={styles.complianceLabel}>{t('footer.compliance.hmrcLabel')}</span>
+                <InfoTooltip text={t('footer.compliance.hmrcInfo')} />
+              </p>
+              <p className={styles.complianceValue}>{t('footer.compliance.hmrcNumber')}</p>
+
+              <p className={styles.complianceRow}>
+                <span className={styles.complianceLabel}>{t('footer.compliance.icoLabel')}</span>
+                <InfoTooltip text={t('footer.compliance.icoInfo')} />
+              </p>
+              <p className={styles.complianceValue}>{t('footer.compliance.icoNumber')}</p>
+
+              <div className={styles.complianceLogos}>
+                <a
+                  href="https://www.gov.uk/government/organisations/hm-revenue-customs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="HM Revenue & Customs"
+                >
+                  <img src={hmrcLogo} className={styles.complianceLogo} alt="HM Revenue & Customs" />
+                </a>
+                <a
+                  href="https://ico.org.uk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Information Commissioner's Office"
+                >
+                  <img src={icoLogo} className={styles.icoLogo} alt="Information Commissioner's Office" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -370,6 +438,28 @@ export default function Footer() {
             {status === 'error' && <p className={styles.formStatus}>{t('footer.statusError')}</p>}
           </div>
         </form>
+      </div>
+
+      <nav className={styles.legalBar} aria-label="Legal">
+        <Link to="/cookie-policy" className={styles.legalLink}>
+          {t('footer.legal.cookiePolicy')}
+        </Link>
+        <span className={styles.legalDivider} aria-hidden="true">|</span>
+        <Link to="/privacy-policy" className={styles.legalLink}>
+          {t('footer.legal.privacyPolicy')}
+        </Link>
+        <span className={styles.legalDivider} aria-hidden="true">|</span>
+        <Link to="/terms-of-service" className={styles.legalLink}>
+          {t('footer.legal.termsOfService')}
+        </Link>
+      </nav>
+
+      <div className={styles.bottomBar}>
+        <p className={styles.bottomBarText}>
+          {t('footer.compliance.copyright')}
+          <span className={styles.legalDivider} aria-hidden="true">|</span>
+          {t('footer.compliance.companyNumber')}
+        </p>
       </div>
     </footer>
   )

@@ -164,6 +164,16 @@
       "cookiePolicy": "Cookie Policy",
       "privacyPolicy": "Privacy Policy",
       "termsOfService": "Terms of Service"
+    },
+    "compliance": {
+      "hmrcLabel": "Registered with HMRC for Anti-Money Laundering Supervision",
+      "hmrcInfo": "MAK Global is registered with HM Revenue & Customs (HMRC) for Anti-Money Laundering supervision, supporting transparent and compliant property transactions in line with UK regulations.",
+      "hmrcNumber": "Registration No. XZML00000214323.",
+      "icoLabel": "Registered with the Information Commissioner's Office (ICO)",
+      "icoInfo": "MAK Global is registered with the ICO in relation to its data protection responsibilities, reflecting our commitment to handling personal information responsibly and in accordance with UK data protection requirements.",
+      "icoNumber": "ICO Registration No. ZC095181",
+      "copyright": "© 2026 MAK Global Estates Limited. All rights reserved.",
+      "companyNumber": "Company No: 15723748"
     }
   },
   "services": {
