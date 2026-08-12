@@ -284,17 +284,55 @@
 .faqRow {
   width: 100%;
   border-top: 1px solid rgba(31, 75, 78, 0.2);
+  background-color: transparent;
+  transition: background-color 0.2s ease;
 }
 
 .faqRow:last-child {
   border-bottom: 1px solid rgba(31, 75, 78, 0.2);
 }
 
+/* lighter than the sticky navbar's #ededed (Hero.module.css's
+   .stickyNavBar) — same grey, just a lighter tint of it. */
+.faqRow:hover {
+  background-color: #f5f5f5;
+}
+
+.faqRowOpen {
+  background-color: #f5f5f5;
+}
+
 .faqInner {
   max-width: 980px;
   margin: 0 auto;
-  padding: clamp(28px, 3vw, 40px) clamp(24px, 4vw, 64px);
+  padding: 0 clamp(24px, 4vw, 64px);
   text-align: left;
+}
+
+/* wraps only the question button (not the answer) — .faqChevron's
+   `top: 100%` is measured against this, so it always lands on the
+   button's own bottom edge regardless of how tall the question is.
+   --faq-v-pad is shared with .faqQuestionBtn's own top padding so the
+   chevron's rest position tracks it exactly at any viewport size,
+   instead of drifting above the button's own top-padded text. */
+.faqHeaderWrap {
+  position: relative;
+  --faq-v-pad: clamp(20px, 2.6vw, 28px);
+}
+
+.faqQuestionBtn {
+  width: 100%;
+  display: block;
+  background: none;
+  border: none;
+  margin: 0;
+  /* left indent reserves the chevron's column, at rest and once open —
+     kept constant so the question text never shifts when the chevron
+     relocates. */
+  padding: var(--faq-v-pad) 0 var(--faq-v-pad) clamp(30px, 3.4vw, 40px);
+  cursor: pointer;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .faqQuestion {
@@ -305,13 +343,60 @@
   color: #163a3d;
 }
 
+.faqChevron {
+  position: absolute;
+  left: 0;
+  /* closed: sits at the question's cap height, under its first letter —
+     the button's own top padding plus a small cap-height nudge. */
+  top: calc(var(--faq-v-pad) + 0.02em);
+  font-size: clamp(18px, 1.5vw, 22px);
+  color: #163a3d;
+  /* clickable on its own — mainly matters once open, when it's relocated
+     down next to the answer, outside the question button's own hit area. */
+  cursor: pointer;
+  transition: top 0.35s ease, transform 0.35s ease;
+}
+
+.faqChevronOpen {
+  /* open: relocates to the answer's cap height, under its first line —
+     100% of .faqHeaderWrap is the question button's own bottom edge,
+     which is exactly where the answer begins. */
+  top: calc(100% + 0.3em);
+  /* down-pointing at rest, rotated to point right once open. */
+  transform: rotate(-90deg);
+}
+
+/* 0fr/1fr swap on the grid track animates the answer's height without
+   ever measuring it in JS — the modern replacement for max-height hacks,
+   and correct on any content length/wrap, mobile included. */
+.faqAnswerWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.faqAnswerWrapOpen {
+  grid-template-rows: 1fr;
+}
+
+.faqAnswerInner {
+  overflow: hidden;
+  min-height: 0;
+}
+
 .faqAnswer {
-  margin: clamp(10px, 1.2vw, 14px) 0 0;
+  margin: 0;
+  /* matches .faqQuestionBtn's left indent — same column as the question,
+     and leaves room for the chevron once it relocates here on open. */
+  padding: 0 0 clamp(20px, 2.6vw, 28px) clamp(30px, 3.4vw, 40px);
   font-family: 'Lexend Deca', sans-serif;
   font-weight: 300;
   font-size: clamp(13px, 1vw, 15px);
   line-height: 1.7;
   color: #5c6b6a;
+  /* some FAQ answers embed \n / \n\n for multi-paragraph structure —
+     collapses to nothing for the (majority) single-paragraph items. */
+  white-space: pre-line;
 }
 
 /* Taxes and Fees */

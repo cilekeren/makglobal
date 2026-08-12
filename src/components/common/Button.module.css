@@ -31,7 +31,24 @@
   font-size: 5.5px;
 }
 
-/* text is centered at rest, slides left on hover to make room for the arrow */
+/* sized to fill the foreignObject box regardless of the icon's own
+   intrinsic size — travels with the label as one unit (see .label below). */
+.iconWrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--btn-color);
+}
+
+.iconWrap svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* icon+label group is centered at rest, slides left on hover to make room
+   for the arrow — icon (if any) rides along with the label as one unit. */
 .label {
   transition: transform 0.4s ease;
 }

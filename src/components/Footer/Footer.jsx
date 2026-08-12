@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { FaInstagram, FaLinkedinIn, FaCircleInfo } from 'react-icons/fa6'
+import { PiPhoneLight } from 'react-icons/pi'
 import logoIcon from '../../assets/hero/logo-mark2.svg'
 import logoMak from '../../assets/hero/logo-mark.svg'
 import logoGlobal from '../../assets/hero/logo-text.svg'
@@ -122,6 +123,26 @@ function InfoTooltip({ text }) {
         </span>
       )}
     </span>
+  )
+}
+
+// the exact same pill/arrow-hover Button used everywhere else on the site
+// (see common/Button.jsx) — just filled gold instead of outlined, with a
+// leading phone icon.
+function CallUsButton({ label, phone }) {
+  return (
+    <Button
+      label={label}
+      icon={<PiPhoneLight className={styles.callUsIcon} />}
+      variant="filled"
+      color="#e2c27a"
+      textColor="#0a3332"
+      padding={10}
+      restShift={-5}
+      onClick={() => {
+        window.location.href = `tel:${phone}`
+      }}
+    />
   )
 }
 
@@ -267,13 +288,7 @@ export default function Footer() {
             <span className={styles.divider} />
             <div className={styles.ctaBlock}>
               <p className={styles.ctaText}>{t('footer.ctaText')}</p>
-              <Button
-                label={t('common.callUs')}
-                color="#fff"
-                onClick={() => {
-                  window.location.href = 'tel:+447825643292'
-                }}
-              />
+              <CallUsButton label={t('common.callUs')} phone="+447825643292" />
             </div>
           </div>
 
@@ -440,21 +455,20 @@ export default function Footer() {
         </form>
       </div>
 
-      <nav className={styles.legalBar} aria-label="Legal">
-        <Link to="/cookie-policy" className={styles.legalLink}>
-          {t('footer.legal.cookiePolicy')}
-        </Link>
-        <span className={styles.legalDivider} aria-hidden="true">|</span>
-        <Link to="/privacy-policy" className={styles.legalLink}>
-          {t('footer.legal.privacyPolicy')}
-        </Link>
-        <span className={styles.legalDivider} aria-hidden="true">|</span>
-        <Link to="/terms-of-service" className={styles.legalLink}>
-          {t('footer.legal.termsOfService')}
-        </Link>
-      </nav>
-
       <div className={styles.bottomBar}>
+        <nav className={styles.bottomLegalBar} aria-label="Legal">
+          <Link to="/cookie-policy" className={styles.bottomLegalLink}>
+            {t('footer.legal.cookiePolicy')}
+          </Link>
+          <span className={styles.legalDivider} aria-hidden="true">|</span>
+          <Link to="/privacy-policy" className={styles.bottomLegalLink}>
+            {t('footer.legal.privacyPolicy')}
+          </Link>
+          <span className={styles.legalDivider} aria-hidden="true">|</span>
+          <Link to="/terms-of-service" className={styles.bottomLegalLink}>
+            {t('footer.legal.termsOfService')}
+          </Link>
+        </nav>
         <p className={styles.bottomBarText}>
           {t('footer.compliance.copyright')}
           <span className={styles.legalDivider} aria-hidden="true">|</span>

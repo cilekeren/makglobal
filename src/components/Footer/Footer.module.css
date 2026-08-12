@@ -4,6 +4,15 @@
 }
 
 .inner {
+  /* explicit width, not just max-width: .footer became a flex column for
+     the 100vh fix (below), which makes .inner a flex *item* now instead
+     of a plain block — and a flex item with `margin: 0 auto` doesn't
+     stretch to the container's width the way a block element does (auto
+     margins on a flex item's cross axis opt it *out* of stretch), so
+     without this it shrinks to fit its content instead of filling up to
+     max-width, capping out well short of it regardless of the value set
+     there. */
+  width: 100%;
   max-width: 1600px;
   margin: 0 auto;
   padding: clamp(48px, 7vw, 96px) clamp(24px, 4vw, 64px) clamp(56px, 8vw, 112px);
@@ -39,18 +48,24 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: clamp(10px, 1.3vw, 18px);
+  gap: clamp(8px, 1.1vw, 14px);
+  /* not shrinkable — .ctaBlock's own text is a paragraph that wraps
+     gracefully under space pressure; a nav item's single-line label
+     (e.g. "DISCOVER LONDON") doesn't, so it's .navList that should keep
+     its natural content width if the two ever have to compete for room. */
+  flex-shrink: 0;
 }
 
 .navItem {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   font-family: 'Lexend Deca', sans-serif;
   font-weight: 300;
-  font-size: clamp(14px, 1.1vw, 19px);
+  font-size: clamp(12px, 0.95vw, 16px);
   letter-spacing: 0.4px;
   color: #fff;
+  white-space: nowrap;
 }
 
 .navItemLink {
@@ -64,15 +79,15 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   box-sizing: border-box;
 }
 
 .radioMark {
   display: block;
-  width: 21px;
-  height: 21px;
+  width: 17px;
+  height: 17px;
   max-width: none;
   object-fit: contain;
 }
@@ -98,6 +113,57 @@
   font-size: clamp(13px, 1vw, 15px);
   line-height: 1.6;
   color: #fff;
+}
+
+.callUsIcon {
+  transform-origin: 70% 30%;
+  /* idle old-handset "ring" — a quick double-wiggle burst, then quiet for
+     the rest of the loop, so it reads as an occasional tremble rather than
+     a constant animation. */
+  animation: callUsRing 6s ease-in-out infinite;
+}
+
+@keyframes callUsRing {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  1% {
+    transform: rotate(-24deg);
+  }
+  2% {
+    transform: rotate(20deg);
+  }
+  3% {
+    transform: rotate(-18deg);
+  }
+  4% {
+    transform: rotate(14deg);
+  }
+  5% {
+    transform: rotate(-10deg);
+  }
+  6% {
+    transform: rotate(6deg);
+  }
+  7% {
+    transform: rotate(0deg);
+  }
+  9% {
+    transform: rotate(-20deg);
+  }
+  10% {
+    transform: rotate(16deg);
+  }
+  11% {
+    transform: rotate(-12deg);
+  }
+  12% {
+    transform: rotate(8deg);
+  }
+  13% {
+    transform: rotate(0deg);
+  }
 }
 
 .social {
@@ -187,26 +253,15 @@
   opacity: 0.6;
 }
 
-.legalBar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  padding: 0 clamp(24px, 4vw, 64px) clamp(16px, 2vw, 24px);
-}
-
-.legalLink {
-  font-family: 'Lexend Deca', sans-serif;
-  font-weight: 400;
-  font-size: clamp(11px, 0.8vw, 13px);
-  color: #fff;
-  opacity: 0.7;
+/* same font/color/opacity as the copyright text around it (.bottomBarText)
+   — inherits color and (via the parent's compositing) its dimmed
+   opacity, only adding its own underline-on-hover. */
+.bottomLegalLink {
+  color: inherit;
   text-decoration: none;
-  transition: opacity 0.2s ease;
 }
 
-.legalLink:hover {
-  opacity: 1;
+.bottomLegalLink:hover {
   text-decoration: underline;
 }
 
@@ -240,7 +295,7 @@
 .complianceValue {
   margin: 2px 0 0;
   font-family: 'Lexend Deca', sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-size: clamp(11px, 0.8vw, 13px);
   color: #fff;
   opacity: 0.85;
@@ -254,14 +309,14 @@
 }
 
 .complianceLogo {
-  height: clamp(20px, 1.8vw, 26px);
+  height: clamp(22px, 2vw, 29px);
   width: auto;
   opacity: 0.85;
   transition: opacity 0.2s ease;
 }
 
 .icoLogo {
-  height: clamp(16px, 1.4vw, 20px);
+  height: clamp(18px, 1.6vw, 22px);
   width: auto;
   opacity: 0.85;
   transition: opacity 0.2s ease;
@@ -326,19 +381,36 @@
   padding: clamp(16px, 2vw, 24px) clamp(24px, 4vw, 64px);
 }
 
-.bottomBarText {
+/* same font/size/color/opacity as .bottomBarText below it — a separate
+   line, not merged into the copyright row, per feedback. */
+.bottomLegalBar {
   max-width: 1600px;
-  margin: 0 auto;
+  margin: 0 auto clamp(8px, 1vw, 10px);
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
   font-family: 'Lexend Deca', sans-serif;
   font-weight: 300;
   font-size: clamp(11px, 0.75vw, 12px);
   color: #fff;
   opacity: 0.6;
-  text-align: left;
+  text-align: center;
+}
+
+.bottomBarText {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 300;
+  font-size: clamp(11px, 0.75vw, 12px);
+  color: #fff;
+  opacity: 0.6;
+  text-align: center;
 }
 
 .form {
@@ -476,6 +548,149 @@
   font-size: clamp(12px, 0.85vw, 14px);
   color: #ededed;
   text-align: center;
+}
+
+/* Desktop only — mobile keeps the footer's natural scrollable height
+   (cramming a full contact form into one short mobile viewport isn't the
+   goal). Pins the whole maroon area to exactly one viewport tall
+   regardless of the window's aspect ratio, so it can never end up partly
+   hidden behind the fixed sticky nav the way a footer taller than the
+   viewport could (see Navbar.jsx/Hero.jsx's own nearBottom fix, which
+   only covers the case where the footer already fits in one viewport).
+   Everything below makes the footer's own content compress — or spread
+   out, on a taller window — to actually fit that one viewport.
+
+   Placed last (right before the max-width:640px block) deliberately: an
+   earlier attempt put these overrides right after each base rule instead,
+   and lost the cascade to it — a same-specificity rule wins by *source
+   order*, not by being wrapped in a matching @media, so a plain rule
+   declared later always beats an earlier-declared conditional one once
+   both apply. */
+@media (min-width: 641px) {
+  .footer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .inner {
+    flex: 1 1 auto;
+    min-height: 0;
+    /* nowrap, not the base rule's wrap: with wrap, a flex line's cross
+       size is sized to its tallest item's own hypothetical (unstretched)
+       content height — and .form's, with its flex:1 textarea inside,
+       hypothesizes tall — so align-items:stretch never gets a chance to
+       clamp .left/.form back down to .inner's real available height, and
+       both silently overflow past the 100vh footer instead. */
+    flex-wrap: nowrap;
+    padding-top: clamp(20px, 4vh, 96px);
+    padding-bottom: clamp(20px, 4vh, 112px);
+  }
+
+  .form {
+    /* no explicit height here (unlike .left below) — align-items:stretch's
+       default cross-axis sizing already fills .inner's height, and
+       automatically subtracts this margin from that stretched size, so
+       .form's box still ends flush with .left's without overflowing past
+       it (a plain height:100% here would just add the margin on top and
+       spill out the bottom instead). */
+    margin-top: clamp(16px, 3vh, 40px);
+    min-height: 0;
+  }
+
+  .left {
+    height: 100%;
+    min-height: 0;
+    justify-content: space-between;
+    gap: clamp(12px, 2vh, 32px);
+  }
+
+  .navRow,
+  .social {
+    margin-top: 0;
+  }
+
+  .brand {
+    margin-top: 0;
+    padding-top: 0;
+    /* everything under .brand (logo, contact line, address, HMRC/ICO
+       block) is sized in em from here down — one vh-driven font-size
+       shrinks the whole block proportionally (text, logo, icons, and
+       their gaps together) on a short viewport, instead of each of those
+       needing its own hand-tuned clamp(). */
+    font-size: clamp(9px, 1.7vh, 16px);
+  }
+
+  .logoRow {
+    width: 11em;
+    margin-bottom: 0.8em;
+  }
+
+  .contactLine,
+  .address {
+    font-size: 1em;
+  }
+
+  .compliance {
+    margin-top: 1.8em;
+  }
+
+  .complianceRow,
+  .complianceValue {
+    font-size: 0.85em;
+  }
+
+  .complianceRow:not(:first-child) {
+    margin-top: 0.5em;
+  }
+
+  .complianceLogos {
+    gap: 1.2em;
+    margin-top: 0.9em;
+  }
+
+  .complianceLogo {
+    height: 1.7em;
+  }
+
+  .icoLogo {
+    height: 1.3em;
+  }
+
+  .infoIcon {
+    font-size: 1em;
+  }
+
+  .bottomBar {
+    flex-shrink: 0;
+    padding-top: clamp(8px, 1.5vh, 24px);
+    padding-bottom: clamp(8px, 1.5vh, 24px);
+  }
+
+  /* the form's own vertical rhythm shrinks the same way — .textarea's
+     flex:1 already absorbs most of the slack on its own, this just keeps
+     the label/field gaps from staying at their full size once there's no
+     room left for them. */
+  .label {
+    margin: clamp(2px, 1vh, 14px) 0 clamp(2px, 0.5vh, 8px);
+  }
+
+  .field,
+  .textarea {
+    padding: clamp(8px, 1.6vh, 16px);
+  }
+
+  .textarea {
+    min-height: clamp(36px, 6vh, 105px);
+  }
+
+  .row2 {
+    margin-top: clamp(2px, 1vh, 14px);
+  }
+
+  .sendWrap {
+    margin-top: clamp(10px, 2.5vh, 40px);
+  }
 }
 
 @media (max-width: 640px) {

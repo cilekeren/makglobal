@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PiHandCoinsLight, PiBankLight, PiGlobeLight, PiCalendarCheckLight } from 'react-icons/pi'
+import { PiHandCoinsLight, PiBankLight, PiGlobeLight, PiCalendarCheckLight, PiCaretDownLight } from 'react-icons/pi'
 import Navbar from '../../components/Navbar/Navbar'
 import heroStyles from '../../components/Hero/Hero.module.css'
 import Footer from '../../components/Footer/Footer'
@@ -46,9 +47,57 @@ function scrollToContact() {
   document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
+// single-open accordion row — the 0fr/1fr grid-template-rows swap animates
+// the answer's height without ever measuring it in JS (no ResizeObserver,
+// no scrollHeight), which is what keeps this smooth on both desktop and
+// mobile regardless of how long/wrapped the answer text is.
+//
+// The chevron itself needs no JS measurement either: it's absolutely
+// positioned against .faqHeaderWrap, which wraps *only* the question
+// button, so `top: 100%` always lands exactly on the button's bottom edge
+// — i.e. the answer's first line — no matter whether the question wrapped
+// to one line or two.
+function FaqItem({ id, question, answer, isOpen, onToggle }) {
+  return (
+    <div className={`${styles.faqRow} ${isOpen ? styles.faqRowOpen : ''}`}>
+      <div className={styles.faqInner}>
+        <div className={styles.faqHeaderWrap}>
+          <PiCaretDownLight
+            className={`${styles.faqChevron} ${isOpen ? styles.faqChevronOpen : ''}`}
+            onClick={onToggle}
+            aria-hidden="true"
+          />
+          <button
+            type="button"
+            className={styles.faqQuestionBtn}
+            onClick={onToggle}
+            aria-expanded={isOpen}
+            aria-controls={id}
+          >
+            <h3 className={styles.faqQuestion}>{question}</h3>
+          </button>
+        </div>
+        <div
+          id={id}
+          className={`${styles.faqAnswerWrap} ${isOpen ? styles.faqAnswerWrapOpen : ''}`}
+          aria-hidden={!isOpen}
+        >
+          <div className={styles.faqAnswerInner}>
+            <p className={styles.faqAnswer}>{answer}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function BuyersGuide() {
   const { t } = useTranslation()
   useSEO({ title: t('seo.buyersGuide.title'), description: t('seo.buyersGuide.description') })
+
+  // first FAQ starts open; opening another closes it (and vice versa) —
+  // a single index is all a single-open accordion needs.
+  const [openFaqIndex, setOpenFaqIndex] = useState(0)
 
   // same array, same order as the navbar's Buyer's Guide dropdown
   // (nav.buyersGuideItems / NavContent.jsx's BUYERS_GUIDE_ANCHORS) — used
@@ -156,13 +205,15 @@ export default function BuyersGuide() {
         <h2 className={styles.sectionHeading}>{sectionLabels[4]}</h2>
 
         <div className={styles.faqList}>
-          {faqItems.map((item) => (
-            <div key={item.q} className={styles.faqRow}>
-              <div className={styles.faqInner}>
-                <h3 className={styles.faqQuestion}>{item.q}</h3>
-                <p className={styles.faqAnswer}>{item.a}</p>
-              </div>
-            </div>
+          {faqItems.map((item, i) => (
+            <FaqItem
+              key={item.q}
+              id={`faq-answer-${i}`}
+              question={item.q}
+              answer={item.a}
+              isOpen={openFaqIndex === i}
+              onToggle={() => setOpenFaqIndex((cur) => (cur === i ? null : i))}
+            />
           ))}
         </div>
       </section>

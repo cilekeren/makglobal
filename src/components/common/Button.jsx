@@ -26,6 +26,8 @@ const CHEVRON_TOP_RATIO = 3.5644 / ARROW_TOTAL_W
 const CHEVRON_BOTTOM_RATIO = 3.8812 / ARROW_TOTAL_W
 const GAP_AFTER_LABEL = 6
 const PADDING = 14
+const ICON_SIZE = 7
+const ICON_GAP = 4
 const SCALE = 3 // matches the hero button's established on-screen size
 // at SCALE the pill is sized for desktop labels — on a narrow screen a
 // longer label (e.g. "BOOK A CONSULTANT") renders wider than the
@@ -35,6 +37,7 @@ const MOBILE_QUERY = '(max-width: 700px)'
 
 export default function Button({
   label,
+  icon,
   color,
   textColor,
   variant = 'outline',
@@ -55,6 +58,10 @@ export default function Button({
   // still centers/anchors correctly since the label/arrow positions are
   // all derived from pillWidth, not hardcoded to the tight-fit case.
   fullWidth = false,
+  // nudges the icon+label group off dead-center at rest, without touching
+  // the hover position (still anchored to `padding`, per hoverGroupX) —
+  // negative shifts it left.
+  restShift = 0,
 }) {
   const textRef = useRef(null)
   const btnElRef = useRef(null)
@@ -90,7 +97,14 @@ export default function Button({
   }, [fullWidth])
 
   const ready = labelWidth > 0
-  const hoverBlockWidth = labelWidth + GAP_AFTER_LABEL + arrowLength
+  // an optional leading icon travels with the label as one fixed-gap unit
+  // (icon, then gap, then label) — that whole group is what gets centered
+  // at rest and shifted on hover, same as the label alone did before, so
+  // every other Button caller (icon undefined) computes byte-identical to
+  // before (iconSpace collapses to 0).
+  const iconSpace = icon ? ICON_SIZE + ICON_GAP : 0
+  const groupWidth = iconSpace + labelWidth
+  const hoverBlockWidth = groupWidth + GAP_AFTER_LABEL + arrowLength
   const naturalPillWidth = hoverBlockWidth + padding * 2
   // when a long label's natural width (at this scale) would still be
   // wider than the container fullWidth is meant to match, shrink the
@@ -108,15 +122,16 @@ export default function Button({
   // label-relative formulas when the pill is tightly fit to its content,
   // but (unlike those) still lands correctly when pillWidth is stretched
   // wider by `fullWidth`.
-  const hoverLabelX = reverse ? pillWidth - padding - labelWidth : padding
+  const hoverGroupX = reverse ? pillWidth - padding - groupWidth : padding
   const arrowX = reverse ? padding : pillWidth - padding - arrowLength
-  const restLabelX = (pillWidth - labelWidth) / 2
-  const labelHoverShift = hoverLabelX - restLabelX
+  const restGroupX = (pillWidth - groupWidth) / 2 + restShift
+  const groupHoverShift = hoverGroupX - restGroupX
   const arrowRestShift = reverse ? -12 : 12
   const chevronW = arrowLength * CHEVRON_W_RATIO
   const chevronTop = arrowLength * CHEVRON_TOP_RATIO
   const chevronBottom = arrowLength * CHEVRON_BOTTOM_RATIO
   const strokeW = (STROKE_W * strokeScale) / scale
+  const iconY = CENTER_Y - ICON_SIZE / 2
 
   const filled = variant === 'filled'
   const fillColor = color || '#fff'
@@ -131,7 +146,7 @@ export default function Button({
       onClick={onClick}
       style={{
         '--btn-color': contentColor,
-        '--label-hover-shift': `${labelHoverShift}px`,
+        '--label-hover-shift': `${groupHoverShift}px`,
         '--arrow-rest-shift': `${arrowRestShift}px`,
         '--stroke-w': `${strokeW}px`,
         // CSS percentage instead of the equivalent computed px value —
@@ -156,15 +171,24 @@ export default function Button({
           fill={filled ? fillColor : 'none'}
           stroke={filled ? 'none' : fillColor}
         />
-        <text
-          ref={textRef}
-          className={`${styles.cls2} ${styles.label}`}
-          x={ready ? restLabelX : 0}
-          y={CENTER_Y}
-          dominantBaseline="middle"
-        >
-          {label}
-        </text>
+        <g transform={`translate(${ready ? restGroupX : 0}, 0)`}>
+          {/* CSS (.label) drives the hover slide via `transform` — same
+              static-outer/CSS-inner split as .arrow below, so the icon
+              travels with the label as one fixed-gap unit instead of the
+              static transform attribute here being overridden by it. */}
+          <g className={styles.label}>
+            {icon && (
+              <foreignObject x={0} y={iconY} width={ICON_SIZE} height={ICON_SIZE}>
+                <div xmlns="http://www.w3.org/1999/xhtml" className={styles.iconWrap}>
+                  {icon}
+                </div>
+              </foreignObject>
+            )}
+            <text ref={textRef} className={styles.cls2} x={iconSpace} y={CENTER_Y} dominantBaseline="middle">
+              {label}
+            </text>
+          </g>
+        </g>
         <g transform={`translate(${arrowX}, 0)`}>
           {/* CSS (.arrow) drives the hover slide/fade via `transform` — a
               static SVG `transform` attribute on the same element would be
