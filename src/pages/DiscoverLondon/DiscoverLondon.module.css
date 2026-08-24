@@ -33,6 +33,26 @@
   background: rgba(10, 51, 50, 0.45);
 }
 
+/* YouTube's embed briefly flashes its own play/pause icon right as
+   autoplay kicks in, even with controls=0 -- an opaque cover matching
+   the section background masks that flash, then fades once playback
+   has settled. */
+.loadCover {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #0a3332;
+  pointer-events: none;
+  animation: hideLoadCover 0.6s ease forwards;
+  animation-delay: 1.2s;
+}
+
+@keyframes hideLoadCover {
+  to {
+    opacity: 0;
+  }
+}
+
 .comingSoon {
   position: absolute;
   top: 50%;

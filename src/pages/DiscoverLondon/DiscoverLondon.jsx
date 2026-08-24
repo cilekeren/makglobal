@@ -4,7 +4,7 @@ import Footer from '../../components/Footer/Footer'
 import { useSEO } from '../../lib/seo'
 import styles from './DiscoverLondon.module.css'
 
-const YOUTUBE_VIDEO_ID = 'M3EYAY2MftI'
+const YOUTUBE_VIDEO_ID = 'zMCea32gpmg'
 const YOUTUBE_EMBED_SRC = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}`
 
 export default function DiscoverLondon() {
@@ -33,6 +33,7 @@ export default function DiscoverLondon() {
         </div>
 
         <div className={styles.videoOverlay} />
+        <div className={styles.loadCover} aria-hidden="true" />
 
         <Navbar />
 
