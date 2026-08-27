@@ -281,6 +281,42 @@
   margin: clamp(40px, 5vw, 56px) 0 0;
 }
 
+.faqLoadMore {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(32px, 4vw, 44px);
+}
+
+.loadMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 22px;
+  border: 1px solid #0a3332;
+  border-radius: 999px;
+  background: transparent;
+  color: #0a3332;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.loadMoreBtn:hover,
+.loadMoreBtn:focus-visible {
+  background-color: #0a3332;
+  color: #fff;
+}
+
+.loadMoreIcon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
 .faqRow {
   width: 100%;
   border-top: 1px solid rgba(31, 75, 78, 0.2);

@@ -383,7 +383,8 @@
           "q": "Yatırım için neden yeni yapılmış bir gayrimenkul tercih edilebilir?",
           "a": "İngiltere'deki konut stokunun önemli bir bölümü eski yapılardan oluşur. Eski evlerde bakım, onarım ve enerji giderleri daha yüksek olabilir. Yeni yapılar ise genellikle daha enerji verimli ve kiralama veya satış açısından daha caziptir. Ayrıca EPC standartlarını karşılamak eski yapılarda ek yenileme maliyetleri doğurabilir."
         }
-      ]
+      ],
+      "loadMoreButton": "Daha Fazla Göster"
     }
   },
   "seo": {

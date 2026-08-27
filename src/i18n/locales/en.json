@@ -383,7 +383,8 @@
           "q": "Why Might a Newly Built Property Be Preferable for Investment?",
           "a": "A large part of the UK's housing stock consists of older properties. Older homes may have higher maintenance, repair, and energy costs. New builds are generally more energy-efficient and can be more attractive for rental or resale. Meeting EPC standards may also require additional upgrades in older properties."
         }
-      ]
+      ],
+      "loadMoreButton": "Load More"
     }
   },
   "seo": {

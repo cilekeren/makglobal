@@ -94,21 +94,32 @@ export default function NavDropdownItem({ label, to, items }) {
                 className={styles.dropdownItem}
                 onMouseEnter={() => setActiveIndex(i)}
               >
-                <span className={styles.bullet}>
-                  <img
-                    src={makMark}
-                    alt=""
-                    className={`${styles.bulletMark} ${
-                      i === activeIndex ? styles.bulletMarkActive : styles.bulletMarkPassive
-                    }`}
-                  />
-                </span>
                 {to ? (
                   <Link to={to} className={styles.dropdownItemLink}>
+                    <span className={styles.bullet}>
+                      <img
+                        src={makMark}
+                        alt=""
+                        className={`${styles.bulletMark} ${
+                          i === activeIndex ? styles.bulletMarkActive : styles.bulletMarkPassive
+                        }`}
+                      />
+                    </span>
                     {label}
                   </Link>
                 ) : (
-                  <span>{label}</span>
+                  <>
+                    <span className={styles.bullet}>
+                      <img
+                        src={makMark}
+                        alt=""
+                        className={`${styles.bulletMark} ${
+                          i === activeIndex ? styles.bulletMarkActive : styles.bulletMarkPassive
+                        }`}
+                      />
+                    </span>
+                    <span>{label}</span>
+                  </>
                 )}
               </li>
             )

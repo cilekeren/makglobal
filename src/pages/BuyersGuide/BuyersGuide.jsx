@@ -6,7 +6,7 @@ import heroStyles from '../../components/Hero/Hero.module.css'
 import Footer from '../../components/Footer/Footer'
 import BuyingJourney from '../../components/BuyingJourney/BuyingJourney'
 import Button from '../../components/common/Button'
-import heroVisual from '../../assets/hero/slider/slide-2.jpg'
+import heroVisual from '../../assets/buyers-guide/hero-london-thames.webp'
 import makStampRing from '../../assets/journey/mak-stamp-ring.svg'
 import makStampCenter from '../../assets/journey/mak-stamp-center.svg'
 import stableMarketImg from '../../assets/why-invest/stable-market.jpg'
@@ -42,6 +42,13 @@ const WHY_INVEST_IMAGES = [
 // Light, not Bold/Fill. See .cardIcon in BuyersGuide.module.css for the
 // matching color/size.
 const FINANCING_ICONS = [PiHandCoinsLight, PiBankLight, PiGlobeLight, PiCalendarCheckLight]
+
+// indices (into buyersGuidePage.faqs.items) of the questions buyers ask most
+// often — these are pulled to the front so they're the ones visible before
+// "Load More" is pressed, regardless of the order they're written in
+// en.json/tr.json.
+const PRIORITY_FAQ_INDICES = [0, 1, 3, 4, 6, 7, 8, 9, 12, 21]
+const INITIAL_FAQ_COUNT = 10
 
 function scrollToContact() {
   document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -98,6 +105,7 @@ export default function BuyersGuide() {
   // first FAQ starts open; opening another closes it (and vice versa) —
   // a single index is all a single-open accordion needs.
   const [openFaqIndex, setOpenFaqIndex] = useState(0)
+  const [showAllFaqs, setShowAllFaqs] = useState(false)
 
   // same array, same order as the navbar's Buyer's Guide dropdown
   // (nav.buyersGuideItems / NavContent.jsx's BUYERS_GUIDE_ANCHORS) — used
@@ -106,6 +114,11 @@ export default function BuyersGuide() {
   const whyInvest = t('buyersGuidePage.internationalBuyersGuide.whyInvest', { returnObjects: true })
   const financingOptions = t('buyersGuidePage.financingOptions.options', { returnObjects: true })
   const faqItems = t('buyersGuidePage.faqs.items', { returnObjects: true })
+  const orderedFaqItems = [
+    ...PRIORITY_FAQ_INDICES.map((i) => faqItems[i]),
+    ...faqItems.filter((_, i) => !PRIORITY_FAQ_INDICES.includes(i)),
+  ]
+  const visibleFaqItems = showAllFaqs ? orderedFaqItems : orderedFaqItems.slice(0, INITIAL_FAQ_COUNT)
 
   return (
     <>
@@ -205,7 +218,7 @@ export default function BuyersGuide() {
         <h2 className={styles.sectionHeading}>{sectionLabels[4]}</h2>
 
         <div className={styles.faqList}>
-          {faqItems.map((item, i) => (
+          {visibleFaqItems.map((item, i) => (
             <FaqItem
               key={item.q}
               id={`faq-answer-${i}`}
@@ -216,6 +229,15 @@ export default function BuyersGuide() {
             />
           ))}
         </div>
+
+        {!showAllFaqs && orderedFaqItems.length > INITIAL_FAQ_COUNT && (
+          <div className={styles.faqLoadMore}>
+            <button type="button" className={styles.loadMoreBtn} onClick={() => setShowAllFaqs(true)}>
+              {t('buyersGuidePage.faqs.loadMoreButton')}
+              <PiCaretDownLight className={styles.loadMoreIcon} aria-hidden="true" />
+            </button>
+          </div>
+        )}
       </section>
 
       <Footer />
