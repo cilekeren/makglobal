@@ -18,7 +18,7 @@ export default function ProjectLocationMap({ coords }) {
       zoomSnap: 0.5,
     }).setView(coords, ZOOM)
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_2y9n_1_fcd49803f56c4f6b828bcff5', {
       attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
     }).addTo(map)
 
