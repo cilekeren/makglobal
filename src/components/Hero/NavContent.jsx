@@ -21,6 +21,12 @@ const BUYERS_GUIDE_ANCHORS = [
   'faqs',
 ]
 
+// order matches nav.discoverLondonItems exactly — each label is paired
+// with the matching section id on the Discover London page
+// (DiscoverLondon.jsx), so the dropdown/mobile menu and the page's own
+// section order can never drift apart.
+const DISCOVER_LONDON_ANCHORS = ['education', 'lifestyle-experiences']
+
 export default function NavContent({ sticky = false }) {
   const { t, i18n } = useTranslation()
   const location = useLocation()
@@ -33,11 +39,17 @@ export default function NavContent({ sticky = false }) {
     to: `/buyers-guide#${BUYERS_GUIDE_ANCHORS[i]}`,
   }))
 
+  const discoverLondonLabels = t('nav.discoverLondonItems', { returnObjects: true })
+  const discoverLondonDropdown = discoverLondonLabels.map((label, i) => ({
+    label,
+    to: `/discover-london#${DISCOVER_LONDON_ANCHORS[i]}`,
+  }))
+
   const NAV_ITEMS = [
     { label: t('nav.projects'), to: '/projects' },
     { label: t('nav.buyersGuide'), to: '/buyers-guide', dropdown: buyersGuideDropdown },
     { label: t('nav.services'), to: '/services' },
-    { label: t('nav.discoverLondon'), to: '/discover-london' },
+    { label: t('nav.discoverLondon'), to: '/discover-london', dropdown: discoverLondonDropdown },
     { label: t('nav.aboutUs'), to: '/about' },
     { label: t('nav.talkToUs'), onClick: () => scrollToId('contact'), highlight: true },
   ]

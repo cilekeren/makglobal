@@ -132,6 +132,12 @@
   font-size: clamp(12px, 0.9vw, 15px);
 }
 
+.stickyNavBar .navItemHighlight {
+  background: #e2c27a;
+  color: #0a3332;
+  padding: 6px 14px;
+}
+
 .stickyNavBar .langBtn {
   color: #0a3332;
   padding: 6px;
@@ -208,6 +214,13 @@ html[lang='tr'] .navItems {
    the hover ring the same on all four sides instead. */
 .navbar:not(.stickyNavBar) .navItemWrapHighlight .pillBox {
   inset: -8px;
+}
+
+/* same equal-gap treatment as the regular navbar's highlighted pill above,
+   scaled down to match the sticky bar's smaller item (6px vs 10px base
+   padding) so the ring hugs the pill edge with the same proportions. */
+.stickyNavBar .navItemWrapHighlight .pillBox {
+  inset: -5px;
 }
 
 .pillSvg {
@@ -293,7 +306,7 @@ html[lang='tr'] .navItems {
   top: calc(100% + 55px);
   transform: translateX(-41px) translateY(-8px);
   z-index: 5;
-  min-width: clamp(360px, 34vw, 520px);
+  min-width: clamp(240px, 19vw, 320px);
   background: #ededed;
   border-radius: 10px;
   padding: clamp(40px, 4.6vw, 60px) clamp(20px, 2.2vw, 30px) clamp(20px, 2.2vw, 30px)

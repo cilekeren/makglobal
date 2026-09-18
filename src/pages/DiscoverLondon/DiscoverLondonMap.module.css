@@ -1,0 +1,109 @@
+/* same section/map shell as Projects.module.css's ProjectsMap, reused
+   verbatim here since this page follows straight on from the education
+   grid above it with the projects map's own visual language. */
+.section {
+  background: #fff;
+  padding: 0 24px clamp(32px, 4vw, 56px);
+  max-width: 1600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mapWrap {
+  position: relative;
+  z-index: 0;
+  margin: clamp(4px, 0.6vw, 8px) auto 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #1f4b4e;
+}
+
+.map {
+  width: 100%;
+  height: clamp(440px, 56vw, 680px);
+}
+
+/* desktop-only: a hover-driven map with two marker types reads best with
+   real cursor/pointer room — the university card grid above already
+   covers this content for mobile. */
+@media (max-width: 900px) {
+  .section {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* University marker pin -- our own bordeaux, graduation-cap version of  */
+/* ProjectsMap's teal logomark pin.                                     */
+/* ------------------------------------------------------------------ */
+
+.markerIcon {
+  background: none;
+  border: none;
+}
+
+.markerCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #8b3a3a;
+  border: 2px solid #fff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.markerLogo {
+  display: block;
+  width: 60%;
+  height: 60%;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+/* ------------------------------------------------------------------ */
+/* University popup card -- same shell as ProjectsMap's MapCard (shared  */
+/* global .mak-map-popup wrapper, imported alongside ProjectsMap.module  */
+/* .css), own layout since a university has no price/from row.          */
+/* ------------------------------------------------------------------ */
+
+.mapCard {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mapCardImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.mapCardBody {
+  padding: 12px 14px 16px;
+}
+
+.mapCardName {
+  margin: 0;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #163a3d;
+}
+
+.mapCardLocation {
+  margin: 4px 0 0;
+  font-family: 'Lexend Deca', sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 13px;
+  color: #8b3a3a;
+}
+
+.mapCardBtnWrap {
+  margin-top: 10px;
+}

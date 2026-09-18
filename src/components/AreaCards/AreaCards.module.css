@@ -9,9 +9,9 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: clamp(16px, 2vw, 32px);
-  max-width: 1150px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -19,7 +19,7 @@
   position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 1 / 1;
   border: none;
   border-radius: 6px;
   padding: 0;

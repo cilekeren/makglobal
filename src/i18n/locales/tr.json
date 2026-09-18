@@ -27,6 +27,7 @@
     ],
     "services": "HİZMETLER",
     "discoverLondon": "LONDRA’YI KEŞFEDİN",
+    "discoverLondonItems": ["Eğitim", "Yaşam Tarzı & Deneyimler"],
     "aboutUs": "HAKKIMIZDA",
     "talkToUs": "BİZE ULAŞIN!",
     "openMenu": "Menüyü aç",
@@ -92,9 +93,8 @@
     "imageDisclaimer": "Görseller ilgili geliştiriciler tarafından sağlanmaktadır ve yalnızca bilgilendirme amaçlıdır. Bilgisayar destekli (CGI) veya yapay zeka ile oluşturulmuş olabilir ve tamamlanan projeden farklılık gösterebilir. MAK Global, görsellerin doğruluğundan sorumlu değildir. Alıcıların karar vermeden önce tüm detayları doğrudan geliştiriciyle teyit etmesi gerekmektedir."
   },
   "areaCards": {
-    "lifestyle": "Yaşam Tarzı",
     "education": "Eğitim",
-    "experiences": "Deneyimler"
+    "lifestyleExperiences": "Yaşam Tarzı & Deneyimler"
   },
   "firmsBand": {
     "ariaLabel": "İş ortağı geliştiriciler"
@@ -248,6 +248,20 @@
     "bodyLine2": "Londra’yı bir yerli gibi keşfetmek için yakında tekrar uğrayın!",
     "cameraLocation": "Abbey Road, St John’s Wood, Londra",
     "live": "CANLI"
+  },
+  "discoverLondonPage": {
+    "intro": "Dünya çapında üniversitelerden, şehri yuva yapan mahallelere, kültüre ve günlük yaşama kadar — Londra’da yaşamla ilgili bilmeniz gereken her şey tek bir sayfada.",
+    "education": {
+      "intro": "Londra'nın önde gelen üniversitelerinden bazılarını, küresel sıralamalarını, akademik güçlü yönlerini ve başkent genelindeki bağlantılarını keşfedin.",
+      "fields": {
+        "location": "Konum",
+        "academicAreas": "Öne Çıkan Akademik Alanlar",
+        "about": "Hakkında",
+        "livingNear": "Yakın Semtler",
+        "rankingSource": "Sıralama Kaynağı",
+        "officialWebsite": "Resmi Web Sitesi"
+      }
+    }
   },
   "buyersGuidePage": {
     "heading": "Alıcı Rehberi",

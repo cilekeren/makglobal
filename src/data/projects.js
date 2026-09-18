@@ -456,7 +456,7 @@ export const PROJECTS = [
     developerName: 'Barratt London',
     developerLogo: barrattLondonLogo,
     image: '/Projects/Royal Gateway/aaa_hero_BA2308_Cloister Corner_View_33_Final.webp',
-    coords: [51.5364, 0.0798],
+    coords: [51.5219917, -0.2648916],
     price: null,
     description: {
       en: 'Peruzzi Residences is a contemporary collection of one and two-bedroom apartments in North Acton, ideally positioned close to White City, Notting Hill and just minutes from Central London. With exclusive resident amenities, excellent transport connections and the long-term growth potential of the Old Oak Common regeneration, it offers an exceptional lifestyle and investment opportunity.',

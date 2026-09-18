@@ -2,16 +2,14 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { pillPathD, PILL_STROKE_W } from '../Hero/pillPath'
-import lifestyleImg from '../../assets/areas/lifestyle.jpg'
 import educationImg from '../../assets/areas/education.jpg'
 import experiencesImg from '../../assets/areas/experiences.jpg'
 import Button from '../common/Button'
 import styles from './AreaCards.module.css'
 
 const CARDS = [
-  { id: 'lifestyle', image: lifestyleImg },
-  { id: 'education', image: educationImg },
-  { id: 'experiences', image: experiencesImg },
+  { id: 'education', image: educationImg, objectPosition: 'center 80%' },
+  { id: 'lifestyleExperiences', image: experiencesImg },
 ]
 
 // Same drawn-pill outline as the navbar's NavItem, sized to the label's
@@ -70,7 +68,12 @@ export default function AreaCards() {
               className={styles.card}
               onClick={() => navigate('/discover-london')}
             >
-              <img src={card.image} alt={label} className={styles.image} />
+              <img
+                src={card.image}
+                alt={label}
+                className={styles.image}
+                style={card.objectPosition ? { objectPosition: card.objectPosition } : undefined}
+              />
               <CardLabel label={label} />
             </button>
           )

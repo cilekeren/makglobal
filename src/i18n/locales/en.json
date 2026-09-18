@@ -27,6 +27,7 @@
     ],
     "services": "SERVICES",
     "discoverLondon": "DISCOVER LONDON",
+    "discoverLondonItems": ["Education", "Lifestyle & Experiences"],
     "aboutUs": "ABOUT US",
     "talkToUs": "TALK TO US!",
     "openMenu": "Open menu",
@@ -92,9 +93,8 @@
     "imageDisclaimer": "Images are provided by the respective developers and are for illustrative purposes only. They may be CGI or AI-generated and may differ from the completed development. MAK Global is not responsible for their accuracy. Buyers should verify all details directly with the developer before making any decision."
   },
   "areaCards": {
-    "lifestyle": "Lifestyle",
     "education": "Education",
-    "experiences": "Experiences"
+    "lifestyleExperiences": "Lifestyle & Experiences"
   },
   "firmsBand": {
     "ariaLabel": "Partner developers"
@@ -248,6 +248,20 @@
     "bodyLine2": "Check back soon to explore London like a local!",
     "cameraLocation": "Abbey Road, St John's Wood, London",
     "live": "LIVE"
+  },
+  "discoverLondonPage": {
+    "intro": "From world-class universities to the neighbourhoods, culture, and everyday life that make the city home — everything you need to know about living in London, in one place.",
+    "education": {
+      "intro": "Discover some of London's leading universities, their global rankings, academic strengths and connections across the capital.",
+      "fields": {
+        "location": "Location",
+        "academicAreas": "Key Academic Areas",
+        "about": "About",
+        "livingNear": "Living Near",
+        "rankingSource": "Ranking Source",
+        "officialWebsite": "Official Website"
+      }
+    }
   },
   "buyersGuidePage": {
     "heading": "Buyer’s Guide",

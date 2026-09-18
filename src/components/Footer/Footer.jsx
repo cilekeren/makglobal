@@ -268,12 +268,8 @@ export default function Footer() {
 
           <div className={styles.navRow}>
             <ul className={styles.navList} onMouseLeave={() => setActiveIndex(0)}>
-              {NAV_ITEMS.map(({ label, to }, i) => (
-                <li
-                  key={label}
-                  className={styles.navItem}
-                  onMouseEnter={() => setActiveIndex(i)}
-                >
+              {NAV_ITEMS.map(({ label, to }, i) => {
+                const mark = (
                   <span className={styles.radio}>
                     <img
                       src={i === activeIndex ? navMarkWhite : navMarkMaroon}
@@ -281,9 +277,27 @@ export default function Footer() {
                       className={styles.radioMark}
                     />
                   </span>
-                  {to ? <Link to={to} className={styles.navItemLink}>{label}</Link> : label}
-                </li>
-              ))}
+                )
+                return (
+                  <li
+                    key={label}
+                    className={styles.navItem}
+                    onMouseEnter={() => setActiveIndex(i)}
+                  >
+                    {to ? (
+                      <Link to={to} className={styles.navItemLink}>
+                        {mark}
+                        {label}
+                      </Link>
+                    ) : (
+                      <>
+                        {mark}
+                        {label}
+                      </>
+                    )}
+                  </li>
+                )
+              })}
             </ul>
             <span className={styles.divider} />
             <div className={styles.ctaBlock}>

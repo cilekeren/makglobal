@@ -12,7 +12,9 @@ import styles from './ProjectsMap.module.css'
 const LONDON_CENTER = [51.4995, -0.14]
 const MARKER_SIZE = 38
 
-function MapCard({ project, onNavigate }) {
+// exported so DiscoverLondonMap can reuse the exact same popup card for
+// this page's own (smaller) project markers, instead of duplicating it.
+export function MapCard({ project, onNavigate }) {
   const { t } = useTranslation()
   const price = project.prices?.[0]?.price || project.price
   const priceText =
