@@ -8,7 +8,7 @@ import Button from '../common/Button'
 import styles from './AreaCards.module.css'
 
 const CARDS = [
-  { id: 'education', image: educationImg, objectPosition: 'center 80%' },
+  { id: 'education', image: educationImg, objectPosition: 'center 80%', anchor: 'education' },
   { id: 'lifestyleExperiences', image: experiencesImg },
 ]
 
@@ -66,7 +66,7 @@ export default function AreaCards() {
               key={card.id}
               type="button"
               className={styles.card}
-              onClick={() => navigate('/discover-london')}
+              onClick={() => navigate(card.anchor ? `/discover-london#${card.anchor}` : '/discover-london')}
             >
               <img
                 src={card.image}

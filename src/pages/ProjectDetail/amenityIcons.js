@@ -15,6 +15,9 @@ import restaurant from '../../assets/amenities/restaurant.svg'
 import meetGreet from '../../assets/amenities/meet-greet.svg'
 import childrensPlay from '../../assets/amenities/childrens-play.svg'
 import primarySchool from '../../assets/amenities/primary-school.svg'
+import communityHub from '../../assets/amenities/community-hub.svg'
+import medicalCentre from '../../assets/amenities/medical-centre.svg'
+import joggingRoute from '../../assets/amenities/jogging-route.svg'
 
 export const AMENITY_ICONS = {
   concierge,
@@ -34,4 +37,7 @@ export const AMENITY_ICONS = {
   meetGreet,
   childrensPlay,
   primarySchool,
+  communityHub,
+  medicalCentre,
+  joggingRoute,
 }

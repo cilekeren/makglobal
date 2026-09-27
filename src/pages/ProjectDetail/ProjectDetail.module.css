@@ -301,6 +301,27 @@
   max-width: 90px;
 }
 
+@media (min-width: 901px) {
+  .amenities {
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+
+  .amenity {
+    padding: 0 clamp(6px, 1.4vw, 36px);
+  }
+
+  .amenityIcon {
+    width: clamp(48px, 5.2vw, 100px);
+    height: clamp(48px, 5.2vw, 100px);
+  }
+
+  .amenityLabel {
+    font-size: clamp(9px, 0.8vw, 12px);
+    max-width: clamp(56px, 7vw, 90px);
+  }
+}
+
 @media (max-width: 900px) {
   .amenity:not(:last-child) {
     border-right: none;
