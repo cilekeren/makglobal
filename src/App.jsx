@@ -16,6 +16,7 @@ import TermsOfService from './pages/Legal/TermsOfService'
 import NotFound from './pages/NotFound/NotFound'
 import CookieConsent from './components/CookieConsent/CookieConsent'
 import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton'
+import BackToTopButton from './components/BackToTopButton/BackToTopButton'
 
 function App() {
   const lenisRef = useRef(null)
@@ -92,6 +93,7 @@ function App() {
 
       <CookieConsent />
       <WhatsAppButton />
+      <BackToTopButton />
     </>
   )
 }

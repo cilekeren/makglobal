@@ -85,6 +85,8 @@
     "tbc": "TBC",
     "amenities": "AMENITIES",
     "backToProjects": "BACK TO PROJECTS",
+    "schoolsText": "View schools, catchment areas and local education information around this development.",
+    "schoolsLink": "EXPLORE ON LOCRATING",
     "mins": "{{count}} MINS",
     "previousImage": "Previous image",
     "nextImage": "Next image",
@@ -163,7 +165,10 @@
     "legal": {
       "cookiePolicy": "Cookie Policy",
       "privacyPolicy": "Privacy Policy",
-      "termsOfService": "Terms of Service"
+      "termsOfService": "Terms of Service",
+      "imageCredits": "Image Credits",
+      "imageCreditsIntro": "Campus photographs on the Discover London page are licensed under Creative Commons and sourced from Wikimedia Commons.",
+      "imageCreditsClose": "Close"
     },
     "compliance": {
       "hmrcLabel": "Registered with HMRC for Anti-Money Laundering Supervision",

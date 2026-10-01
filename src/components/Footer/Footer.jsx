@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { FaInstagram, FaLinkedinIn, FaCircleInfo } from 'react-icons/fa6'
@@ -11,6 +12,7 @@ import navMarkMaroon from '../../assets/hero/nav-mak-mark-maroon.svg'
 import hmrcLogo from '../../assets/footer/hmrc-logo.svg'
 import icoLogo from '../../assets/footer/ico-logo.webp'
 import Button from '../common/Button'
+import { IMAGE_CREDITS } from '../../data/imageCredits'
 import styles from './Footer.module.css'
 
 // native <select> popups can't be styled to match the site (maroon bg,
@@ -126,6 +128,56 @@ function InfoTooltip({ text }) {
   )
 }
 
+// attribution for the Creative Commons campus photos (see
+// data/imageCredits.js) — CC BY / BY-SA require credit wherever the images
+// are used. Overlay + Escape/outside-click close, same shape as
+// UniversityModal.
+function ImageCreditsModal({ onClose }) {
+  const { t } = useTranslation()
+
+  useEffect(() => {
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = prevOverflow
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [onClose])
+
+  return createPortal(
+    <div className={styles.creditsOverlay} onClick={onClose}>
+      <div
+        className={styles.creditsBox}
+        role="dialog"
+        aria-modal="true"
+        aria-label={t('footer.legal.imageCredits')}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button type="button" className={styles.creditsClose} onClick={onClose} aria-label={t('footer.legal.imageCreditsClose')}>
+          ×
+        </button>
+        <h2 className={styles.creditsTitle}>{t('footer.legal.imageCredits')}</h2>
+        <p className={styles.creditsIntro}>{t('footer.legal.imageCreditsIntro')}</p>
+        <ul className={styles.creditsList}>
+          {IMAGE_CREDITS.map((c) => (
+            <li key={c.file}>
+              <a href={c.source} target="_blank" rel="noopener noreferrer">
+                {c.title}
+              </a>
+              <span className={styles.creditsLicense}>{c.license}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>,
+    document.body,
+  )
+}
+
 // the exact same pill/arrow-hover Button used everywhere else on the site
 // (see common/Button.jsx) — just filled gold instead of outlined, with a
 // leading phone icon.
@@ -203,6 +255,7 @@ export default function Footer() {
   ]
 
   const [activeIndex, setActiveIndex] = useState(0)
+  const [creditsOpen, setCreditsOpen] = useState(false)
   const [purpose, setPurpose] = useState('')
   const [budget, setBudget] = useState('')
   const [name, setName] = useState('')
@@ -482,6 +535,10 @@ export default function Footer() {
           <Link to="/terms-of-service" className={styles.bottomLegalLink}>
             {t('footer.legal.termsOfService')}
           </Link>
+          <span className={styles.legalDivider} aria-hidden="true">|</span>
+          <button type="button" className={styles.bottomLegalButton} onClick={() => setCreditsOpen(true)}>
+            {t('footer.legal.imageCredits')}
+          </button>
         </nav>
         <p className={styles.bottomBarText}>
           {t('footer.compliance.copyright')}
@@ -489,6 +546,8 @@ export default function Footer() {
           {t('footer.compliance.companyNumber')}
         </p>
       </div>
+
+      {creditsOpen && <ImageCreditsModal onClose={() => setCreditsOpen(false)} />}
     </footer>
   )
 }

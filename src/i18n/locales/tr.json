@@ -85,6 +85,8 @@
     "tbc": "Belirlenecek",
     "amenities": "OLANAKLAR",
     "backToProjects": "PROJELERE DÖN",
+    "schoolsText": "Bu projenin çevresindeki okulları, okul bölgelerini (catchment area) ve yerel eğitim bilgilerini görüntüleyin.",
+    "schoolsLink": "LOCRATING’DE KEŞFEDİN",
     "mins": "{{count}} DK",
     "previousImage": "Önceki görsel",
     "nextImage": "Sonraki görsel",
@@ -163,7 +165,10 @@
     "legal": {
       "cookiePolicy": "Çerez Politikası",
       "privacyPolicy": "Gizlilik Politikası",
-      "termsOfService": "Kullanım Koşulları"
+      "termsOfService": "Kullanım Koşulları",
+      "imageCredits": "Görsel Kaynakları",
+      "imageCreditsIntro": "Discover London sayfasındaki kampüs fotoğrafları Creative Commons lisanslıdır ve Wikimedia Commons kaynaklıdır.",
+      "imageCreditsClose": "Kapat"
     },
     "compliance": {
       "hmrcLabel": "HMRC nezdinde Kara Para Aklamayı Önleme Denetimi kapsamında kayıtlıdır",

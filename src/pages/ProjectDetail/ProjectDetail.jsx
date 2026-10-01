@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from 'react'
 import { useParams, useNavigate, Navigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import gsap from 'gsap'
+import { PiBackpackLight } from 'react-icons/pi'
 import { PROJECTS } from '../../data/projects'
 import { consumePendingHeroTransition } from '../../lib/pageTransition'
 import heroStyles from '../../components/Hero/Hero.module.css'
@@ -263,6 +264,22 @@ export default function ProjectDetail() {
               ))}
             </ul>
           )}
+
+          <div className={styles.schools}>
+            <span className={styles.schoolsIcon}>
+              <PiBackpackLight />
+            </span>
+            <p className={styles.schoolsText}>{t('projectDetail.schoolsText')}</p>
+            <Button
+              label={t('projectDetail.schoolsLink')}
+              variant="filled"
+              color="#e2c27a"
+              textColor="#0a3332"
+              scale={1.9}
+              padding={10}
+              onClick={() => window.open('https://www.locrating.com/', '_blank', 'noopener,noreferrer')}
+            />
+          </div>
         </section>
       )}
 

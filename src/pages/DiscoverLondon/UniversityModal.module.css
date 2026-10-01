@@ -18,7 +18,9 @@
   display: flex;
   width: 100%;
   max-width: 1200px;
-  max-height: 90vh;
+  /* fixed (not max-) height: the profile inside is scaled to fit it, so the
+     card is the same size for every university and never needs a scrollbar. */
+  height: min(90vh, 760px);
   border-radius: 10px;
   overflow: hidden;
   background: #fff;
@@ -180,13 +182,20 @@
 }
 
 .content {
-  flex: 1 1 auto;
+  flex: 1 1 0;
   min-width: 0;
+  min-height: 0;
+  padding: clamp(28px, 3.4vw, 48px);
+  overflow: hidden;
+}
+
+/* scaled from the top-left by UniversityModal's fit effect; its width is
+   set in px there (pane width / scale), so don't give it one here. */
+.contentInner {
   display: flex;
   flex-direction: column;
   gap: clamp(18px, 2vw, 26px);
-  padding: clamp(28px, 3.4vw, 48px);
-  overflow-y: auto;
+  transform-origin: top left;
 }
 
 .field {
@@ -312,17 +321,12 @@
 @media (max-width: 800px) {
   .box {
     flex-direction: column;
-    max-height: 92vh;
-    overflow-y: auto;
+    height: 92vh;
   }
 
   .imagePane {
     flex: 0 0 auto;
     aspect-ratio: 16 / 9;
-  }
-
-  .content {
-    overflow-y: visible;
   }
 }
 

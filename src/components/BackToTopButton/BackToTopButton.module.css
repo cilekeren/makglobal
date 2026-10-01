@@ -1,0 +1,60 @@
+.button {
+  position: fixed;
+  left: 36px;
+  z-index: 200;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 1px solid #0a3332;
+  border-radius: 50%;
+  background: #e2c27a;
+  color: #0a3332;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(2, 19, 30, 0.35);
+  -webkit-tap-highlight-color: transparent;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: bottom 0.4s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.button.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+.button.visible:hover {
+  transform: scale(1.06);
+}
+
+.arrow {
+  width: 27px;
+  height: auto;
+  color: currentColor;
+  /* the site's own right-pointing arrow, turned to point up */
+  transform: rotate(-90deg);
+}
+
+.arrow line,
+.arrow polyline {
+  stroke: currentColor;
+  stroke-width: 1;
+}
+
+@media (max-width: 480px) {
+  .button {
+    left: 16px;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+
+  .arrow {
+    width: 23px;
+  }
+}

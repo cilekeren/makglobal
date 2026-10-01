@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 import {
@@ -14,6 +14,10 @@ import {
 import ArrowIcon from '../../components/common/ArrowIcon'
 import styles from './UniversityModal.module.css'
 
+// below this the text would be unreadable — only then does .content fall
+// back to scrolling, as a last resort on absurdly short viewports.
+const MIN_FIT_SCALE = 0.5
+
 // Loops through UNIVERSITIES (src/data/universities.js) — left/right always
 // wrap around rather than stopping at the ends, same "keep browsing" intent
 // as GalleryCarousel's own image loop on the project detail page, just one
@@ -22,6 +26,53 @@ export default function UniversityModal({ universities, index, onClose, onStep }
   const { t, i18n } = useTranslation()
   const total = universities.length
   const uni = universities[index]
+  const contentRef = useRef(null)
+  const innerRef = useRef(null)
+
+  // The card never scrolls: the panel has a fixed height (see .box), and
+  // the profile inside it is scaled down until it fits that height. Text
+  // re-wraps as the scale changes (the inner box is widened by 1/scale so
+  // it still fills the pane visually), so the fit is a small binary search
+  // rather than a single division.
+  useLayoutEffect(() => {
+    const fit = () => {
+      const outer = contentRef.current
+      const inner = innerRef.current
+      if (!outer || !inner) return
+      const cs = getComputedStyle(outer)
+      const availW = outer.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)
+      const availH = outer.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)
+      if (availW <= 0 || availH <= 0) return
+
+      const apply = (scale) => {
+        inner.style.width = `${availW / scale}px`
+        inner.style.transform = scale === 1 ? '' : `scale(${scale})`
+        return inner.offsetHeight * scale
+      }
+
+      let best = MIN_FIT_SCALE
+      if (apply(1) <= availH) {
+        best = 1
+      } else {
+        let lo = MIN_FIT_SCALE
+        let hi = 1
+        for (let i = 0; i < 10; i++) {
+          const mid = (lo + hi) / 2
+          if (apply(mid) <= availH) lo = mid
+          else hi = mid
+        }
+        best = lo
+      }
+      apply(best)
+      outer.style.overflowY = apply(best) > availH + 1 ? 'auto' : 'hidden'
+    }
+
+    fit()
+    const ro = new ResizeObserver(fit)
+    if (contentRef.current) ro.observe(contentRef.current)
+    document.fonts?.ready.then(fit)
+    return () => ro.disconnect()
+  }, [index, i18n.language])
 
   useEffect(() => {
     const prevOverflow = document.body.style.overflow
@@ -88,7 +139,8 @@ export default function UniversityModal({ universities, index, onClose, onStep }
           </div>
         </div>
 
-        <div className={styles.content}>
+        <div ref={contentRef} className={styles.content}>
+          <div ref={innerRef} className={styles.contentInner}>
           <div className={styles.field}>
             <span className={styles.eyebrow}>
               <PiMapPinLight className={styles.eyebrowIcon} aria-hidden="true" />
@@ -163,6 +215,7 @@ export default function UniversityModal({ universities, index, onClose, onStep }
               <p className={styles.note}>{localize(uni.rankingDetail.note)}</p>
             </div>
           )}
+          </div>
         </div>
       </div>
 
