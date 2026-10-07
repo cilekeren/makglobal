@@ -337,8 +337,8 @@ html[lang='tr'] .navItems {
   display: flex;
   align-items: center;
   gap: 14px;
-  font-family: 'Lexend Deca', sans-serif;
-  font-weight: 300;
+  font-family: 'Petrona', serif;
+  font-weight: 400;
   font-size: clamp(14px, 1.15vw, 17px);
   color: #02131e;
   white-space: nowrap;

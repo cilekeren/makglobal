@@ -78,6 +78,7 @@
   },
   "projectDetail": {
     "developedBy": "geliştiren",
+    "bedroomType": "{{rooms}} oda & salon",
     "from": "BAŞLANGIÇ",
     "location": "KONUM",
     "londonUk": "Londra, İngiltere",
@@ -258,6 +259,7 @@
     "intro": "Dünya çapında üniversitelerden, şehri yuva yapan mahallelere, kültüre ve günlük yaşama kadar — Londra’da yaşamla ilgili bilmeniz gereken her şey tek bir sayfada.",
     "education": {
       "intro": "Londra'nın önde gelen üniversitelerinden bazılarını, küresel sıralamalarını, akademik güçlü yönlerini ve başkent genelindeki bağlantılarını keşfedin.",
+      "schoolsText": "Yakınınızdaki ilk ve ortaokulları, okul bölgelerini (catchment area) ve yerel eğitim bilgilerini bulun.",
       "fields": {
         "location": "Konum",
         "academicAreas": "Öne Çıkan Akademik Alanlar",

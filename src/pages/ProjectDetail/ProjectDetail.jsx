@@ -185,7 +185,11 @@ export default function ProjectDetail() {
             <ul className={styles.priceList}>
               {project.prices.map((p) => (
                 <li key={p.type}>
-                  <span className={styles.priceType}>{p.type}</span>
+                  <span className={styles.priceType}>
+                    {/^\d+\+1$/.test(p.type)
+                      ? t('projectDetail.bedroomType', { rooms: parseInt(p.type, 10) })
+                      : p.type}
+                  </span>
                   <span className={styles.priceValue}>
                     {p.price === 'Price on Request' ? t('common.priceOnRequest') : p.price}
                   </span>

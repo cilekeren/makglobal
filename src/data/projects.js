@@ -5,6 +5,7 @@ import barrattLondonLogo from '../assets/firms/barratt_london.svg'
 export const PROJECTS = [
   {
     slug: 'oval-village',
+    addedAt: '2026-07-09',
     name: 'OVAL VILLAGE',
     developerName: 'Berkeley',
     developerLogo: berkeleyLogo,
@@ -73,6 +74,7 @@ export const PROJECTS = [
   },
   {
     slug: 'kings-road-park',
+    addedAt: '2026-07-09',
     name: 'KINGS ROAD PARK',
     developerName: 'Berkeley',
     developerLogo: berkeleyLogo,
@@ -138,6 +140,7 @@ export const PROJECTS = [
   },
   {
     slug: 'camdens-good-yard',
+    addedAt: '2026-07-09',
     name: 'CAMDENS GOOD YARD',
     developerName: 'Berkeley',
     developerLogo: berkeleyLogo,
@@ -203,6 +206,7 @@ export const PROJECTS = [
   },
   {
     slug: 'white-city-living',
+    addedAt: '2026-07-09',
     name: 'WHITE CITY LIVING',
     developerName: 'Berkeley',
     developerLogo: berkeleyLogo,
@@ -267,6 +271,7 @@ export const PROJECTS = [
   },
   {
     slug: 'wimbledon-bridge-house',
+    addedAt: '2026-07-09',
     name: 'WIMBLEDON BRIDGE HOUSE',
     developerName: 'London Square',
     developerLogo: londonSquareLogo,
@@ -337,6 +342,7 @@ export const PROJECTS = [
   },
   {
     slug: 'county-hall-kingston',
+    addedAt: '2026-07-09',
     name: 'COUNTY HALL KINGSTON',
     developerName: 'London Square',
     developerLogo: londonSquareLogo,
@@ -393,6 +399,7 @@ export const PROJECTS = [
   },
   {
     slug: 'colindale-gardens',
+    addedAt: '2026-07-09',
     name: 'COLINDALE GARDENS',
     developerName: 'Barratt London & Redrow',
     developerLogo: barrattLondonLogo,
@@ -452,6 +459,7 @@ export const PROJECTS = [
   },
   {
     slug: 'royal-gateway',
+    addedAt: '2026-07-09',
     name: 'ROYAL GATEWAY',
     developerName: 'Barratt London',
     developerLogo: barrattLondonLogo,
@@ -508,6 +516,7 @@ export const PROJECTS = [
   },
   {
     slug: 'bermondsey-heights',
+    addedAt: '2026-07-09',
     name: 'BERMONDSEY HEIGHTS',
     developerName: 'Barratt London',
     developerLogo: barrattLondonLogo,
@@ -571,6 +580,7 @@ export const PROJECTS = [
   },
   {
     slug: 'the-hexon-nine-elms',
+    addedAt: '2026-09-27',
     name: 'THE HEXON - NINE ELMS',
     developerName: 'London Square',
     developerLogo: londonSquareLogo,
@@ -626,6 +636,7 @@ export const PROJECTS = [
   },
   {
     slug: 'hendon-waterside',
+    addedAt: '2026-09-27',
     name: 'HENDON WATERSIDE',
     developerName: 'Barratt London',
     developerLogo: barrattLondonLogo,
@@ -682,6 +693,7 @@ export const PROJECTS = [
   },
   {
     slug: 'bow-green',
+    addedAt: '2026-09-27',
     name: 'BOW GREEN',
     developerName: 'Berkeley',
     developerLogo: berkeleyLogo,
@@ -746,6 +758,7 @@ export const PROJECTS = [
   },
   {
     slug: 'bermondsey-place',
+    addedAt: '2026-09-27',
     name: 'BERMONDSEY PLACE',
     developerName: 'Berkeley',
     developerLogo: berkeleyLogo,
@@ -806,6 +819,7 @@ export const PROJECTS = [
   },
   {
     slug: 'the-lanes',
+    addedAt: '2026-09-27',
     name: 'THE LANES',
     developerName: 'Barratt London',
     developerLogo: barrattLondonLogo,
@@ -858,4 +872,19 @@ export const PROJECTS = [
       { icon: 'communityHub', label: { en: 'Community Spaces', tr: 'Topluluk Alanları' } },
     ],
   },
+]
+
+// shown first, in this order, on the home page and the projects page
+export const FEATURED_SLUGS = ['royal-gateway', 'bow-green', 'the-hexon-nine-elms']
+
+export const FEATURED_PROJECTS = FEATURED_SLUGS.map((slug) => PROJECTS.find((p) => p.slug === slug))
+
+// featured first, then the rest newest-first by addedAt; projects added on
+// the same day keep "later in PROJECTS = newer"
+export const PROJECTS_ORDERED = [
+  ...FEATURED_PROJECTS,
+  ...PROJECTS.map((p, i) => ({ p, i }))
+    .filter(({ p }) => !FEATURED_SLUGS.includes(p.slug))
+    .sort((a, b) => b.p.addedAt.localeCompare(a.p.addedAt) || b.i - a.i)
+    .map(({ p }) => p),
 ]

@@ -78,6 +78,7 @@
   },
   "projectDetail": {
     "developedBy": "developed by",
+    "bedroomType": "{{rooms}} bedroom",
     "from": "FROM",
     "location": "LOCATION",
     "londonUk": "London, UK",
@@ -258,6 +259,7 @@
     "intro": "From world-class universities to the neighbourhoods, culture, and everyday life that make the city home — everything you need to know about living in London, in one place.",
     "education": {
       "intro": "Discover some of London's leading universities, their global rankings, academic strengths and connections across the capital.",
+      "schoolsText": "Find primary and secondary schools, catchment areas, and local education information near you.",
       "fields": {
         "location": "Location",
         "academicAreas": "Key Academic Areas",

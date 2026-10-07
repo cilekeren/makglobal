@@ -6,7 +6,7 @@ import ProjectsSlider from './ProjectsSlider'
 import ProjectCard from './ProjectCard'
 import ProjectsMap from './ProjectsMap'
 import Footer from '../../components/Footer/Footer'
-import { PROJECTS } from '../../data/projects'
+import { PROJECTS_ORDERED } from '../../data/projects'
 import { useSEO } from '../../lib/seo'
 import styles from './Projects.module.css'
 
@@ -35,7 +35,7 @@ export default function Projects() {
 
       <section className={styles.gridSection}>
         <div className={styles.grid}>
-          {PROJECTS.map((project) => (
+          {PROJECTS_ORDERED.map((project) => (
             <ProjectCard key={project.name} project={project} />
           ))}
         </div>

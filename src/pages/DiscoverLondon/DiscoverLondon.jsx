@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { PiBackpackLight } from 'react-icons/pi'
 import Navbar from '../../components/Navbar/Navbar'
 import heroStyles from '../../components/Hero/Hero.module.css'
 import Footer from '../../components/Footer/Footer'
@@ -74,6 +75,22 @@ export default function DiscoverLondon() {
           {UNIVERSITIES.map((uni, i) => (
             <UniversityCard key={uni.id} uni={uni} onOpen={() => setOpenIndex(i)} />
           ))}
+        </div>
+
+        <div className={styles.schools}>
+          <span className={styles.schoolsIcon}>
+            <PiBackpackLight />
+          </span>
+          <p className={styles.schoolsText}>{t('discoverLondonPage.education.schoolsText')}</p>
+          <Button
+            label={t('projectDetail.schoolsLink')}
+            variant="filled"
+            color="#e2c27a"
+            textColor="#0a3332"
+            scale={1.9}
+            padding={10}
+            onClick={() => window.open('https://www.locrating.com/', '_blank', 'noopener,noreferrer')}
+          />
         </div>
       </section>
 

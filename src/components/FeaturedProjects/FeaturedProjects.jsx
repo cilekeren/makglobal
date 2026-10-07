@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Button from '../common/Button'
 import ArrowIcon from '../common/ArrowIcon'
-import { PROJECTS } from '../../data/projects'
+import { FEATURED_PROJECTS } from '../../data/projects'
 import { startCardHeroTransition } from '../../lib/pageTransition'
 import styles from './FeaturedProjects.module.css'
 
-const FEATURED = PROJECTS.slice(0, 3)
+const FEATURED = FEATURED_PROJECTS
 // drag past this many px (or a quick flick) commits to the next/prev slide
 const DRAG_COMMIT_PX = 60
 
