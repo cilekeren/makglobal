@@ -9,7 +9,12 @@ import Button from '../../components/common/Button'
 import UniversityModal from './UniversityModal'
 import UniversityCard from './UniversityCard'
 import DiscoverLondonMap from './DiscoverLondonMap'
+import { CardLabel } from '../../components/AreaCards/AreaCards'
+import areaStyles from '../../components/AreaCards/AreaCards.module.css'
 import heroVisual from '../../assets/hero/slider/slide-16.webp'
+import lifestyleImg from '../../assets/areas/lifestyle.jpg'
+import foodDiningImg from '../../assets/areas/food-dining.jpg'
+import experiencesImg from '../../assets/areas/experiences.jpg'
 import makStampRing from '../../assets/journey/mak-stamp-ring.svg'
 import makStampCenter from '../../assets/journey/mak-stamp-center.svg'
 import { UNIVERSITIES } from '../../data/universities'
@@ -19,13 +24,20 @@ import styles from './DiscoverLondon.module.css'
 const YOUTUBE_VIDEO_ID = 'zMCea32gpmg'
 const YOUTUBE_EMBED_SRC = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}`
 
+// Lifestyle & Experiences — same image + drawn-pill card as the home
+// page's AreaCards. Only cards with a `to` route are live so far.
+const LIFESTYLE_CARDS = [
+  { id: 'neighbourhoods', image: lifestyleImg, to: '/discover-london/central-london-neighbourhoods' },
+  { id: 'foodDining', image: foodDiningImg },
+  { id: 'cultureEvents', image: experiencesImg },
+]
+
 export default function DiscoverLondon() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  // noindex: the Lifestyle & Experiences section is still a placeholder
-  // ("Under Construction") — nothing to rank on yet there, and indexing
-  // risks Google associating the domain with thin/empty content. Drop
-  // this once that section ships real content.
+  // noindex: two of the three Lifestyle & Experiences cards (Food &
+  // Dining, Culture & Events) don't lead anywhere yet. Drop this once
+  // that section ships its remaining pages.
   useSEO({
     title: t('seo.discoverLondon.title'),
     description: t('seo.discoverLondon.description'),
@@ -99,6 +111,47 @@ export default function DiscoverLondon() {
       <section id="lifestyle-experiences" className={`${styles.section} ${styles.sectionAlt}`}>
         <h2 className={styles.sectionHeading}>{sectionLabels[1]}</h2>
 
+        <div className={styles.lifestyleGrid}>
+          {LIFESTYLE_CARDS.map((card) => {
+            const label = t(`discoverLondonPage.lifestyle.cards.${card.id}`)
+            const image = <img src={card.image} alt={label} className={areaStyles.image} />
+
+            // only cards with a destination page are clickable for now —
+            // the rest render the same card shell (hover zoom included),
+            // minus the button role and drawn pill, and reveal a "check back
+            // soon" note on hover instead.
+            if (!card.to) {
+              return (
+                <div key={card.id} className={`${areaStyles.card} ${styles.lifestyleCardDisabled}`}>
+                  {image}
+                  <div className={styles.lifestyleComingSoon}>
+                    <p className={styles.comingSoonBody}>
+                      {t('discoverLondon.bodyLine1')}
+                      <br />
+                      <br />
+                      {t('discoverLondon.bodyLine2')}
+                    </p>
+                  </div>
+                  <span className={`${areaStyles.labelWrap} ${styles.lifestyleLabelWrap}`}>
+                    <span className={`${areaStyles.label} ${styles.lifestyleLabel}`}>{label}</span>
+                  </span>
+                </div>
+              )
+            }
+
+            return (
+              <button key={card.id} type="button" className={areaStyles.card} onClick={() => navigate(card.to)}>
+                {image}
+                <CardLabel
+                  label={label}
+                  wrapClassName={styles.lifestyleLabelWrap}
+                  labelClassName={styles.lifestyleLabel}
+                />
+              </button>
+            )
+          })}
+        </div>
+
         <div className={styles.videoFrame}>
           <div className={styles.videoWrap}>
             <iframe
@@ -113,17 +166,6 @@ export default function DiscoverLondon() {
 
           <div className={styles.videoOverlay} />
           <div className={styles.loadCover} aria-hidden="true" />
-
-          <div className={styles.comingSoon}>
-            <h3 className={styles.comingSoonText}>{t('discoverLondon.underConstruction')}</h3>
-
-            <p className={styles.comingSoonBody}>
-              {t('discoverLondon.bodyLine1')}
-              <br />
-              <br />
-              {t('discoverLondon.bodyLine2')}
-            </p>
-          </div>
 
           <div className={styles.cameraInfo}>
             <p className={styles.cameraLocation}>{t('discoverLondon.cameraLocation')}</p>

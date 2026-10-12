@@ -241,12 +241,11 @@
   box-shadow: 0 0 16px -4px rgba(22, 58, 61, 0.22);
 }
 
-/* 10 cards over 3 columns leaves the last row with a single card (Royal
-   College of Art) — centers it in the middle column instead of it
-   defaulting to the far left. Only applies at the 3-column breakpoint;
-   the 2- and 1-column layouts below reset it since neither leaves that
-   card alone on its own row. */
-.universityCard:nth-child(10) {
+/* a card left alone on the last row (Education's 10th, Central London
+   Neighbourhoods' 13th) sits in the middle column instead of defaulting
+   to the far left. The 2-column layout below re-centers it its own way
+   when the count is odd; 1 column resets it. */
+.universityCard:nth-child(3n + 1):last-child {
   grid-column: 2;
 }
 
@@ -255,6 +254,13 @@
     transform: none;
     box-shadow: none;
   }
+}
+
+/* Central London Neighbourhoods reuses this card, but its taglines run
+   longer than a university's location line — extra bottom room keeps the
+   text clear of the Details button hanging off the bottom edge. */
+.neighbourhoodCard {
+  padding-bottom: clamp(36px, 3.6vw, 56px);
 }
 
 .universityImage {
@@ -309,8 +315,16 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .universityCard:nth-child(10) {
+  .universityCard:nth-child(3n + 1):last-child {
     grid-column: auto;
+  }
+
+  /* odd count over 2 columns: span both and center at one column's width
+     (half the row minus half the grid's own gap). */
+  .universityCard:nth-child(2n + 1):last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc((100% - clamp(16px, 2.4vw, 40px)) / 2);
   }
 
   .universityName {
@@ -321,6 +335,10 @@
 @media (max-width: 600px) {
   .universityGrid {
     grid-template-columns: 1fr;
+  }
+
+  .universityCard:nth-child(2n + 1):last-child {
+    width: 100%;
   }
 
   .universityName {
@@ -345,6 +363,10 @@
     padding-top: 0;
   }
 
+  .neighbourhoodCard {
+    padding-bottom: clamp(16px, 2vw, 32px);
+  }
+
   .universityDetailsBtnWrap {
     position: static;
     flex-shrink: 0;
@@ -358,10 +380,77 @@
   }
 }
 
-/* Lifestyle & Experiences — placeholder for now: the same "under
-   construction" live-camera video this page used to open with, just
-   contained to a framed 16:9 block inside its own section instead of
-   filling the viewport. */
+/* Lifestyle & Experiences — the card itself (image, gradient, drawn-pill
+   label, hover lift) comes straight from AreaCards.module.css; these only
+   lay out three of them and fit the label to the narrower card. */
+.lifestyleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2.4vw, 40px);
+  width: 100%;
+  max-width: 1600px;
+  margin: clamp(48px, 6vw, 72px) auto 0;
+  padding: 0 clamp(24px, 4vw, 64px);
+}
+
+/* AreaCards' own label is centered with left:50% + translateX(-50%) and
+   never wraps — fine for its two wide cards, but "Central London
+   Neighbourhoods" can outgrow a third-width card, so it's allowed to wrap
+   within the card's width instead of overflowing it. Scoped under
+   .lifestyleGrid so these win over AreaCards' rules regardless of which
+   stylesheet loads first. */
+.lifestyleGrid .lifestyleLabelWrap {
+  width: max-content;
+  max-width: calc(100% - 32px);
+}
+
+.lifestyleGrid .lifestyleLabel {
+  font-size: clamp(18px, 1.7vw, 26px);
+  white-space: normal;
+  text-align: center;
+}
+
+.lifestyleGrid .lifestyleCardDisabled {
+  cursor: default;
+}
+
+/* hover note on the not-yet-live cards — the same body text
+   (.comingSoonBody) the live-camera video below used to carry, on the
+   site's solid dark green. Sits under the label (which is later in the
+   DOM, same z-index). */
+.lifestyleComingSoon {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(20px, 2.4vw, 36px);
+  background: #0a3332;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lifestyleCardDisabled:hover .lifestyleComingSoon {
+  opacity: 1;
+}
+
+@media (max-width: 700px) {
+  .lifestyleGrid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    padding: 0 16px;
+  }
+
+  .lifestyleGrid .lifestyleLabel {
+    font-size: 18px;
+  }
+}
+
+/* live-camera video closing the Lifestyle & Experiences section, below
+   its cards — the same one this page used to open with, contained to a
+   framed 16:9 block instead of filling the viewport. */
 .videoFrame {
   position: relative;
   width: 100%;
@@ -427,31 +516,8 @@
   }
 }
 
-.comingSoon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(6px, 0.8vw, 10px);
-  text-align: center;
-  padding: 0 24px;
-}
-
-.comingSoonText {
-  margin: 0;
-  font-family: 'Petrona', serif;
-  font-weight: 200;
-  font-size: clamp(26px, 3vw, 42px);
-  color: #fff;
-  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
-}
-
 .comingSoonBody {
-  margin: clamp(12px, 1.6vw, 18px) 0 0;
+  margin: 0;
   max-width: 480px;
   font-family: 'Lexend Deca', sans-serif;
   font-weight: 300;
@@ -521,10 +587,6 @@
   .videoFrame {
     aspect-ratio: 9 / 16;
     max-width: 420px;
-  }
-
-  .comingSoon {
-    padding: 0 12px;
   }
 
   .comingSoonBody {

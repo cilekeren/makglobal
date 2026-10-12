@@ -13,8 +13,10 @@ const CARDS = [
 ]
 
 // Same drawn-pill outline as the navbar's NavItem, sized to the label's
-// own box via ResizeObserver so the stroke hugs the text exactly.
-function CardLabel({ label }) {
+// own box via ResizeObserver so the stroke hugs the text exactly. Also
+// used by Discover London's Lifestyle & Experiences cards, which pass
+// extra classes to let a longer label wrap inside a narrower card.
+export function CardLabel({ label, wrapClassName = '', labelClassName = '' }) {
   const pillBoxRef = useRef(null)
   const [pillSize, setPillSize] = useState({ w: 0, h: 0 })
 
@@ -29,8 +31,8 @@ function CardLabel({ label }) {
   }, [])
 
   return (
-    <span className={styles.labelWrap}>
-      <span className={styles.label}>{label}</span>
+    <span className={`${styles.labelWrap} ${wrapClassName}`}>
+      <span className={`${styles.label} ${labelClassName}`}>{label}</span>
 
       <span className={styles.pillBox} ref={pillBoxRef}>
         {pillSize.w > 0 && (

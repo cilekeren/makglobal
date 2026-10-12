@@ -268,6 +268,25 @@
         "rankingSource": "Sıralama Kaynağı",
         "officialWebsite": "Resmi Web Sitesi"
       }
+    },
+    "lifestyle": {
+      "cards": {
+        "neighbourhoods": "Merkezi Londra Semtleri",
+        "foodDining": "Yeme & İçme",
+        "cultureEvents": "Kültür & Etkinlikler"
+      }
+    },
+    "neighbourhoods": {
+      "heading": "Merkezi Londra Semtleri",
+      "subheading": "Londra’nın Kalbini Keşfedin",
+      "intro": "Tarihi meydanlardan kraliyet parklarına, ünlü kültür noktalarından ikonik caddelere kadar Merkezi Londra’nın en özgün semtlerinin karakterini, simge yapılarını ve yaşam tarzını keşfedin.",
+      "fields": {
+        "about": "Hakkında",
+        "knownFor": "Öne Çıkanlar",
+        "landmarks": "Simge Yapılar ve Mekânlar",
+        "gettingAround": "Ulaşım",
+        "localExperiences": "Yerel Deneyimler"
+      }
     }
   },
   "buyersGuidePage": {
@@ -435,6 +454,10 @@
     "notFound": {
       "title": "Sayfa Bulunamadı",
       "description": "Aradığınız sayfa mevcut değil."
+    },
+    "centralLondonNeighbourhoods": {
+      "title": "Merkezi Londra Semtleri",
+      "description": "Mayfair ve Marylebone’dan Chelsea, Notting Hill ve Westminster’a kadar Merkezi Londra’nın en özgün semtlerinin karakterini, simge yapılarını ve yaşam tarzını keşfedin."
     }
   }
 }

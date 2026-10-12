@@ -268,6 +268,25 @@
         "rankingSource": "Ranking Source",
         "officialWebsite": "Official Website"
       }
+    },
+    "lifestyle": {
+      "cards": {
+        "neighbourhoods": "Central London Neighbourhoods",
+        "foodDining": "Food & Dining",
+        "cultureEvents": "Culture & Events"
+      }
+    },
+    "neighbourhoods": {
+      "heading": "Central London Neighbourhoods",
+      "subheading": "Discover the Heart of London",
+      "intro": "Explore the character, landmarks and lifestyle of some of Central London's most distinctive neighbourhoods — from historic squares and royal parks to celebrated cultural destinations and iconic streets.",
+      "fields": {
+        "about": "About",
+        "knownFor": "Known For",
+        "landmarks": "Landmarks & Places",
+        "gettingAround": "Getting Around",
+        "localExperiences": "Local Experiences"
+      }
     }
   },
   "buyersGuidePage": {
@@ -435,6 +454,10 @@
     "notFound": {
       "title": "Page Not Found",
       "description": "The page you’re looking for doesn’t exist."
+    },
+    "centralLondonNeighbourhoods": {
+      "title": "Central London Neighbourhoods",
+      "description": "Explore the character, landmarks and lifestyle of Central London's most distinctive neighbourhoods, from Mayfair and Marylebone to Chelsea, Notting Hill and Westminster."
     }
   }
 }

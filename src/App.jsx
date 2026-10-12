@@ -7,6 +7,7 @@ import Home from './pages/Home/Home'
 import Projects from './pages/Projects/Projects'
 import ProjectDetail from './pages/ProjectDetail/ProjectDetail'
 import DiscoverLondon from './pages/DiscoverLondon/DiscoverLondon'
+import CentralLondonNeighbourhoods from './pages/DiscoverLondon/CentralLondonNeighbourhoods'
 import AboutUs from './pages/AboutUs/AboutUs'
 import Services from './pages/Services/Services'
 import BuyersGuide from './pages/BuyersGuide/BuyersGuide'
@@ -82,6 +83,7 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
         <Route path="/discover-london" element={<DiscoverLondon />} />
+        <Route path="/discover-london/central-london-neighbourhoods" element={<CentralLondonNeighbourhoods />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/services" element={<Services />} />
         <Route path="/buyers-guide" element={<BuyersGuide />} />
